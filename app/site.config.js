@@ -12,6 +12,9 @@ export const SITE = {
   },
   phone: "(408) 332-8962",
   phoneHref: "tel:+14083328962",
+  // WhatsApp number in international format, digits only (used by wa.me).
+  // Confirm this line is WhatsApp-enabled, or replace with the shop's WhatsApp.
+  whatsapp: "14083328962",
   address: {
     line1: "623 E Taylor St",
     line2: "San José, CA 95112",
@@ -166,7 +169,28 @@ export const COPY = {
     gallery: { en: "Gallery", es: "Galería" },
     location: { en: "Location", es: "Ubicación" },
     reviews: { en: "Reviews", es: "Reseñas" },
+    quote: { en: "Get a Quote", es: "Cotizar" },
     callNow: { en: "Call Now", es: "Llamar" },
+  },
+  quote: {
+    heading: { en: "Instant Price Estimate", es: "Estimado de Precio Instantáneo" },
+    sub: {
+      en: "Pick your vehicle and services for a ballpark price. We confirm the exact price at the shop.",
+      es: "Elija su vehículo y servicios para un precio aproximado. Confirmamos el precio exacto en el taller.",
+    },
+    vehicleStep: { en: "1. Your vehicle", es: "1. Su vehículo" },
+    vehicleClassLabel: { en: "Vehicle type", es: "Tipo de vehículo" },
+    vehicleTextLabel: { en: "Year / Make / Model (optional)", es: "Año / Marca / Modelo (opcional)" },
+    vehicleTextPlaceholder: { en: "e.g. 2019 Toyota Camry", es: "ej. 2019 Toyota Camry" },
+    servicesStep: { en: "2. What do you need?", es: "2. ¿Qué necesita?" },
+    qtyLabel: { en: "Quantity", es: "Cantidad" },
+    estimateLabel: { en: "Estimated total", es: "Total estimado" },
+    emptyState: {
+      en: "Select one or more services to see your estimate.",
+      es: "Seleccione uno o más servicios para ver su estimado.",
+    },
+    send: { en: "Send to shop on WhatsApp", es: "Enviar al taller por WhatsApp" },
+    ctaFromHome: { en: "Get an instant estimate", es: "Obtenga un estimado instantáneo" },
   },
   status: {
     open: { en: "Open now", es: "Abierto ahora" },

@@ -3,8 +3,9 @@
 Next.js (App Router) marketing site for Tires SOS Rescue, a tire & auto shop
 in San José, CA (tires, brakes, oil changes, batteries, rims, alignment).
 
-**Stack:** Next.js 14 · React · plain CSS · Vercel (hosting). No database,
-no backend — the shop runs on walk-ins and phone calls, not online booking.
+**Stack:** Next.js 14 · React · plain CSS · Vercel (hosting) · Supabase
+(stores editable quote pricing). The marketing pages are static; the quote
+estimator (`/quote`) and admin panel (`/admin`) are the only dynamic parts.
 
 ## Run it
 
@@ -44,6 +45,29 @@ users with `prefers-reduced-motion`.
 - **Instagram reels** — the "From the Shop" section embeds the reels listed
   in `REELS` in `app/site.config.js`. Paste new reel permalinks there to
   rotate the featured content.
+
+## Quote estimator + admin pricing
+
+Customers get an instant estimate at **`/quote`**: they pick a vehicle type and
+services and see a price range, then send it to the shop pre-filled over
+WhatsApp. Prices "vary by model" via a per-vehicle-class multiplier and by
+labor hours × rate — see the model in `lib/pricing.default.js` and the engine
+in `lib/quote.js`.
+
+The owner edits prices at **`/admin`** (no code):
+
+1. In Supabase, run `db/pricing-schema.sql` once (creates + seeds the `pricing`
+   table).
+2. Set these env vars locally (`.env.local`) and in Vercel — see `.env.example`:
+   - `ADMIN_PASSWORD` — the login password
+   - `AUTH_SECRET` — random string (`openssl rand -base64 32`)
+   - `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — server-only (not NEXT_PUBLIC)
+3. Confirm `SITE.whatsapp` in `app/site.config.js` is the shop's WhatsApp number.
+
+Until Supabase is connected, the estimator runs on the built-in default prices
+and the admin editor saves for the current session only. The default prices in
+`lib/pricing.default.js` are starting points — the owner should set real numbers
+in `/admin` (or you can edit that file).
 
 ## SEO
 

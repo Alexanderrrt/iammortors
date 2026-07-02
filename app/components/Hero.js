@@ -34,7 +34,10 @@ export default function Hero() {
           </p>
 
           <div className="hero__actions hero__enter" style={{ "--d": "300ms" }}>
-            <a href={SITE.phoneHref} className="btn btn--primary">
+            <a href="/quote" className="btn btn--primary">
+              {t(COPY.quote.ctaFromHome)} <Icon name="arrow" />
+            </a>
+            <a href={SITE.phoneHref} className="btn btn--ghost">
               <Icon name="phone" /> {t(COPY.hero.callNow)}
             </a>
             <a href={SITE.mapsHref} target="_blank" rel="noopener noreferrer" className="btn btn--ghost">

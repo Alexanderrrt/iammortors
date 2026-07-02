@@ -22,16 +22,17 @@ export default function Header() {
   return (
     <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
       <div className="header__inner">
-        <a href="#top" className="header__brand">
+        <a href="/" className="header__brand">
           <img className="header__logo" src="/logo-mark.png" alt="" />
           <span className="header__brand-name">{SITE.name}</span>
         </a>
 
         <nav className="header__nav">
-          <a href="#services">{t(COPY.nav.services)}</a>
-          <a href="#gallery">{t(COPY.nav.gallery)}</a>
-          <a href="#location">{t(COPY.nav.location)}</a>
-          <a href="#reviews">{t(COPY.nav.reviews)}</a>
+          <a href="/#services">{t(COPY.nav.services)}</a>
+          <a href="/quote">{t(COPY.nav.quote)}</a>
+          <a href="/#gallery">{t(COPY.nav.gallery)}</a>
+          <a href="/#location">{t(COPY.nav.location)}</a>
+          <a href="/#reviews">{t(COPY.nav.reviews)}</a>
         </nav>
 
         <div className="header__actions">
