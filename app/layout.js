@@ -1,6 +1,18 @@
+import { Archivo_Black, Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import { SITE } from "./site.config";
+
+const displayFont = Archivo_Black({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-display",
+});
+
+const bodyFont = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
 
 export const metadata = {
   title: `${SITE.name} — Tire & Auto Shop in San José, CA`,
@@ -18,9 +30,13 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: "#ff6b1a",
+};
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <body>
         <LanguageProvider>{children}</LanguageProvider>
       </body>

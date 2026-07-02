@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useLanguage, useT } from "../i18n/LanguageContext";
 import { useOpenStatus } from "../hooks/useOpenStatus";
 import { COPY, SITE } from "../site.config";
@@ -8,12 +9,20 @@ export default function Header() {
   const { lang, toggleLang } = useLanguage();
   const t = useT();
   const isOpen = useOpenStatus();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="header">
+    <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
       <div className="header__inner">
         <a href="#top" className="header__brand">
-          🛞 {SITE.name}
+          🛞 <span className="header__brand-name">{SITE.name}</span>
         </a>
 
         <nav className="header__nav">
@@ -40,7 +49,7 @@ export default function Header() {
             {lang === "en" ? "ES" : "EN"}
           </button>
 
-          <a href={SITE.phoneHref} className="btn btn--primary btn--small">
+          <a href={SITE.phoneHref} className="btn btn--primary btn--small btn--pulse">
             {t(COPY.nav.callNow)}
           </a>
         </div>

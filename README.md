@@ -26,12 +26,27 @@ Open **`app/site.config.js`**:
 Every text field that needs both languages is a `{ en: "...", es: "..." }`
 object — the site's language toggle reads whichever one is active.
 
+## Design system
+
+Brand colors are the shop's real ones — **orange & black** (`--color-accent:
+#ff6b1a` in `app/globals.css`). Headings use Archivo Black, body uses Inter,
+both self-hosted at build time via `next/font` (no runtime font requests).
+All scroll/hover animations are pure CSS + a small IntersectionObserver
+`Reveal` component (`app/components/Reveal.js`) and are fully disabled for
+users with `prefers-reduced-motion`.
+
 ## Photos
 
-The gallery section currently uses placeholder tiles (`app/components/Gallery.js`)
-since Instagram photos can't be pulled in automatically. Drop real shop/vehicle
-photos into `/public`, then swap the placeholder tiles for `<img>` tags pointing
-at them.
+**Owner's BMW M3 Competition** — the "Owner's Ride" section
+(`app/components/OwnersRide.js`) ships with a styled placeholder. To show the
+real car: drop the photo into `/public/owners-m3.jpg`, then replace the
+placeholder `<div>` with the `<img>` tag shown in the comment right above it
+(a one-line swap).
+
+**Gallery** — the gallery section currently uses placeholder tiles
+(`app/components/Gallery.js`) since Instagram photos can't be pulled in
+automatically. Drop real shop/vehicle photos into `/public`, then swap the
+placeholder tiles for `<img>` tags pointing at them.
 
 ## Deploying to Vercel
 

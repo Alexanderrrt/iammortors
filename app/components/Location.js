@@ -2,17 +2,20 @@
 
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
+import Reveal from "./Reveal";
 
 export default function Location() {
   const t = useT();
   const today = new Date().getDay();
 
   return (
-    <section id="location" className="section">
+    <section id="location" className="section section--tread">
       <div className="section__inner">
-        <h2 className="section__heading">{t(COPY.location.heading)}</h2>
+        <Reveal>
+          <h2 className="section__heading">{t(COPY.location.heading)}</h2>
+        </Reveal>
 
-        <div className="location-grid">
+        <Reveal className="location-grid">
           <div className="location-map">
             <iframe
               title="Tires SOS Rescue location"
@@ -56,7 +59,7 @@ export default function Location() {
               </table>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

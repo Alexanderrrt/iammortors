@@ -2,23 +2,33 @@
 
 import { useT } from "../i18n/LanguageContext";
 import { COPY, TESTIMONIALS } from "../site.config";
+import Reveal from "./Reveal";
 
 export default function Reviews() {
   const t = useT();
 
   return (
-    <section id="reviews" className="section section--muted">
+    <section id="reviews" className="section section--muted section--angled">
       <div className="section__inner">
-        <h2 className="section__heading">{t(COPY.reviews.heading)}</h2>
+        <Reveal>
+          <h2 className="section__heading">{t(COPY.reviews.heading)}</h2>
+        </Reveal>
 
-        <div className="reviews-grid">
+        <Reveal className="reviews-grid">
           {TESTIMONIALS.map((review, i) => (
-            <blockquote className="review-card" key={i}>
+            <blockquote
+              className="review-card reveal-item"
+              style={{ "--d": `${i * 90}ms` }}
+              key={i}
+            >
+              <span className="review-card__stars" aria-hidden="true">
+                ★★★★★
+              </span>
               <p>&ldquo;{t(review.quote)}&rdquo;</p>
               <cite>— {review.author}</cite>
             </blockquote>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

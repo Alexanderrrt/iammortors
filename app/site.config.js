@@ -101,6 +101,32 @@ export const SERVICES = [
   },
 ];
 
+// Strings for the scrolling marquee strip. Deliberately mixed EN/ES —
+// it reads as one bilingual banner, so it does not switch with the toggle.
+export const MARQUEE_ITEMS = [
+  "Llantas Nuevas",
+  "Brakes",
+  "Alineación",
+  "Oil Change",
+  "Rines",
+  "Batteries",
+  "Flat Repair",
+  "Best Prices in the Bay Area",
+];
+
+export const OWNERS_RIDE = {
+  kicker: { en: "The Boss's Ride", es: "El Carro del Jefe" },
+  title: { en: "BMW M3 Competition", es: "BMW M3 Competition" },
+  body: {
+    en: "Our owner's daily driver is his pride and joy — and every car that rolls into the shop gets treated the exact same way. Your ride is our ride.",
+    es: "El carro diario de nuestro dueño es su orgullo — y cada carro que entra al taller recibe exactamente el mismo trato. Su carro es nuestro carro.",
+  },
+  photoNote: {
+    en: "Photo coming soon",
+    es: "Foto próximamente",
+  },
+};
+
 export const TESTIMONIALS = [
   {
     quote: {
