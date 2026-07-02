@@ -12,15 +12,12 @@ export default function OwnersRide() {
       <Reveal className="owners-ride__inner">
         <div className="owners-ride__media">
           <span className="owners-ride__m-stripes" aria-hidden="true" />
-          {/* To show the owner's real car: drop owners-m3.jpg into /public,
-              then replace the placeholder div below with:
-              <img src="/owners-m3.jpg" alt="BMW M3 Competition" /> */}
-          <div className="owners-ride__placeholder">
-            <span className="owners-ride__placeholder-icon" aria-hidden="true">
-              🏁
-            </span>
-            <span className="owners-ride__placeholder-note">{t(OWNERS_RIDE.photoNote)}</span>
-          </div>
+          <img
+            className="owners-ride__img"
+            src="/owners-m3.jpg"
+            alt="The owner's orange BMW M3 Competition at Tires SOS Rescue in San José"
+            loading="lazy"
+          />
         </div>
 
         <div className="owners-ride__copy">

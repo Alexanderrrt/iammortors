@@ -1,13 +1,11 @@
 "use client";
 
 import { useT } from "../i18n/LanguageContext";
-import { COPY, SITE } from "../site.config";
+import { COPY, REELS, SITE } from "../site.config";
 import Reveal from "./Reveal";
 
-// Placeholder tiles — swap these for real shop/vehicle photos in /public
-// and replace this grid with <img> tags pointing at them.
-const PLACEHOLDER_TILES = ["🛞", "🔧", "🚗", "🛠️", "🏁", "⚙️"];
-
+// Featured Instagram reels, embedded via Instagram's iframe endpoint
+// (no external script needed). Permalinks live in site.config.js.
 export default function Gallery() {
   const t = useT();
 
@@ -19,15 +17,16 @@ export default function Gallery() {
           <p className="section__sub">{t(COPY.gallery.sub)}</p>
         </Reveal>
 
-        <Reveal className="gallery-grid">
-          {PLACEHOLDER_TILES.map((emoji, i) => (
-            <div
-              className="gallery-tile reveal-item"
-              style={{ "--d": `${i * 60}ms` }}
-              key={i}
-              aria-hidden="true"
-            >
-              <span>{emoji}</span>
+        <Reveal className="reels-grid">
+          {REELS.map((permalink, i) => (
+            <div className="reel-card reveal-item" style={{ "--d": `${i * 80}ms` }} key={permalink}>
+              <iframe
+                src={`${permalink}embed/`}
+                title={`Tires SOS Rescue Instagram reel ${i + 1}`}
+                loading="lazy"
+                allowFullScreen
+                scrolling="no"
+              />
             </div>
           ))}
         </Reveal>
@@ -37,9 +36,9 @@ export default function Gallery() {
             href={SITE.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn--secondary gallery-cta"
+            className="btn btn--primary gallery-cta"
           >
-            📸 @tiressosrescue
+            📸 Follow @tiressosrescue
           </a>
         </Reveal>
       </div>

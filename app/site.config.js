@@ -3,6 +3,9 @@
 
 export const SITE = {
   name: "Tires SOS Rescue",
+  // Used for canonical URLs, sitemap, robots and Open Graph.
+  // UPDATE this once the real domain is attached in Vercel.
+  url: "https://tires-sos.vercel.app",
   tagline: {
     en: "Tire specialists. Fast service, best prices in the Bay Area.",
     es: "Especialistas en neumáticos. Servicio rápido, los mejores precios del Bay Area.",
@@ -112,6 +115,16 @@ export const MARQUEE_ITEMS = [
   "Batteries",
   "Flat Repair",
   "Best Prices in the Bay Area",
+  "Afterpay Available",
+];
+
+// Instagram reels featured in the "From the Shop" section.
+// Paste new reel permalinks here to rotate the featured content.
+export const REELS = [
+  "https://www.instagram.com/reel/DaQ2UFdSpnK/",
+  "https://www.instagram.com/reel/DZ7-m7PztjQ/",
+  "https://www.instagram.com/reel/DZsjXNexI8I/",
+  "https://www.instagram.com/reel/DZWBzaGRmS8/",
 ];
 
 export const OWNERS_RIDE = {
@@ -120,10 +133,6 @@ export const OWNERS_RIDE = {
   body: {
     en: "Our owner's daily driver is his pride and joy — and every car that rolls into the shop gets treated the exact same way. Your ride is our ride.",
     es: "El carro diario de nuestro dueño es su orgullo — y cada carro que entra al taller recibe exactamente el mismo trato. Su carro es nuestro carro.",
-  },
-  photoNote: {
-    en: "Photo coming soon",
-    es: "Foto próximamente",
   },
 };
 
@@ -170,6 +179,10 @@ export const COPY = {
     note: {
       en: "Walk-ins welcome. Shop service only — no mobile dispatch.",
       es: "Se aceptan clientes sin cita. Servicio solo en tienda — no ofrecemos servicio móvil.",
+    },
+    afterpay: {
+      en: "Afterpay accepted — split it into 4 easy interest-free payments",
+      es: "Aceptamos Afterpay — divida su pago en 4 pagos fáciles sin interés",
     },
   },
   services: {

@@ -29,24 +29,36 @@ object — the site's language toggle reads whichever one is active.
 ## Design system
 
 Brand colors are the shop's real ones — **orange & black** (`--color-accent:
-#ff6b1a` in `app/globals.css`). Headings use Archivo Black, body uses Inter,
+#f86000` in `app/globals.css`). Headings use Archivo Black, body uses Inter,
 both self-hosted at build time via `next/font` (no runtime font requests).
 All scroll/hover animations are pure CSS + a small IntersectionObserver
 `Reveal` component (`app/components/Reveal.js`) and are fully disabled for
 users with `prefers-reduced-motion`.
 
-## Photos
+## Photos & Instagram
 
-**Owner's BMW M3 Competition** — the "Owner's Ride" section
-(`app/components/OwnersRide.js`) ships with a styled placeholder. To show the
-real car: drop the photo into `/public/owners-m3.jpg`, then replace the
-placeholder `<div>` with the `<img>` tag shown in the comment right above it
-(a one-line swap).
+- **Owner's BMW M3 Competition** — `/public/owners-m3.jpg`, shown in the
+  "Owner's Ride" section. Replace the file to update the photo.
+- **Logo** — `/public/logo.jpg`, used in the header, footer and the social
+  share image (`/public/og.png`).
+- **Instagram reels** — the "From the Shop" section embeds the reels listed
+  in `REELS` in `app/site.config.js`. Paste new reel permalinks there to
+  rotate the featured content.
 
-**Gallery** — the gallery section currently uses placeholder tiles
-(`app/components/Gallery.js`) since Instagram photos can't be pulled in
-automatically. Drop real shop/vehicle photos into `/public`, then swap the
-placeholder tiles for `<img>` tags pointing at them.
+## SEO
+
+- `app/components/JsonLd.js` — schema.org `TireShop`/`AutoRepair` structured
+  data (name, address, phone, hours, payment methods incl. Afterpay, social
+  profiles) for Google local results.
+- `app/robots.js` / `app/sitemap.js` — served at `/robots.txt` and
+  `/sitemap.xml` automatically.
+- `app/layout.js` — canonical URL, bilingual keywords, Open Graph + Twitter
+  cards using `/public/og.png`.
+- **IMPORTANT:** `SITE.url` in `app/site.config.js` is set to the default
+  Vercel URL. Update it when a custom domain is attached, then also submit
+  the sitemap in [Google Search Console](https://search.google.com/search-console)
+  and create/claim the free **Google Business Profile** — for a local shop
+  that matters more than anything on the site itself.
 
 ## Deploying to Vercel
 

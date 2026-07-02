@@ -39,7 +39,12 @@ export default function Hero() {
           </a>
         </div>
 
-        <p className="hero__note hero__enter" style={{ "--d": "480ms" }}>
+        <p className="hero__afterpay hero__enter" style={{ "--d": "440ms" }}>
+          <span className="afterpay-chip">Afterpay</span>
+          {t(COPY.hero.afterpay)}
+        </p>
+
+        <p className="hero__note hero__enter" style={{ "--d": "520ms" }}>
           {t(COPY.hero.note)}
         </p>
       </div>
