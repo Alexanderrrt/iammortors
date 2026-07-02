@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer__inner">
         <div>
-          <img className="footer__logo" src="/logo.jpg" alt={SITE.name} />
+          <img className="footer__logo" src="/logo-mark.png" alt={SITE.name} />
           <p>{SITE.address.full}</p>
           <a href={SITE.phoneHref}>{SITE.phone}</a>
           <p className="footer__payments">

@@ -54,7 +54,7 @@ export default function Hero() {
 
         <div className="hero__visual hero__enter" style={{ "--d": "240ms" }} aria-hidden="true">
           <TreadRing />
-          <img className="hero__logo" src="/logo.jpg" alt="" />
+          <img className="hero__logo" src="/logo-mark.png" alt="" />
         </div>
       </div>
     </section>
