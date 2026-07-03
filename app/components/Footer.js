@@ -25,7 +25,9 @@ export default function Footer() {
           <p>{SITE.address.full}</p>
           <a href={SITE.phoneHref}>{SITE.phone}</a>
           <p className="footer__payments">
-            <span className="afterpay-chip">Snap Finance</span> · Visa · Mastercard · Cash
+            <span className="afterpay-chip">Snap Finance</span>
+            <span className="afterpay-chip afterpay-chip--mint">Afterpay</span>
+            · Visa · Mastercard · Cash
           </p>
         </div>
 

@@ -47,6 +47,7 @@ export default function Hero() {
 
           <p className="hero__afterpay hero__enter" style={{ "--d": "380ms" }}>
             <span className="afterpay-chip">Snap Finance</span>
+            <span className="afterpay-chip afterpay-chip--mint">Afterpay</span>
             {t(COPY.hero.afterpay)}
           </p>
 

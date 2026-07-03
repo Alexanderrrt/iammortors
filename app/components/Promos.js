@@ -19,8 +19,8 @@ export default function Promos() {
   );
   const financeWa = waMsg(
     t({
-      en: "Hi, I'd like to know more about Snap Finance!",
-      es: "Hola, me gustaría saber más sobre Snap Finance!",
+      en: "Hi, I'd like to know more about Snap Finance and Afterpay!",
+      es: "Hola, me gustaría saber más sobre Snap Finance y Afterpay!",
     })
   );
   const loyaltyWa = waMsg(
