@@ -25,14 +25,17 @@ export default function Header() {
     <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
       <div className="header__inner">
         <a href="/" className="header__brand">
-          <span
-            className="header__logo-hit"
-            role="presentation"
-            onClick={onSecretAdminTap}
-          >
+          <span className="header__logo-hit" role="presentation" onClick={onSecretAdminTap}>
             <img className="header__logo" src="/logo-mark.png" alt="" draggable={false} />
           </span>
-          <span className="header__brand-name">{SITE.name}</span>
+          <span className="header__brand-copy">
+            <span className="header__brand-name">{SITE.nameShort}</span>
+            <span className="header__brand-flag" aria-hidden="true">
+              <span className="header__brand-tire header__brand-tire--yellow" />
+              <span className="header__brand-tire header__brand-tire--blue" />
+              <span className="header__brand-tire header__brand-tire--red" />
+            </span>
+          </span>
         </a>
 
         <nav className="header__nav">

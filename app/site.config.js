@@ -3,6 +3,7 @@
 
 export const SITE = {
   name: "Tires SOS Rescue",
+  nameShort: "Tires SOS",
   // Used for canonical URLs, sitemap, robots and Open Graph.
   // UPDATE this once the real domain is attached in Vercel.
   url: "https://tires-sos.vercel.app",

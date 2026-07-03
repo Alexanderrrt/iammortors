@@ -11,7 +11,17 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer__inner">
         <div>
-          <img className="footer__logo" src="/logo-mark.png" alt={SITE.name} />
+          <div className="footer__brand">
+            <img className="footer__logo" src="/logo-mark.png" alt={SITE.name} />
+            <div className="footer__brand-copy">
+              <span className="footer__brand-name">{SITE.nameShort}</span>
+              <span className="footer__brand-flag" aria-hidden="true">
+                <span className="footer__brand-tire footer__brand-tire--yellow" />
+                <span className="footer__brand-tire footer__brand-tire--blue" />
+                <span className="footer__brand-tire footer__brand-tire--red" />
+              </span>
+            </div>
+          </div>
           <p>{SITE.address.full}</p>
           <a href={SITE.phoneHref}>{SITE.phone}</a>
           <p className="footer__payments">

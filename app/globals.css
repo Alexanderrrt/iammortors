@@ -200,6 +200,13 @@ h3 {
   white-space: nowrap;
 }
 
+.header__brand-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
 .header__logo {
   height: 36px;
   width: auto;
@@ -212,6 +219,37 @@ h3 {
   line-height: 0;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+}
+
+.header__brand-name {
+  display: inline-block;
+}
+
+.header__brand-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.22rem;
+  flex-shrink: 0;
+}
+
+.header__brand-tire {
+  width: 16px;
+  height: 8px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(20, 16, 12, 0.35);
+}
+
+.header__brand-tire--yellow {
+  background: #fcd116;
+}
+
+.header__brand-tire--blue {
+  background: #003893;
+}
+
+.header__brand-tire--red {
+  background: #ce1126;
 }
 
 .header__nav {
@@ -954,10 +992,58 @@ h3 {
 }
 
 .footer__logo {
-  height: 58px;
+  height: 46px;
   width: auto;
   border-radius: var(--r-sm);
+}
+
+.footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
   margin-bottom: 0.7rem;
+}
+
+.footer__brand-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.footer__brand-name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+}
+
+.footer__brand-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.18rem;
+}
+
+.footer__brand-tire {
+  width: 14px;
+  height: 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(20, 16, 12, 0.35);
+}
+
+.footer__brand-tire--yellow {
+  background: #fcd116;
+}
+
+.footer__brand-tire--blue {
+  background: #003893;
+}
+
+.footer__brand-tire--red {
+  background: #ce1126;
 }
 
 .footer p {
