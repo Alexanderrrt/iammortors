@@ -138,7 +138,7 @@ export const REELS = [
 ];
 
 export const OWNERS_RIDE = {
-  kicker: { en: "Dale un gusto a tu carrito", es: "Give your car a little treat" },
+  kicker: { en: "Give your car a little treat", es: "Dale un gusto a tu carrito" },
   title: { en: "BMW M3 Competition", es: "BMW M3 Competition" },
   body: {
     en: "Every car that rolls into the shop gets treated the exact same way. Your ride is our ride.",
