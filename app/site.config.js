@@ -109,8 +109,8 @@ export const SERVICES = [
     image: "/services/rims.jpg",
     title: { en: "Rims", es: "Rines" },
     desc: {
-      en: "New and used rims to fit your ride and your budget.",
-      es: "Rines nuevos y usados para su vehículo y su presupuesto.",
+      en: "New rims to fit your ride and your budget.",
+      es: "Rines nuevos para su vehículo y su presupuesto.",
     },
   },
 ];
@@ -127,6 +127,7 @@ export const MARQUEE_ITEMS = [
   "Flat Repair",
   "Best Prices in the Bay Area",
   "Snap Finance Available",
+  "Afterpay Available",
 ];
 
 // Instagram reels featured in the "From the Shop" section.
@@ -212,9 +213,21 @@ export const COPY = {
       en: "Walk-ins welcome — no appointment needed. Shop service only.",
       es: "Sin cita, sin problema — llegá cuando quieras. Servicio solo en tienda.",
     },
+    alignmentHighlight: {
+      en: "Specialized Alignment Equipment",
+      es: "Equipo Especializado de Alineación",
+    },
+    alignmentSub: {
+      en: "Precision laser alignment technology for all vehicles. Get it done right the first time.",
+      es: "Tecnología de alineación láser de precisión para todo tipo de vehículo. Bien hecho a la primera.",
+    },
+    alignmentCta: {
+      en: "Learn more",
+      es: "Más info",
+    },
     afterpay: {
-      en: "Snap Finance available — approvals from $300 to $5,000",
-      es: "Snap Finance disponible — aprobaciones desde $300 hasta $5,000",
+      en: "Snap Finance & Afterpay available — flexible payments on your terms",
+      es: "Snap Finance y Afterpay disponibles — pagos flexibles a tu manera",
     },
   },
   services: {
@@ -247,10 +260,10 @@ export const COPY = {
     },
     financeTitle: { en: "Buy Now, Pay Later", es: "Compra Ahora, Paga Después" },
     financeSub: {
-      en: "Snap Finance — approvals from $300 to $5,000. No perfect credit needed. Quick approval, flexible payments.",
-      es: "Snap Finance — aprobaciones desde $300 hasta $5,000. Sin necesidad de crédito perfecto. Aprobación rápida, pagos flexibles.",
+      en: "Snap Finance & Afterpay available. Snap Finance approvals from $300 to $5,000. Afterpay lets you split purchases into 4 easy payments. No perfect credit needed.",
+      es: "Snap Finance y Afterpay disponibles. Snap Finance con aprobaciones desde $300 hasta $5,000. Afterpay te permite dividir tus compras en 4 pagos fáciles. Sin necesidad de crédito perfecto.",
     },
-    financeCta: { en: "Ask about Snap Finance", es: "Pregunta por Snap Finance" },
+    financeCta: { en: "Ask about financing", es: "Pregunta por financiamiento" },
     loyaltyTitle: { en: "Loyalty Card", es: "Tarjeta de Fidelidad" },
     loyaltySub: {
       en: "Get your 5th oil change FREE. Every oil change includes fluid top-off, filter, and tire pressure check.",

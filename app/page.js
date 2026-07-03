@@ -8,6 +8,8 @@ import OwnersRide from "./components/OwnersRide";
 import Location from "./components/Location";
 import Reviews from "./components/Reviews";
 import Footer from "./components/Footer";
+import BrandPopups from "./components/BrandPopups";
+import { SITE } from "./site.config";
 
 export default function HomePage() {
   return (
@@ -24,6 +26,7 @@ export default function HomePage() {
         <Reviews />
       </main>
       <Footer />
+      <BrandPopups phoneHref={SITE.phoneHref} />
     </>
   );
 }

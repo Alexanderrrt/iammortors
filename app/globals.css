@@ -352,6 +352,87 @@ h3 {
   }
 }
 
+/* ---------- Alignment equipment banner ---------- */
+
+.alignment-banner {
+  background: linear-gradient(90deg, var(--surface-2), var(--surface));
+  border-bottom: 2px solid var(--orange);
+  overflow: hidden;
+}
+
+.alignment-banner__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.65rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.alignment-banner__icon {
+  width: 28px;
+  height: 28px;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.alignment-banner__text {
+  flex: 1;
+  margin: 0;
+  font-size: 0.9rem;
+  min-width: 0;
+}
+
+.alignment-banner__text strong {
+  font-family: var(--display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--orange);
+  font-size: 0.95rem;
+}
+
+.alignment-banner__text span {
+  color: var(--paper-dim);
+}
+
+.alignment-banner__sep {
+  margin: 0 0.45rem;
+}
+
+.alignment-banner__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--orange);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.alignment-banner__link .icon {
+  width: 1em;
+  height: 1em;
+}
+
+.alignment-banner__link:hover {
+  color: #ff7420;
+}
+
+@media (max-width: 600px) {
+  .alignment-banner__link {
+    width: 100%;
+    justify-content: center;
+    padding: 0.35rem 0 0;
+  }
+}
+
 /* ---------- Hero — asymmetric, left-aligned ---------- */
 
 .hero {
@@ -458,6 +539,11 @@ h3 {
   letter-spacing: 0.03em;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
+}
+
+.afterpay-chip--mint {
+  background: #b2fcb2;
+  color: #0a1f0a;
 }
 
 .hero__note {
@@ -1913,6 +1999,161 @@ h3 {
   width: auto;
 }
 
+/* ---------- Brand popup ---------- */
+
+.brand-popup {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 100;
+  animation: popup-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.brand-popup__inner {
+  position: relative;
+  background: linear-gradient(135deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--orange);
+  border-radius: var(--r-lg);
+  padding: 1.5rem 1.5rem 1.25rem;
+  width: min(340px, calc(100vw - 2.5rem));
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.brand-popup__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.65rem;
+  background: none;
+  border: none;
+  color: var(--paper-dim);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.brand-popup__close:hover {
+  color: var(--orange);
+}
+
+.brand-popup__tire {
+  width: 42px;
+  height: 42px;
+  color: var(--orange);
+  margin-bottom: 0.6rem;
+}
+
+.brand-popup__kicker {
+  font-family: var(--display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: var(--paper-dim);
+  margin: 0 0 0.25rem;
+}
+
+.brand-popup__brand {
+  font-family: var(--display);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  color: var(--orange);
+  margin: 0 0 0.35rem;
+  line-height: 1.1;
+  animation: popup-brand 0.35s ease;
+}
+
+@keyframes popup-brand {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.brand-popup__tagline {
+  color: var(--paper);
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem;
+  line-height: 1.4;
+}
+
+.brand-popup__afterpay {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+}
+
+.brand-popup__afterpay-text {
+  font-size: 0.75rem;
+  color: var(--paper-dim);
+  width: 100%;
+  margin-top: 0.15rem;
+}
+
+.brand-popup__cta {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.brand-popup__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.brand-popup__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.brand-popup__dot--on {
+  background: var(--orange);
+}
+
+.brand-popup__dot:hover {
+  background: var(--orange);
+}
+
+@media (max-width: 480px) {
+  .brand-popup {
+    bottom: 0.75rem;
+    right: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .brand-popup__inner {
+    width: 100%;
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1938,6 +2179,14 @@ h3 {
   }
 
   .admin-loader {
+    animation: none;
+  }
+
+  .brand-popup {
+    animation: none;
+  }
+
+  .brand-popup__brand {
     animation: none;
   }
 }
