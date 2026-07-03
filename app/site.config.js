@@ -45,6 +45,7 @@ export const SERVICES = [
   {
     id: "new-tires",
     icon: "tire",
+    image: "/services/new-tires.jpg",
     title: { en: "New Tires", es: "Llantas Nuevas" },
     desc: {
       en: "All major brands and sizes, at the best prices in the Bay Area.",
@@ -54,6 +55,7 @@ export const SERVICES = [
   {
     id: "flat-repair",
     icon: "wrench",
+    image: "/services/flat-repair.jpg",
     title: { en: "Flat Repair", es: "Reparación de Ponchaduras" },
     desc: {
       en: "Fast, reliable patch and plug repairs while you wait.",
@@ -63,6 +65,7 @@ export const SERVICES = [
   {
     id: "alignment",
     icon: "alignment",
+    image: "/services/alignment.jpg",
     title: { en: "Wheel Alignment", es: "Alineación" },
     desc: {
       en: "Precise alignment to extend tire life and improve handling.",
@@ -72,6 +75,7 @@ export const SERVICES = [
   {
     id: "brakes",
     icon: "brakes",
+    image: "/services/brakes.jpg",
     title: { en: "Brakes", es: "Frenos" },
     desc: {
       en: "Pads, rotors, and full brake inspections done right.",
@@ -81,6 +85,7 @@ export const SERVICES = [
   {
     id: "oil-change",
     icon: "oil",
+    image: "/services/oil-change.jpg",
     title: { en: "Oil Change", es: "Cambio de Aceite" },
     desc: {
       en: "Quick, affordable oil changes to keep your engine healthy.",
@@ -90,6 +95,7 @@ export const SERVICES = [
   {
     id: "batteries",
     icon: "battery",
+    image: "/services/batteries.jpg",
     title: { en: "Batteries", es: "Baterías" },
     desc: {
       en: "Free testing and same-day battery replacement.",
@@ -99,6 +105,7 @@ export const SERVICES = [
   {
     id: "rims",
     icon: "rim",
+    image: "/services/rims.jpg",
     title: { en: "Rims", es: "Rines" },
     desc: {
       en: "New and used rims to fit your ride and your budget.",

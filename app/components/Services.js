@@ -31,7 +31,11 @@ export default function Services() {
                 aria-expanded={isActive}
               >
                 <span className="service-card__icon">
-                  <Icon name={service.icon} />
+                  {service.image ? (
+                    <img src={service.image} alt={t(service.title)} loading="lazy" />
+                  ) : (
+                    <Icon name={service.icon} />
+                  )}
                 </span>
                 <span className="service-card__title">{t(service.title)}</span>
                 <span className={`service-card__reveal ${isActive ? "service-card__reveal--open" : ""}`}>
