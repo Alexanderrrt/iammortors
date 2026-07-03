@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 import Icon from "./Icons";
@@ -27,10 +28,19 @@ function AlignmentIcon() {
 export default function Hero() {
   const t = useT();
   const alignment = COPY.hero.alignment;
+  const [open, setOpen] = useState(true);
+  const [dismissed, setDismissed] = useState(false);
 
   return (
     <>
-      <section className="alignment-spotlight" aria-label={t(alignment.title)}>
+      <section className={`alignment-spotlight ${open ? "" : "alignment-spotlight--out"}`} aria-label={t(alignment.title)}>
+        <button
+          className="alignment-spotlight__toggle"
+          onClick={() => setOpen(false)}
+          aria-label="Collapse"
+        >
+          −
+        </button>
         <div className="alignment-spotlight__inner">
           <div className="alignment-spotlight__media">
             <img
@@ -63,6 +73,30 @@ export default function Hero() {
           </div>
         </div>
       </section>
+
+      {!dismissed && !open && (
+        <div className="alignment-popup" role="dialog" aria-label="Precision Alignment">
+          <div className="alignment-popup__inner">
+            <button
+              type="button"
+              className="alignment-popup__close"
+              onClick={() => setDismissed(true)}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <div className="alignment-popup__img">
+              <img src="/services/alignment.jpg" alt="Alignment rack" />
+            </div>
+            <p className="alignment-popup__kicker">{t(alignment.kicker)}</p>
+            <p className="alignment-popup__title">{t(alignment.title)}</p>
+            <p className="alignment-popup__stamp">BY HUNTER</p>
+            <a href={SITE.phoneHref} className="btn btn--primary btn--small alignment-popup__cta">
+              <Icon name="phone" /> {t(alignment.cta)}
+            </a>
+          </div>
+        </div>
+      )}
 
       <section id="top" className="hero">
         <div className="hero__inner">

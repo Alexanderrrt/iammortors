@@ -1,4 +1,4 @@
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import { Barlow, Barlow_Condensed, Caveat } from "next/font/google";
 import "./globals.css";
 import JsonLd from "./components/JsonLd";
 import { LanguageProvider } from "./i18n/LanguageContext";
@@ -18,6 +18,12 @@ const bodyFont = Barlow({
   weight: ["400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-body",
+});
+
+const signatureFont = Caveat({
+  weight: ["600"],
+  subsets: ["latin"],
+  variable: "--font-signature",
 });
 
 const TITLE = `${SITE.name} — Tire Shop in San José, CA | Llantas San José`;
@@ -80,7 +86,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} ${signatureFont.variable}`}>
       <body>
         <JsonLd />
         <LanguageProvider>{children}</LanguageProvider>
