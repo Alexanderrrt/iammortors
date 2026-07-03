@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import AdminLoader from "./AdminLoader";
 
 const MODEL_HELP = {
   perUnit: "Per-unit price × vehicle factor × qty, plus fees.",
@@ -15,6 +16,7 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
   const [pricing, setPricing] = useState(initialPricing);
   const [status, setStatus] = useState(null); // {ok, msg}
   const [saving, setSaving] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
 
   // immutable-ish update helper
   const edit = (mutator) =>
@@ -53,13 +55,16 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
   }
 
   async function logout() {
+    setLoggingOut(true);
     await fetch("/api/admin/logout", { method: "POST" });
     router.push("/admin/login");
     router.refresh();
   }
 
   return (
-    <div className="editor">
+    <>
+      {loggingOut && <AdminLoader message="Signing out…" />}
+      <div className="editor">
       <header className="editor__bar">
         <div>
           <h1>Quote Pricing</h1>
@@ -74,8 +79,8 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
           {status && (
             <span className={status.ok ? "editor__ok" : "editor__err"}>{status.msg}</span>
           )}
-          <button className="btn btn--ghost btn--small" onClick={logout}>
-            Log out
+          <button className="btn btn--ghost btn--small" onClick={logout} disabled={loggingOut || saving}>
+            {loggingOut ? "Signing out…" : "Log out"}
           </button>
           <button className="btn btn--primary btn--small" onClick={save} disabled={saving}>
             {saving ? "Saving…" : "Save changes"}
@@ -194,6 +199,7 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
           </div>
         ))}
       </section>
-    </div>
+      </div>
+    </>
   );
 }
