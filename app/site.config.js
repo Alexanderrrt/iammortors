@@ -138,11 +138,11 @@ export const REELS = [
 ];
 
 export const OWNERS_RIDE = {
-  kicker: { en: "The Boss's Ride", es: "El Carro del Jefe" },
+  kicker: { en: "Dale un gusto a tu carrito", es: "Give your car a little treat" },
   title: { en: "BMW M3 Competition", es: "BMW M3 Competition" },
   body: {
-    en: "Our owner's daily driver is his pride and joy — and every car that rolls into the shop gets treated the exact same way. Your ride is our ride.",
-    es: "El carro del patrón es su orgullo — y cada carro que entra al taller recibe exactamente el mismo trato. Tu carro es nuestro carro, parce.",
+    en: "Every car that rolls into the shop gets treated the exact same way. Your ride is our ride.",
+    es: "Cada carro que entra al taller recibe exactamente el mismo trato. Tu carro es nuestro carro, parce.",
   },
 };
 
