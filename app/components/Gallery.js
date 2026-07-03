@@ -32,33 +32,18 @@ export default function Gallery() {
           </button>
           <div className="reels-track" ref={trackRef}>
             {REELS.map((permalink, i) => (
-              <a
+              <div
                 key={permalink}
-                href={permalink}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="reel-card reveal-item"
                 style={{ "--d": `${i * 80}ms` }}
               >
                 <iframe
-                  src={`${permalink}embed/captioned/`}
+                  src={`${permalink}embed/`}
                   title={`Tires SOS Rescue Instagram reel ${i + 1}`}
-                  loading="lazy"
+                  allowFullScreen
                   scrolling="no"
-                  tabIndex={-1}
                 />
-                <div className="reel-top-fade" />
-                <div className="reel-play">
-                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                    <circle cx="24" cy="24" r="23" stroke="white" strokeWidth="2" opacity="0.9"/>
-                    <path d="M19 14.5L34 24L19 33.5V14.5Z" fill="white" opacity="0.95"/>
-                  </svg>
-                </div>
-                <div className="reel-label">
-                  <Icon name="instagram" />
-                  <span>Watch Reel</span>
-                </div>
-              </a>
+              </div>
             ))}
           </div>
           <button className="reels-arrow reels-arrow--right" onClick={() => scroll(1)} aria-label="Next reel">

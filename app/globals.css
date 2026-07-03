@@ -738,13 +738,12 @@ h3 {
 .reel-card {
   position: relative;
   flex: 0 0 280px;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 4 / 5;
   background: var(--ink-2);
   border-radius: var(--r-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   scroll-snap-align: start;
-  cursor: pointer;
-  text-decoration: none;
   display: block;
 }
 
@@ -753,79 +752,11 @@ h3 {
   height: 100%;
   border: 0;
   display: block;
-  pointer-events: none;
-  clip-path: inset(12% 0 14% 0);
+  clip-path: inset(10% 0 16% 0);
   transform: scale(1.35);
-  transform-origin: center 44%;
+  transform-origin: center 40%;
 }
 
-.reel-card::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30%;
-  background: linear-gradient(transparent, var(--ink-2));
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* top gradient to hide remaining IG header chrome */
-.reel-card > .reel-top-fade {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 15%;
-  background: linear-gradient(var(--ink-2), transparent);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.reel-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: var(--r-lg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  pointer-events: none;
-  z-index: 3;
-}
-
-.reel-play {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  z-index: 4;
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-.reel-card:hover .reel-play { opacity: 1; }
-
-.reel-label {
-  position: absolute;
-  bottom: 0.75rem;
-  left: 0.75rem;
-  z-index: 4;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.25s, transform 0.25s;
-}
-.reel-card:hover .reel-label {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reel-label .icon { width: 14px; height: 14px; }
 
 .gallery-cta {
   width: fit-content;
