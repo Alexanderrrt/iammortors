@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useLanguage, useT } from "../i18n/LanguageContext";
 import { useOpenStatus } from "../hooks/useOpenStatus";
+import { useSecretAdminTap } from "../hooks/useSecretAdminTap";
 import { COPY, SITE } from "../site.config";
 import Icon from "./Icons";
 
@@ -11,6 +12,7 @@ export default function Header() {
   const t = useT();
   const isOpen = useOpenStatus();
   const [scrolled, setScrolled] = useState(false);
+  const onSecretAdminTap = useSecretAdminTap();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -23,7 +25,13 @@ export default function Header() {
     <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
       <div className="header__inner">
         <a href="/" className="header__brand">
-          <img className="header__logo" src="/logo-mark.png" alt="" />
+          <span
+            className="header__logo-hit"
+            role="presentation"
+            onClick={onSecretAdminTap}
+          >
+            <img className="header__logo" src="/logo-mark.png" alt="" draggable={false} />
+          </span>
           <span className="header__brand-name">{SITE.name}</span>
         </a>
 

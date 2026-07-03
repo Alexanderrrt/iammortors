@@ -206,6 +206,14 @@ h3 {
   border-radius: var(--r-sm);
 }
 
+.header__logo-hit {
+  display: inline-flex;
+  flex-shrink: 0;
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
 .header__nav {
   display: none;
   gap: 1.6rem;
