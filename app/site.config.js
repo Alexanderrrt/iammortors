@@ -276,4 +276,73 @@ export const COPY = {
     },
     followUs: { en: "Follow us", es: "Síganos" },
   },
+  admin: {
+    login: {
+      title: { en: "Admin — Pricing", es: "Admin — Precios" },
+      intro: {
+        en: "Enter the admin password to edit quote pricing.",
+        es: "Ingresa la contraseña de administrador para editar los precios.",
+      },
+      passwordPlaceholder: { en: "Password", es: "Contraseña" },
+      passwordAria: { en: "Admin password", es: "Contraseña de administrador" },
+      signIn: { en: "Sign in", es: "Iniciar sesión" },
+      signingIn: { en: "Signing in…", es: "Iniciando sesión…" },
+      wrongPassword: { en: "Incorrect password.", es: "Contraseña incorrecta." },
+      notConfigured: {
+        en: "Admin auth is not configured (set ADMIN_PASSWORD and AUTH_SECRET).",
+        es: "La autenticación de admin no está configurada (define ADMIN_PASSWORD y AUTH_SECRET).",
+      },
+      failed: { en: "Login failed.", es: "No se pudo iniciar sesión." },
+    },
+    editor: {
+      title: { en: "Quote Pricing", es: "Precios del Cotizador" },
+      storageWarn: {
+        en: "Storage not connected — changes apply for this session only. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to persist.",
+        es: "Almacenamiento no conectado — los cambios solo aplican en esta sesión. Define SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY para guardarlos.",
+      },
+      logOut: { en: "Log out", es: "Cerrar sesión" },
+      loggingOut: { en: "Signing out…", es: "Cerrando sesión…" },
+      save: { en: "Save changes", es: "Guardar cambios" },
+      saving: { en: "Saving…", es: "Guardando…" },
+      saved: { en: "Saved.", es: "Guardado." },
+      savedSession: {
+        en: "Saved for this session — connect Supabase to make it permanent.",
+        es: "Guardado para esta sesión — conecta Supabase para hacerlo permanente.",
+      },
+      saveFailed: { en: "Save failed.", es: "No se pudo guardar." },
+      globalHeading: { en: "Global", es: "General" },
+      laborRate: { en: "Labor rate ($/hr)", es: "Mano de obra ($/hr)" },
+      spread: { en: "Estimate spread (%)", es: "Margen del estimado (%)" },
+      currency: { en: "Currency", es: "Moneda" },
+      vehicleHeading: { en: "Vehicle multipliers", es: "Multiplicadores por vehículo" },
+      vehicleHint: {
+        en: "Sedan is the 1.0 baseline. Bigger/more premium vehicles cost more.",
+        es: "El sedán es la base (1.0). Vehículos más grandes o premium cuestan más.",
+      },
+      servicesHeading: { en: "Services", es: "Servicios" },
+      appliesFactor: { en: "applies vehicle factor", es: "aplica factor de vehículo" },
+      basePrice: { en: "Base price / unit", es: "Precio base / unidad" },
+      partsBase: { en: "Parts base", es: "Base de refacciones" },
+      laborHours: { en: "Labor hours", es: "Horas de mano de obra" },
+      flatPrice: { en: "Flat price", es: "Precio fijo" },
+      perUnit: { en: "per unit", es: "por unidad" },
+      perJob: { en: "per job", es: "por trabajo" },
+      modelHelp: {
+        perUnit: {
+          en: "Per-unit price × vehicle factor × qty, plus fees.",
+          es: "Precio por unidad × factor de vehículo × cantidad, más cargos.",
+        },
+        labor: {
+          en: "Parts + (labor hours × vehicle factor × labor rate).",
+          es: "Refacciones + (horas × factor de vehículo × tarifa).",
+        },
+        options: {
+          en: "Customer picks one option; that price is used.",
+          es: "El cliente elige una opción; se usa ese precio.",
+        },
+        flat: { en: "Single flat price.", es: "Un solo precio fijo." },
+      },
+      openingEditor: { en: "Opening pricing editor…", es: "Abriendo el editor de precios…" },
+    },
+  },
 };

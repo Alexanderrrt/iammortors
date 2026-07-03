@@ -2,19 +2,18 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLanguage, useT } from "../i18n/LanguageContext";
+import { COPY } from "../site.config";
 import AdminLoader from "./AdminLoader";
 
-const MODEL_HELP = {
-  perUnit: "Per-unit price × vehicle factor × qty, plus fees.",
-  labor: "Parts + (labor hours × vehicle factor × labor rate).",
-  options: "Customer picks one option; that price is used.",
-  flat: "Single flat price.",
-};
+const E = COPY.admin.editor;
 
 export default function PricingEditor({ initialPricing, persistent, authReady }) {
   const router = useRouter();
+  const { lang, toggleLang } = useLanguage();
+  const t = useT();
   const [pricing, setPricing] = useState(initialPricing);
-  const [status, setStatus] = useState(null); // {ok, msg}
+  const [status, setStatus] = useState(null); // {ok, msg: {en, es}}
   const [saving, setSaving] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -42,15 +41,13 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
     setSaving(false);
     const body = await res.json().catch(() => ({}));
     if (res.ok) {
-      setStatus({
-        ok: true,
-        msg: body.persisted
-          ? "Saved."
-          : "Saved for this session — connect Supabase to make it permanent.",
-      });
+      setStatus({ ok: true, msg: body.persisted ? E.saved : E.savedSession });
       router.refresh();
     } else {
-      setStatus({ ok: false, msg: body.error || "Save failed." });
+      // Server detail (validation etc.) is English-only; show it after the
+      // bilingual headline rather than dropping it.
+      const detail = body.error ? ` (${body.error})` : "";
+      setStatus({ ok: false, msg: { en: E.saveFailed.en + detail, es: E.saveFailed.es + detail } });
     }
   }
 
@@ -63,41 +60,39 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
 
   return (
     <>
-      {loggingOut && <AdminLoader message="Signing out…" />}
+      {loggingOut && <AdminLoader message={t(E.loggingOut)} />}
       <div className="editor">
       <header className="editor__bar">
         <div>
-          <h1>Quote Pricing</h1>
-          {!persistent && (
-            <p className="editor__warn">
-              Storage not connected — changes apply for this session only. Set SUPABASE_URL and
-              SUPABASE_SERVICE_ROLE_KEY to persist.
-            </p>
-          )}
+          <h1>{t(E.title)}</h1>
+          {!persistent && <p className="editor__warn">{t(E.storageWarn)}</p>}
         </div>
         <div className="editor__actions">
           {status && (
-            <span className={status.ok ? "editor__ok" : "editor__err"}>{status.msg}</span>
+            <span className={status.ok ? "editor__ok" : "editor__err"}>{t(status.msg)}</span>
           )}
+          <button type="button" className="lang-toggle" onClick={toggleLang} aria-label="Toggle language">
+            {lang === "en" ? "ES" : "EN"}
+          </button>
           <button className="btn btn--ghost btn--small" onClick={logout} disabled={loggingOut || saving}>
-            {loggingOut ? "Signing out…" : "Log out"}
+            {loggingOut ? t(E.loggingOut) : t(E.logOut)}
           </button>
           <button className="btn btn--primary btn--small" onClick={save} disabled={saving}>
-            {saving ? "Saving…" : "Save changes"}
+            {saving ? t(E.saving) : t(E.save)}
           </button>
         </div>
       </header>
 
       {/* Global settings */}
       <section className="editor__group">
-        <h2>Global</h2>
+        <h2>{t(E.globalHeading)}</h2>
         <div className="editor__row">
           <label>
-            <span>Labor rate ($/hr)</span>
+            <span>{t(E.laborRate)}</span>
             <input type="number" min="0" value={pricing.laborRate} onChange={numHandler((n, v) => (n.laborRate = v))} />
           </label>
           <label>
-            <span>Estimate spread (%)</span>
+            <span>{t(E.spread)}</span>
             <input
               type="number"
               min="0"
@@ -107,7 +102,7 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
             />
           </label>
           <label>
-            <span>Currency</span>
+            <span>{t(E.currency)}</span>
             <input value={pricing.currency} onChange={(e) => edit((n) => (n.currency = e.target.value))} />
           </label>
         </div>
@@ -115,12 +110,12 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
 
       {/* Vehicle multipliers */}
       <section className="editor__group">
-        <h2>Vehicle multipliers</h2>
-        <p className="editor__hint">Sedan is the 1.0 baseline. Bigger/more premium vehicles cost more.</p>
+        <h2>{t(E.vehicleHeading)}</h2>
+        <p className="editor__hint">{t(E.vehicleHint)}</p>
         <div className="editor__grid">
           {pricing.vehicleClasses.map((vc, i) => (
             <label key={vc.id} className="editor__cell">
-              <span>{vc.label.en}</span>
+              <span>{t(vc.label)}</span>
               <input
                 type="number"
                 step="0.05"
@@ -135,11 +130,11 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
 
       {/* Services */}
       <section className="editor__group">
-        <h2>Services</h2>
+        <h2>{t(E.servicesHeading)}</h2>
         {pricing.services.map((svc, i) => (
           <div key={svc.id} className="editor__svc">
             <div className="editor__svc-head">
-              <strong>{svc.label.en}</strong>
+              <strong>{t(svc.label)}</strong>
               <span className="editor__tag">{svc.model}</span>
               <label className="editor__inline-check">
                 <input
@@ -147,21 +142,21 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
                   checked={svc.appliesVehicleFactor}
                   onChange={(e) => edit((n) => (n.services[i].appliesVehicleFactor = e.target.checked))}
                 />
-                applies vehicle factor
+                {t(E.appliesFactor)}
               </label>
             </div>
-            <p className="editor__hint">{MODEL_HELP[svc.model]}</p>
+            <p className="editor__hint">{t(E.modelHelp[svc.model])}</p>
 
             <div className="editor__row">
               {svc.model === "perUnit" && (
                 <>
                   <label>
-                    <span>Base price / unit</span>
+                    <span>{t(E.basePrice)}</span>
                     <input type="number" min="0" value={svc.basePrice} onChange={numHandler((n, v) => (n.services[i].basePrice = v))} />
                   </label>
                   {svc.fees?.map((f, fi) => (
                     <label key={fi}>
-                      <span>{f.label.en} ({f.per})</span>
+                      <span>{t(f.label)} ({t(f.per === "unit" ? E.perUnit : E.perJob)})</span>
                       <input type="number" min="0" value={f.amount} onChange={numHandler((n, v) => (n.services[i].fees[fi].amount = v))} />
                     </label>
                   ))}
@@ -171,11 +166,11 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
               {svc.model === "labor" && (
                 <>
                   <label>
-                    <span>Parts base</span>
+                    <span>{t(E.partsBase)}</span>
                     <input type="number" min="0" value={svc.partsBase} onChange={numHandler((n, v) => (n.services[i].partsBase = v))} />
                   </label>
                   <label>
-                    <span>Labor hours</span>
+                    <span>{t(E.laborHours)}</span>
                     <input type="number" min="0" step="0.25" value={svc.laborHours} onChange={numHandler((n, v) => (n.services[i].laborHours = v))} />
                   </label>
                 </>
@@ -184,14 +179,14 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
               {svc.model === "options" &&
                 svc.options.map((o, oi) => (
                   <label key={o.id}>
-                    <span>{o.label.en}</span>
+                    <span>{t(o.label)}</span>
                     <input type="number" min="0" value={o.price} onChange={numHandler((n, v) => (n.services[i].options[oi].price = v))} />
                   </label>
                 ))}
 
               {svc.model === "flat" && (
                 <label>
-                  <span>Flat price</span>
+                  <span>{t(E.flatPrice)}</span>
                   <input type="number" min="0" value={svc.flatPrice} onChange={numHandler((n, v) => (n.services[i].flatPrice = v))} />
                 </label>
               )}

@@ -1,4 +1,14 @@
-export default function AdminLoader({ message = "Loading…" }) {
+"use client";
+
+import { useT } from "../i18n/LanguageContext";
+
+// `message` accepts a plain string or a bilingual { en, es } object so both
+// client components (which translate up-front) and server loading.js files
+// (which can't) can use it.
+export default function AdminLoader({ message = { en: "Loading…", es: "Cargando…" } }) {
+  const t = useT();
+  const text = typeof message === "string" ? message : t(message);
+
   return (
     <div className="admin-loader" role="status" aria-live="polite" aria-busy="true">
       <div className="admin-loader__backdrop" aria-hidden="true" />
@@ -17,7 +27,7 @@ export default function AdminLoader({ message = "Loading…" }) {
         </div>
 
         <p className="admin-loader__brand">Tires SOS Rescue</p>
-        <p className="admin-loader__message">{message}</p>
+        <p className="admin-loader__message">{text}</p>
 
         <div className="admin-loader__track" aria-hidden="true">
           <span className="admin-loader__track-fill" />
