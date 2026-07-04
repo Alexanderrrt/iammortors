@@ -22,7 +22,9 @@ export default function Footer() {
               </span>
             </div>
           </div>
-          <p>{SITE.address.full}</p>
+          {SITE.locations.map((loc) => (
+            <p key={loc.id}>{loc.full}</p>
+          ))}
           <a href={SITE.phoneHref}>{SITE.phone}</a>
           <p className="footer__payments">
             <span className="afterpay-chip">Snap Finance</span>

@@ -118,7 +118,7 @@ export default function Hero() {
               <a href={SITE.phoneHref} className="btn btn--ghost">
                 <Icon name="phone" /> {t(COPY.hero.callNow)}
               </a>
-              <a href={SITE.mapsHref} target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
+              <a href={SITE.locations[0].mapsHref} target="_blank" rel="noopener noreferrer" className="btn btn--ghost">
                 <Icon name="pin" /> {t(COPY.hero.directions)}
               </a>
             </div>

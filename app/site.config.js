@@ -16,15 +16,31 @@ export const SITE = {
   // WhatsApp number in international format, digits only (used by wa.me).
   // Confirm this line is WhatsApp-enabled, or replace with the shop's WhatsApp.
   whatsapp: "14083328962",
-  address: {
-    line1: "623 E Taylor St",
-    line2: "San José, CA 95112",
-    full: "623 E Taylor St, San José, CA 95112",
-  },
-  mapsHref:
-    "https://www.google.com/maps/dir/?api=1&destination=623+E+Taylor+St,+San+Jose,+CA+95112",
-  mapsEmbedSrc:
-    "https://www.google.com/maps?q=623+E+Taylor+St,+San+Jose,+CA+95112&output=embed",
+  locations: [
+    {
+      id: "taylor",
+      line1: "623 E Taylor St",
+      line2: "San José, CA 95112",
+      full: "623 E Taylor St, San José, CA 95112",
+      mapsHref:
+        "https://www.google.com/maps/dir/?api=1&destination=623+E+Taylor+St,+San+Jose,+CA+95112",
+      mapsEmbedSrc:
+        "https://www.google.com/maps?q=623+E+Taylor+St,+San+Jose,+CA+95112&output=embed",
+      postalCode: "95112",
+    },
+    {
+      id: "tenth",
+      line1: "1407 N 10th St",
+      line2: "San José, CA 95112",
+      full: "1407 N 10th St, San José, CA 95112",
+      mapsHref:
+        "https://www.google.com/maps/dir/?api=1&destination=1407+N+10th+St,+San+Jose,+CA+95112",
+      mapsEmbedSrc:
+        "https://www.google.com/maps?q=1407+N+10th+St,+San+Jose,+CA+95112&output=embed",
+      postalCode: "95112",
+    },
+  ],
+
   social: {
     instagram: "https://www.instagram.com/tiressosrescue/",
     tiktok: "https://www.tiktok.com/@tiressosrescue",
@@ -187,10 +203,13 @@ export const COPY = {
       en: "Pick your vehicle and services for a ballpark price. We confirm the exact price at the shop.",
       es: "Elija su vehículo y servicios para un precio aproximado. Confirmamos el precio exacto en el taller.",
     },
-    vehicleStep: { en: "1. Your vehicle", es: "1. Su vehículo" },
-    vehicleClassLabel: { en: "Vehicle type", es: "Tipo de vehículo" },
-    vehicleTextLabel: { en: "Year / Make / Model (optional)", es: "Año / Marca / Modelo (opcional)" },
-    vehicleTextPlaceholder: { en: "e.g. 2019 Toyota Camry", es: "ej. 2019 Toyota Camry" },
+      vehicleStep: { en: "1. Your vehicle", es: "1. Su vehículo" },
+      vehicleMakeLabel: { en: "Brand", es: "Marca" },
+      vehicleModelLabel: { en: "Model", es: "Modelo" },
+      vehicleYearLabel: { en: "Year", es: "Año" },
+      vehicleClassLabel: { en: "Vehicle type", es: "Tipo de vehículo" },
+      vehicleTextLabel: { en: "Describe your vehicle", es: "Describe tu vehículo" },
+      vehicleTextPlaceholder: { en: "e.g. 2019 Toyota Camry", es: "ej. 2019 Toyota Camry" },
     servicesStep: { en: "2. What do you need?", es: "2. ¿Qué necesita?" },
     qtyLabel: { en: "Quantity", es: "Cantidad" },
     estimateLabel: { en: "Estimated total", es: "Total estimado" },

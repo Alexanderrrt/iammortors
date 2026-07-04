@@ -1140,27 +1140,20 @@ h3 {
   display: block;
 }
 
-/* Crop away the IG embed chrome: header row (~16% at this card size) and
-   footer sliver (~12%). Scale/origin are derived so the remaining band fills
-   the card exactly: scale = 1/(1-.16-.12), originY = scale*.16/(scale-1). */
-.reel-card iframe {
-  width: 100%;
+.reel-card .instagram-media,
+.reel-card .instagram-media-reels {
+  width: calc(100% - 2px) !important;
+  min-width: auto !important;
   height: 100%;
-  border: 0;
+  border: 0 !important;
+  margin: 0 !important;
   display: block;
-  clip-path: inset(16% 0 12% 0);
-  transform: scale(1.389);
-  transform-origin: center 57.1%;
 }
-
 
 .gallery-cta {
   width: fit-content;
 }
 
-/* Card width stays fixed across breakpoints: the IG embed's header/footer
-   chrome is a fixed pixel height, so the % clip above only lines up at one
-   card size. */
 @media (max-width: 640px) {
   .reels-arrow { display: none; }
 }
@@ -1261,42 +1254,41 @@ h3 {
   grid-template-columns: 1fr;
 }
 
-.location-map {
+.location-card {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  background: var(--surface);
   border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  padding: 1.25rem;
+}
+
+.location-card__map {
+  border-radius: var(--r-md);
   overflow: hidden;
-  border: none;
-  min-height: 320px;
-  transition: box-shadow 0.2s ease;
+  min-height: 240px;
 }
 
-.location-map:hover {
-  box-shadow: 0 8px 32px rgba(248, 96, 0, 0.12);
-}
-
-.location-map iframe {
+.location-card__map iframe {
   width: 100%;
   height: 100%;
-  min-height: 320px;
+  min-height: 240px;
   border: 0;
+  display: block;
 }
 
-.location-details {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.location-block h3 {
+.location-card__details h3 {
   margin: 0 0 0.6rem;
   font-size: 1.35rem;
 }
 
-.location-block p {
+.location-card__details p {
   margin: 0.15rem 0;
   color: var(--paper-dim);
 }
 
-.location-block > a:not(.btn) {
+.location-card__details > a:not(.btn) {
   display: block;
   width: fit-content;
   text-decoration: none;
@@ -1309,6 +1301,18 @@ h3 {
 
 .location-directions {
   margin-top: 1.1rem;
+}
+
+.location-block--hours {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  padding: 1.25rem;
+}
+
+.location-block--hours h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.35rem;
 }
 
 .hours-table {
@@ -1334,8 +1338,18 @@ h3 {
 }
 
 @media (min-width: 820px) {
-  .location-grid {
+  .location-card {
     grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1100px) {
+  .location-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .location-grid > .location-block--hours {
+    grid-column: 1 / -1;
   }
 }
 
@@ -1884,9 +1898,63 @@ h3 {
   font: inherit;
 }
 
+.quote__select {
+  width: 100%;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--paper);
+  padding: 0.6rem 0.7rem;
+  font: inherit;
+  appearance: auto;
+  cursor: pointer;
+}
+
+.quote__select:focus {
+  outline: 2px solid var(--orange);
+  outline-offset: 1px;
+}
+
+.quote__select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.quote__vehicle-img {
+  margin: 1rem 0 0.5rem;
+  max-width: 240px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.quote__vehicle-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.quote__toggle-custom {
+  display: inline-block;
+  margin-top: 0.75rem;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--orange);
+  font: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.quote__toggle-custom:hover {
+  color: var(--paper);
+}
+
 .quote__field input:focus,
 .editor input:focus,
 .quote__chip:focus-visible,
+.quote__select:focus-visible,
 .admin-card input:focus {
   outline: 2px solid var(--orange);
   outline-offset: 1px;
@@ -2580,6 +2648,131 @@ h3 {
   }
 }
 
+/* ---------- Subtle UI polish — hover & ambient effects ---------- */
+
+.btn--primary {
+  position: relative;
+  overflow: hidden;
+}
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn--primary:hover::after {
+  transform: translateX(100%);
+}
+
+.service-card__icon {
+  transition: transform 0.3s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.service-card:hover .service-card__icon {
+  transform: scale(1.06);
+}
+
+.review-card__stars {
+  display: block;
+  transition: text-shadow 0.3s ease;
+}
+.review-card:hover .review-card__stars {
+  text-shadow: 0 0 12px rgba(248, 96, 0, 0.5);
+}
+
+.footer__social a {
+  position: relative;
+  width: fit-content;
+}
+.footer__social a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.footer__social a:hover::after {
+  transform: scaleX(1);
+}
+
+.status-badge__dot {
+  animation: dot-pulse 2.5s ease-in-out infinite;
+}
+.status-badge--closed .status-badge__dot {
+  animation: none;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.hours-table__today td:first-child {
+  position: relative;
+}
+.hours-table__today td:first-child::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+.header__brand-tire {
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.header__brand:hover .header__brand-tire--yellow {
+  transform: translateY(-2px);
+}
+.header__brand:hover .header__brand-tire--blue {
+  transform: translateY(1px);
+}
+.header__brand:hover .header__brand-tire--red {
+  transform: translateY(3px);
+}
+
+.location-card__map,
+.location-storefront {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.location-card__map:hover,
+.location-storefront:hover {
+  transform: translateY(-2px);
+}
+
+.lang-toggle {
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.lang-toggle:hover {
+  transform: scale(1.05);
+}
+
+.marquee__item {
+  transition: color 0.25s ease;
+}
+.marquee__item:hover {
+  color: var(--ink);
+  opacity: 0.7;
+}
+
+.driver-banner__price {
+  transition: text-shadow 0.4s ease;
+}
+.driver-banner:hover .driver-banner__price {
+  text-shadow: 0 0 24px rgba(224, 128, 48, 0.5);
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2639,5 +2832,28 @@ h3 {
 
   .driver-popup {
     animation: none;
+  }
+
+  .btn--primary::after,
+  .status-badge__dot,
+  .hours-table__today td:first-child::before {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .service-card__icon,
+  .review-card__stars,
+  .footer__social a,
+  .footer__social a::after,
+  .header__brand-tire,
+  .location-card__map,
+  .location-storefront,
+  .lang-toggle,
+  .marquee__item,
+  .driver-banner__price {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
   }
 }

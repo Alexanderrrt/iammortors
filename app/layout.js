@@ -1,4 +1,5 @@
 import { Barlow, Barlow_Condensed, Caveat } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import JsonLd from "./components/JsonLd";
 import { LanguageProvider } from "./i18n/LanguageContext";
@@ -77,7 +78,12 @@ export const metadata = {
   },
   icons: {
     icon: "/favicon.svg",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon-152.png", sizes: "152x152", type: "image/png" },
+    ],
   },
+  manifest: "/manifest.json",
 };
 
 export const viewport = {
@@ -90,6 +96,7 @@ export default function RootLayout({ children }) {
       <body>
         <JsonLd />
         <LanguageProvider>{children}</LanguageProvider>
+        <Script src="https://www.instagram.com/embed.js" strategy="afterInteractive" />
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, REELS, SITE } from "../site.config";
 import Icon from "./Icons";
@@ -9,6 +9,21 @@ import Reveal from "./Reveal";
 export default function Gallery() {
   const t = useT();
   const trackRef = useRef(null);
+  const processed = useRef(false);
+
+  useEffect(() => {
+    if (processed.current) return;
+    processed.current = true;
+
+    const id = setInterval(() => {
+      if (window.instgrm) {
+        window.instgrm.Embeds.process();
+        clearInterval(id);
+      }
+    }, 200);
+
+    return () => clearInterval(id);
+  }, []);
 
   const scroll = (dir) => {
     const track = trackRef.current;
@@ -37,11 +52,10 @@ export default function Gallery() {
                 className="reel-card reveal-item"
                 style={{ "--d": `${i * 80}ms` }}
               >
-                <iframe
-                  src={`${permalink}embed/`}
-                  title={`Tires SOS Rescue Instagram reel ${i + 1}`}
-                  allowFullScreen
-                  scrolling="no"
+                <blockquote
+                  className="instagram-media"
+                  data-instgrm-permalink={permalink}
+                  data-instgrm-version="14"
                 />
               </div>
             ))}
