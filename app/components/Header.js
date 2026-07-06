@@ -39,6 +39,7 @@ export default function Header() {
         </a>
 
         <nav className="header__nav">
+          <a href="/#about">{t(COPY.nav.about)}</a>
           <a href="/#services">{t(COPY.nav.services)}</a>
           <a href="/quote">{t(COPY.nav.quote)}</a>
           <a href="/#gallery">{t(COPY.nav.gallery)}</a>

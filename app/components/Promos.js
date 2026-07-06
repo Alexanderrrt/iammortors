@@ -121,7 +121,7 @@ export default function Promos() {
           <div className="promo-card reveal-item" style={{ "--d": "120ms" }}>
             <div className="promo-card__media">
               <img
-                src="/loyalty-card-br.svg"
+                src="/loyalty-card.png"
                 alt="Loyalty card — free oil change after 10 visits"
                 loading="lazy"
               />

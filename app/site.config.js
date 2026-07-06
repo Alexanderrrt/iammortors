@@ -24,7 +24,7 @@ export const SITE = {
       mapsHref:
         "https://www.google.com/maps/dir/?api=1&destination=1048+N+Tenth+St,+San+Jose,+CA+95112",
       mapsEmbedSrc:
-        "https://maps.google.com/maps?q=1048+N+Tenth+St,+San+Jose,+CA+95112&t=&z=15&ie=UTF8&iwloc=&output=embed",
+        "https://www.openstreetmap.org/export/embed.html?bbox=-121.8989356%2C37.3583228%2C-121.8929356%2C37.3643228&layer=mapnik&marker=37.3613228%2C-121.8959356",
       postalCode: "95112",
     },
     {
@@ -35,7 +35,7 @@ export const SITE = {
       mapsHref:
         "https://www.google.com/maps/dir/?api=1&destination=804+Park+Ave+Ste+B,+San+Jose,+CA+95126",
       mapsEmbedSrc:
-        "https://maps.google.com/maps?q=804+Park+Ave+Ste+B,+San+Jose,+CA+95126&t=&z=15&ie=UTF8&iwloc=&output=embed",
+        "https://www.openstreetmap.org/export/embed.html?bbox=-121.9083681%2C37.3222802%2C-121.9023681%2C37.3282802&layer=mapnik&marker=37.3252802%2C-121.9053681",
       postalCode: "95126",
     },
   ],
@@ -179,6 +179,39 @@ export const OWNERS_RIDE = {
   },
 };
 
+export const ABOUT_US = {
+  brandStatement: {
+    en: "We don't just fix cars — we deliver confidence, safety, and performance you can feel with every mile.",
+    es: "No solo reparamos autos — entregamos confianza, seguridad y rendimiento que puedes sentir en cada kilómetro.",
+  },
+  cards: [
+    {
+      id: "who-we-are",
+      title: { en: "Who We Are", es: "Quiénes Somos" },
+      body: {
+        en: "A team of certified professionals with a deep passion for automotive care and customer satisfaction, backed by years of industry experience built on honesty and quality.",
+        es: "Un equipo de profesionales certificados con una profunda pasión por el cuidado automotriz y la satisfacción del cliente, respaldado por años de experiencia en la industria basada en la honestidad y la calidad.",
+      },
+    },
+    {
+      id: "mission",
+      title: { en: "Our Mission", es: "Nuestra Misión" },
+      body: {
+        en: "To provide professional, transparent, and efficient automotive services that ensure safety, performance, and peace of mind — building enduring relationships through integrity, technical excellence, and personalized attention.",
+        es: "Brindar servicios automotrices profesionales, transparentes y eficientes que garanticen seguridad, rendimiento y tranquilidad — construyendo relaciones duraderas a través de la integridad, la excelencia técnica y la atención personalizada.",
+      },
+    },
+    {
+      id: "vision",
+      title: { en: "Our Vision", es: "Nuestra Visión" },
+      body: {
+        en: "To become a benchmark in the automotive service industry, recognized for our commitment to innovation, reliability, and exceptional customer care — a trusted partner for our community.",
+        es: "Convertirnos en un referente en la industria de servicios automotrices, reconocidos por nuestro compromiso con la innovación, la confiabilidad y el servicio excepcional — un socio de confianza para nuestra comunidad.",
+      },
+    },
+  ],
+};
+
 export const TESTIMONIALS = [
   {
     quote: {
@@ -205,6 +238,7 @@ export const TESTIMONIALS = [
 
 export const COPY = {
   nav: {
+    about: { en: "Our Company", es: "Nuestra Empresa" },
     services: { en: "Services", es: "Servicios" },
     gallery: { en: "Gallery", es: "Galería" },
     location: { en: "Location", es: "Ubicación" },
@@ -268,6 +302,13 @@ export const COPY = {
     afterpay: {
       en: "Flexible financing available — payments that work for you",
       es: "Financiamiento flexible disponible — pagos que funcionan para ti",
+    },
+  },
+  about: {
+    heading: { en: "Our Company", es: "Nuestra Empresa" },
+    sub: {
+      en: "Certified professionals, honest work, and a genuine passion for automotive care.",
+      es: "Profesionales certificados, trabajo honesto y una pasión genuina por el cuidado automotriz.",
     },
   },
   services: {

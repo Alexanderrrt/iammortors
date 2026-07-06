@@ -1,93 +1,96 @@
-# Tires SOS Rescue — website
+# Business Website Template
 
-Next.js (App Router) marketing site for Tires SOS Rescue, a tire & auto shop
-in San José, CA (tires, brakes, oil changes, batteries, rims, alignment).
+A Next.js (App Router) bilingual (English/Spanish) business website template with a quote estimator, admin pricing panel, and full i18n support.
 
-**Stack:** Next.js 14 · React · plain CSS · Vercel (hosting) · Supabase
-(stores editable quote pricing). The marketing pages are static; the quote
-estimator (`/quote`) and admin panel (`/admin`) are the only dynamic parts.
+**Stack:** Next.js 14 · React · plain CSS · Vercel (hosting) · Supabase (optional, for persistent pricing)
 
-## Run it
+## Quick start
 
 ```bash
 npm install
 npm run dev   # http://localhost:3000
 ```
 
-## Edit site content in ONE place
+## Customize for your business
 
-Open **`app/site.config.js`**:
+### 1. Edit `app/site.config.js`
 
-- `SITE` — name, phone, address, map links, hours (per weekday, used to
-  compute the live "Open now / Closed" badge), social links
+This is the **single file** where you change all text and business info:
+
+- `SITE` — name, phone, address, maps links, hours (per weekday), social links, WhatsApp number
 - `SERVICES` — the service cards shown in the "What We Do" section
-- `TESTIMONIALS` — the review quotes shown in "What Customers Say"
-- `COPY` — every other bilingual (English/Spanish) UI string
+- `MARQUEE_ITEMS` — scrolling banner text
+- `OWNERS_RIDE` — featured vehicle/build section copy
+- `TESTIMONIALS` — customer review quotes
+- `COPY` — every other bilingual UI string
+- `REELS` — Instagram reel permalinks for the gallery
 
-Every text field that needs both languages is a `{ en: "...", es: "..." }`
-object — the site's language toggle reads whichever one is active.
+Every text field that needs both languages is a `{ en: "...", es: "..." }` object.
 
-## Design system
+### 2. Replace images in `public/`
 
-Brand colors are the shop's real ones — **orange & black** (`--color-accent:
-#f86000` in `app/globals.css`). Headings use Archivo Black, body uses Inter,
-both self-hosted at build time via `next/font` (no runtime font requests).
-All scroll/hover animations are pure CSS + a small IntersectionObserver
-`Reveal` component (`app/components/Reveal.js`) and are fully disabled for
-users with `prefers-reduced-motion`.
+| Location | Replace with |
+|----------|-------------|
+| `public/storefront.jpg` | Your storefront photo |
+| `public/owner.jpg` | Owner/staff portrait |
+| `public/owners-m3.jpg` | Featured vehicle photo |
+| `public/loyalty-card.jpg` | Loyalty card or promo image |
+| `public/snap-finance.jpg` | Financing partner image |
+| `public/og.png` | Open Graph share image (1200×630) |
+| `public/apple-touch-icon.png` | Apple touch icon (180×180) |
+| `public/apple-touch-icon-152.png` | Apple touch icon (152×152) |
+| `public/services/*.jpg` | Photos for each service |
+| `public/vehicles/*` | Vehicle photos for the quote estimator |
 
-## Photos & Instagram
+**Keep:** `logo.jpg`, `logo-mark.png`, `favicon.svg`, `brands/*.svg`
 
-- **Owner's BMW M3 Competition** — `/public/owners-m3.jpg`, shown in the
-  "Owner's Ride" section. Replace the file to update the photo.
-- **Logo** — `/public/logo.jpg`, used in the header, footer and the social
-  share image (`/public/og.png`).
-- **Instagram reels** — the "From the Shop" section embeds the reels listed
-  in `REELS` in `app/site.config.js`. Paste new reel permalinks there to
-  rotate the featured content.
+### 3. Update metadata in `app/layout.js`
 
-## Quote estimator + admin pricing
+Set your business name, description, and keywords in the `metadata` export.
 
-Customers get an instant estimate at **`/quote`**: they pick a vehicle type and
-services and see a price range, then send it to the shop pre-filled over
-WhatsApp. Prices "vary by model" via a per-vehicle-class multiplier and by
-labor hours × rate — see the model in `lib/pricing.default.js` and the engine
-in `lib/quote.js`.
+### 4. Review `lib/pricing.default.js`
 
-The owner edits prices at **`/admin`** (no code):
+Default pricing for the quote estimator. Set real prices in the `/admin` panel or edit this file.
 
-1. In Supabase, run `db/pricing-schema.sql` once (creates + seeds the `pricing`
-   table).
-2. Set these env vars locally (`.env.local`) and in Vercel — see `.env.example`:
-   - `ADMIN_PASSWORD` — the login password
-   - `AUTH_SECRET` — random string (`openssl rand -base64 32`)
-   - `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` — server-only (not NEXT_PUBLIC)
-3. Confirm `SITE.whatsapp` in `app/site.config.js` is the shop's WhatsApp number.
+### 5. Update environment variables
 
-Until Supabase is connected, the estimator runs on the built-in default prices
-and the admin editor saves for the current session only. The default prices in
-`lib/pricing.default.js` are starting points — the owner should set real numbers
-in `/admin` (or you can edit that file).
+Copy `.env.example` to `.env.local` and set:
+- `ADMIN_PASSWORD` — admin login password
+- `AUTH_SECRET` — random string (`openssl rand -base64 32`)
 
-## SEO
+(Optional) For persistent pricing storage, also set:
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
 
-- `app/components/JsonLd.js` — schema.org `TireShop`/`AutoRepair` structured
-  data (name, address, phone, hours, payment methods incl. Afterpay, social
-  profiles) for Google local results.
-- `app/robots.js` / `app/sitemap.js` — served at `/robots.txt` and
-  `/sitemap.xml` automatically.
-- `app/layout.js` — canonical URL, bilingual keywords, Open Graph + Twitter
-  cards using `/public/og.png`.
-- **IMPORTANT:** `SITE.url` in `app/site.config.js` is set to the default
-  Vercel URL. Update it when a custom domain is attached, then also submit
-  the sitemap in [Google Search Console](https://search.google.com/search-console)
-  and create/claim the free **Google Business Profile** — for a local shop
-  that matters more than anything on the site itself.
+## Features
 
-## Deploying to Vercel
+- Bilingual EN/ES with language toggle
+- Mobile-responsive, fully custom CSS (no framework)
+- Scroll animations with reduced-motion support
+- Interactive quote estimator (`/quote`)
+- Password-protected admin pricing editor (`/admin`)
+- Real-time open/closed status badge
+- Secret admin entry (5-tap Easter egg on logo)
+- SEO: sitemap, robots.txt, JSON-LD structured data, Open Graph
+- Instagram reels gallery
+- Brand showcase popups
+- WhatsApp integration for quotes and inquiries
 
-1. Go to [vercel.com/new](https://vercel.com/new) and import the
-   `alexanderrrt/tires-sos` GitHub repo.
-2. Framework preset: Next.js (auto-detected). No environment variables are
-   required.
-3. Deploy. Every push to the connected branch will auto-deploy.
+## Project structure
+
+```
+app/
+  layout.js           — Root layout, metadata, font loading
+  page.js             — Homepage (assembles all components)
+  site.config.js      — All text and business configuration
+  globals.css         — All styles (2859 lines)
+  components/         — UI components
+  i18n/               — Language context/provider
+  hooks/              — Custom React hooks
+  quote/              — Quote estimator page
+  admin/              — Admin panel (login + pricing editor)
+  api/                — API routes (pricing, auth)
+lib/                  — Business logic (pricing engine, auth, vehicles)
+public/               — Static assets (images, manifests)
+db/                   — Database schema
+```

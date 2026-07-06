@@ -7,9 +7,9 @@ import { getPricing } from "../../lib/pricing-store";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Get a Quote — Tires SOS Rescue | Tire & Auto Estimate, San José",
+  title: "Get a Quote — Instant Price Estimate",
   description:
-    "Instant price estimate for tires, brakes, oil changes, alignment and more at Tires SOS Rescue in San José, CA. Pick your vehicle and services, get a ballpark, confirm on WhatsApp.",
+    "Get an instant price estimate for your vehicle. Select services, see the estimated range, and send your quote request via WhatsApp.",
   alternates: { canonical: "/quote" },
 };
 

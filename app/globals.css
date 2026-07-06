@@ -1103,6 +1103,62 @@ h3 {
   font-size: 0.95rem;
 }
 
+/* ---------- About Us ---------- */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.about-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 1.4rem;
+}
+
+.about-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--blue);
+  border-radius: var(--r) var(--r) 0 0;
+}
+
+.about-card__title {
+  font-family: var(--display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  letter-spacing: 0.01em;
+  margin: 0 0 0.6rem;
+}
+
+.about-card__body {
+  color: var(--paper-dim);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.about-statement {
+  border-left: 4px solid var(--blue);
+  padding: 0.9rem 0 0.9rem 1.25rem;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--paper);
+}
+
+.about-statement p {
+  margin: 0;
+  max-width: 60ch;
+}
+
 /* ---------- Gallery / reels ---------- */
 
 .reels-wrapper {

@@ -1,7 +1,7 @@
 {
-  "name": "tires-sos-rescue",
+  "name": "business-website-template",
   "version": "1.0.0",
-  "description": "Tires SOS Rescue — San Jose tire & auto shop website",
+  "description": "Next.js bilingual business website template — customizable site with quote estimator, admin panel, and i18n",
   "private": true,
   "scripts": {
     "dev": "next dev",

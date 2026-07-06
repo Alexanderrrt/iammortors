@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
+import AboutUs from "./components/AboutUs";
 import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Promos from "./components/Promos";
@@ -16,14 +17,15 @@ export default function HomePage() {
     <>
       <Header />
       <main>
-        <Hero />
         <Marquee />
-        <Services />
-        <Gallery />
-        <Promos />
+        <Hero />
         <OwnersRide />
-        <Location />
+        <AboutUs />
+        <Services />
+        <Promos />
+        <Gallery />
         <Reviews />
+        <Location />
       </main>
       <Footer />
       <BrandPopups phoneHref={SITE.phoneHref} />
