@@ -12,15 +12,7 @@ export default function Footer() {
       <div className="footer__inner">
         <div>
           <div className="footer__brand">
-            <img className="footer__logo" src="/logo-mark.png" alt={SITE.name} />
-            <div className="footer__brand-copy">
-              <span className="footer__brand-name">{SITE.nameShort}</span>
-              <span className="footer__brand-flag" aria-hidden="true">
-                <span className="footer__brand-tire footer__brand-tire--yellow" />
-                <span className="footer__brand-tire footer__brand-tire--blue" />
-                <span className="footer__brand-tire footer__brand-tire--red" />
-              </span>
-            </div>
+            <img className="footer__logo" src="/logo.png" alt={SITE.name} />
           </div>
           {SITE.locations.map((loc) => (
             <p key={loc.id}>{loc.full}</p>
