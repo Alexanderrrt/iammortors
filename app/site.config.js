@@ -3,7 +3,7 @@
 
 export const SITE = {
   name: "Centro Automotriz BR",
-  nameShort: "BR Auto",
+  nameShort: "BR Auto Center",
   // Used for canonical URLs, sitemap, robots and Open Graph.
   // UPDATE once your domain is live.
   url: "https://centroautomotrizbr.com",

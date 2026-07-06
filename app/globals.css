@@ -210,7 +210,7 @@ h3 {
 .header__logo {
   height: 36px;
   width: auto;
-  border-radius: var(--r-sm);
+  mix-blend-mode: multiply;
 }
 
 .header__logo-hit {
@@ -1561,7 +1561,7 @@ h3 {
 .footer__logo {
   height: 46px;
   width: auto;
-  border-radius: var(--r-sm);
+  mix-blend-mode: multiply;
 }
 
 .footer__brand {
