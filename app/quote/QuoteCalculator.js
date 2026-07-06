@@ -171,6 +171,20 @@ export default function QuoteCalculator({ pricing }) {
           <p className="quote__disclaimer">{t(pricing.disclaimer)}</p>
         </div>
       </aside>
+
+      {result.hasSelection && (
+        <div className="quote-mobile-summary" aria-live="polite">
+          <div>
+            <span className="quote-mobile-summary__label">{t(COPY.quote.estimateLabel)}</span>
+            <strong>
+              {formatMoney(result.low, cur)} - {formatMoney(result.high, cur)}
+            </strong>
+          </div>
+          <a className="btn btn--primary btn--small" href={waHref} target="_blank" rel="noopener noreferrer">
+            <Icon name="phone" /> {t(COPY.quote.send)}
+          </a>
+        </div>
+      )}
     </div>
   );
 }

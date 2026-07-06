@@ -1,14 +1,21 @@
 "use client";
 
-import { useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SERVICES } from "../site.config";
 import Icon from "./Icons";
 import Reveal from "./Reveal";
 
+const FALLBACK_IMAGES = {
+  "llantas-nuevas": "/services/new-tires-shop.png",
+};
+
+const SERVICE_CTA = {
+  en: "Estimate this service",
+  es: "Cotizar este servicio",
+};
+
 export default function Services() {
   const t = useT();
-  const [activeId, setActiveId] = useState(null);
 
   return (
     <section id="services" className="section section--tread">
@@ -20,28 +27,33 @@ export default function Services() {
 
         <Reveal className="services-grid">
           {SERVICES.map((service, i) => {
-            const isActive = activeId === service.id;
+            const image = service.image || FALLBACK_IMAGES[service.id];
+
             return (
-              <button
+              <article
                 key={service.id}
-                type="button"
-                className={`service-card reveal-item ${isActive ? "service-card--active" : ""}`}
+                className={`service-card service-card--${service.id} reveal-item`}
                 style={{ "--d": `${i * 70}ms` }}
-                onClick={() => setActiveId(isActive ? null : service.id)}
-                aria-expanded={isActive}
               >
-                <span className="service-card__icon">
-                  {service.image ? (
-                    <img src={service.image} alt={t(service.title)} loading="lazy" />
-                  ) : (
+                {image && (
+                  <img
+                    className="service-card__image"
+                    src={image}
+                    alt={t(service.title)}
+                    loading="lazy"
+                  />
+                )}
+                <div className="service-card__body">
+                  <span className="service-card__icon" aria-hidden="true">
                     <Icon name={service.icon} />
-                  )}
-                </span>
-                <span className="service-card__title">{t(service.title)}</span>
-                <span className={`service-card__reveal ${isActive ? "service-card__reveal--open" : ""}`}>
-                  <span className="service-card__desc">{t(service.desc)}</span>
-                </span>
-              </button>
+                  </span>
+                  <h3 className="service-card__title">{t(service.title)}</h3>
+                  <p className="service-card__desc">{t(service.desc)}</p>
+                  <a href="/quote" className="service-card__link">
+                    {t(SERVICE_CTA)} <Icon name="arrow" />
+                  </a>
+                </div>
+              </article>
             );
           })}
         </Reveal>

@@ -13,11 +13,15 @@ export default function OwnersRide() {
         <div className="owners-ride__media">
           <span className="owners-ride__m-stripes" aria-hidden="true" />
           <img
-            className="owners-ride__img"
-            src="/OwnersRide.jpg"
-            alt={`Featured vehicle at ${SITE.name}`}
+            className="owners-ride__img owners-ride__img--owner"
+            src="/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_9da89c4b-1024x683.jpg"
+            alt={`Owner of ${SITE.name}`}
             loading="lazy"
           />
+          <figure className="owners-ride__inset">
+            <img src="/OwnersRide.jpg" alt={`Featured vehicle at ${SITE.name}`} loading="lazy" />
+            <figcaption>{t({ en: "Shop-built standards", es: "Calidad hecha en taller" })}</figcaption>
+          </figure>
         </div>
 
         <div className="owners-ride__copy">

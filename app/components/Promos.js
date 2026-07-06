@@ -1,14 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 import Reveal from "./Reveal";
 
 export default function Promos() {
   const t = useT();
-  const [driverOpen, setDriverOpen] = useState(true);
-  const [driverDismissed, setDriverDismissed] = useState(false);
 
   function waMsg(text) {
     return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`;
@@ -43,61 +40,28 @@ export default function Promos() {
           <p className="section__sub">{t(COPY.promos.sub)}</p>
         </Reveal>
 
-        {/* Driver Program — hero-style featured banner */}
         <Reveal className="driver-banner-wrapper">
-          {driverOpen ? (
-            <div className="driver-banner">
-              <button
-                className="driver-banner__toggle"
-                onClick={() => setDriverOpen(false)}
-                aria-label="Collapse"
+          <div className="driver-banner">
+            <div className="driver-banner__flag" aria-hidden="true" />
+            <div className="driver-banner__content">
+              <p className="driver-banner__kicker">{t(COPY.promos.driverTitle)}</p>
+              <div className="driver-banner__price">{COPY.promos.driverPrice}</div>
+              <p className="driver-banner__desc">{t(COPY.promos.driverSub)}</p>
+              <ul className="driver-banner__list">
+                {includes.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <a
+                href={driverWa}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--primary"
               >
-                −
-              </button>
-              <div className="driver-banner__flag" aria-hidden="true" />
-              <div className="driver-banner__content">
-                <p className="driver-banner__kicker">
-                  {t(COPY.promos.driverTitle)}
-                </p>
-                <div className="driver-banner__price">
-                  {COPY.promos.driverPrice}
-                </div>
-                <p className="driver-banner__desc">{t(COPY.promos.driverSub)}</p>
-                <ul className="driver-banner__list">
-                  {includes.map((item) => (
-                    <li key={item}>✓ {item}</li>
-                  ))}
-                </ul>
-                <a
-                  href={driverWa}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn--primary"
-                >
-                  {t(COPY.promos.driverCta)}
-                </a>
-              </div>
+                {t(COPY.promos.driverCta)}
+              </a>
             </div>
-          ) : driverDismissed ? null : (
-            <div className="driver-popup" role="dialog" aria-label="Driver Program">
-              <div className="driver-popup__inner">
-                <button
-                  type="button"
-                  className="driver-popup__close"
-                  onClick={() => setDriverDismissed(true)}
-                  aria-label="Close"
-                >
-                  &times;
-                </button>
-                <div className="driver-popup__flag" />
-                <p className="driver-popup__kicker">{t(COPY.promos.driverTitle)}</p>
-                <div className="driver-popup__price">{COPY.promos.driverPrice}</div>
-                <a href={driverWa} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--small driver-popup__cta">
-                  {t(COPY.promos.driverCta)}
-                </a>
-              </div>
-            </div>
-          )}
+          </div>
         </Reveal>
 
         <Reveal className="promos-grid">
@@ -122,7 +86,7 @@ export default function Promos() {
             <div className="promo-card__media">
               <img
                 src="/loyalty-card.png"
-                alt="Loyalty card — free oil change after 10 visits"
+                alt="Loyalty card - free oil change after 10 visits"
                 loading="lazy"
               />
             </div>
