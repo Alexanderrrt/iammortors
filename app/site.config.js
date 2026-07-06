@@ -24,7 +24,7 @@ export const SITE = {
       mapsHref:
         "https://www.google.com/maps/dir/?api=1&destination=1048+N+Tenth+St,+San+Jose,+CA+95112",
       mapsEmbedSrc:
-        "https://www.google.com/maps?q=1048+N+Tenth+St,+San+Jose,+CA+95112&output=embed",
+        "https://maps.google.com/maps?q=1048+N+Tenth+St,+San+Jose,+CA+95112&t=&z=15&ie=UTF8&iwloc=&output=embed",
       postalCode: "95112",
     },
     {
@@ -35,7 +35,7 @@ export const SITE = {
       mapsHref:
         "https://www.google.com/maps/dir/?api=1&destination=804+Park+Ave+Ste+B,+San+Jose,+CA+95126",
       mapsEmbedSrc:
-        "https://www.google.com/maps?q=804+Park+Ave+Ste+B,+San+Jose,+CA+95126&output=embed",
+        "https://maps.google.com/maps?q=804+Park+Ave+Ste+B,+San+Jose,+CA+95126&t=&z=15&ie=UTF8&iwloc=&output=embed",
       postalCode: "95126",
     },
   ],
