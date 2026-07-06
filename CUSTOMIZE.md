@@ -110,7 +110,6 @@ Replace every file with real photos. Recommended dimensions:
 | `apple-touch-icon.png` | 180×180 | Apple touch icon |
 | `apple-touch-icon-152.png` | 152×152 | Apple touch icon (smaller) |
 | `services/*.jpg` | 800×600 | One photo per service |
-| `vehicles/*` | 400×300 | Vehicle photos for quote estimator |
 
 ---
 
@@ -195,7 +194,6 @@ To change the color theme, update these variables (affects entire site).
 | Structured data (schema.org) | `app/components/JsonLd.js` |
 | Admin loader text | `app/admin/AdminLoader.js` |
 | Default prices | `lib/pricing.default.js` |
-| Vehicle database | `lib/vehicles.js` |
 | Environment variables | `.env.example` |
 | PWA manifest | `public/manifest.json` |
 | CSS custom properties | `app/globals.css` (lines 1–24) |

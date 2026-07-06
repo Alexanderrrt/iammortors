@@ -40,7 +40,6 @@ Every text field that needs both languages is a `{ en: "...", es: "..." }` objec
 | `public/apple-touch-icon.png` | Apple touch icon (180×180) |
 | `public/apple-touch-icon-152.png` | Apple touch icon (152×152) |
 | `public/services/*.jpg` | Photos for each service |
-| `public/vehicles/*` | Vehicle photos for the quote estimator |
 
 **Keep:** `logo.jpg`, `logo-mark.png`, `favicon.svg`, `brands/*.svg`
 
@@ -90,7 +89,7 @@ app/
   quote/              — Quote estimator page
   admin/              — Admin panel (login + pricing editor)
   api/                — API routes (pricing, auth)
-lib/                  — Business logic (pricing engine, auth, vehicles)
+lib/                  — Business logic (pricing engine, auth)
 public/               — Static assets (images, manifests)
 db/                   — Database schema
 ```

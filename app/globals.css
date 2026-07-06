@@ -2128,63 +2128,15 @@ body.no-scroll {
   font: inherit;
 }
 
-.quote__select {
-  width: 100%;
-  background: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  color: var(--paper);
-  padding: 0.6rem 0.7rem;
-  font: inherit;
-  appearance: auto;
-  cursor: pointer;
-}
-
-.quote__select:focus {
-  outline: 2px solid var(--blue);
-  outline-offset: 1px;
-}
-
-.quote__select:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.quote__vehicle-img {
-  margin: 1rem 0 0.5rem;
-  max-width: 240px;
-  border-radius: var(--r-sm);
-  overflow: hidden;
-  border: 1px solid var(--line);
-}
-
-.quote__vehicle-img img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.quote__toggle-custom {
-  display: inline-block;
-  margin-top: 0.75rem;
-  background: none;
-  border: 0;
-  padding: 0;
-  color: var(--blue);
-  font: inherit;
-  font-size: 0.85rem;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.quote__toggle-custom:hover {
-  color: var(--paper);
+.quote__hint {
+  margin: -0.25rem 0 1rem;
+  color: var(--paper-dim);
+  font-size: 0.95rem;
 }
 
 .quote__field input:focus,
 .editor input:focus,
 .quote__chip:focus-visible,
-.quote__select:focus-visible,
 .admin-card input:focus {
   outline: 2px solid var(--blue);
   outline-offset: 1px;

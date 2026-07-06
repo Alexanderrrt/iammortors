@@ -1,63 +1,19 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { useLanguage } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 import Icon from "../components/Icons";
 import { estimateTotal, formatMoney, buildWhatsAppMessage, clampQty } from "../../lib/quote";
-import { MAKES, VEHICLE_YEARS, vehicleImagePath, vehicleImageExts } from "../../lib/vehicles";
-
-const IMG_EXTS = vehicleImageExts();
 
 export default function QuoteCalculator({ pricing }) {
   const t = useT();
   const { lang } = useLanguage();
 
   const [vehicleClass, setVehicleClass] = useState(pricing.vehicleClasses[1]?.id || pricing.vehicleClasses[0].id);
-  const [vehicleMake, setVehicleMake] = useState("");
-  const [vehicleModel, setVehicleModel] = useState("");
-  const [vehicleYear, setVehicleYear] = useState("");
-  const [customText, setCustomText] = useState("");
-  const [useCustom, setUseCustom] = useState(false);
-  const [imgExtIdx, setImgExtIdx] = useState(0);
-  const [imgFailed, setImgFailed] = useState(false);
+  const [vehicleText, setVehicleText] = useState("");
   const [selections, setSelections] = useState({});
-
-  const models = useMemo(() => {
-    const make = MAKES.find((m) => m.id === vehicleMake);
-    return make ? make.models : [];
-  }, [vehicleMake]);
-
-  const imgPath = vehicleMake && vehicleModel && vehicleYear && !imgFailed
-    ? vehicleImagePath(vehicleMake, vehicleModel, vehicleYear, IMG_EXTS[imgExtIdx])
-    : null;
-
-  const onImgError = useCallback(() => {
-    const next = imgExtIdx + 1;
-    if (next < IMG_EXTS.length) {
-      setImgExtIdx(next);
-    } else {
-      setImgFailed(true);
-    }
-  }, [imgExtIdx]);
-
-  const vehicleText = useCustom
-    ? customText
-    : [vehicleMake, vehicleModel, vehicleYear].filter(Boolean).join(" ");
-
-  const resetImg = useCallback(() => {
-    setImgExtIdx(0);
-    setImgFailed(false);
-  }, []);
-
-  const onMakeChange = useCallback((makeId) => {
-    setVehicleMake(makeId);
-    setVehicleModel("");
-    resetImg();
-    const make = MAKES.find((m) => m.id === makeId);
-    if (make) setVehicleClass(make.classId);
-  }, [resetImg]);
 
   const toggle = (svc) =>
     setSelections((prev) => {
@@ -99,97 +55,16 @@ export default function QuoteCalculator({ pricing }) {
         <fieldset className="quote__step">
           <legend>{t(COPY.quote.vehicleStep)}</legend>
 
-          {!useCustom && (
-            <>
-              {/* Make */}
-              <label className="quote__field">
-                <span className="quote__label">{t(COPY.quote.vehicleMakeLabel)}</span>
-                <select
-                  className="quote__select"
-                  value={vehicleMake}
-                  onChange={(e) => onMakeChange(e.target.value)}
-                >
-                  <option value="">— {t({ en: "Select brand", es: "Selecciona marca" })} —</option>
-                  {MAKES.map((m) => (
-                    <option key={m.id} value={m.id}>{t(m.name)}</option>
-                  ))}
-                </select>
-              </label>
-
-              {/* Model */}
-              <label className="quote__field">
-                <span className="quote__label">{t(COPY.quote.vehicleModelLabel)}</span>
-                <select
-                  className="quote__select"
-                  value={vehicleModel}
-                  onChange={(e) => { setVehicleModel(e.target.value); resetImg(); }}
-                  disabled={!vehicleMake}
-                >
-                  <option value="">— {t({ en: "Select model", es: "Selecciona modelo" })} —</option>
-                  {models.map((m) => (
-                    <option key={m.id} value={m.id}>{t(m.label)}</option>
-                  ))}
-                </select>
-              </label>
-
-              {/* Year */}
-              <label className="quote__field">
-                <span className="quote__label">{t(COPY.quote.vehicleYearLabel)}</span>
-                <select
-                  className="quote__select"
-                  value={vehicleYear}
-                  onChange={(e) => { setVehicleYear(e.target.value); resetImg(); }}
-                  disabled={!vehicleModel}
-                >
-                  <option value="">— {t({ en: "Select year", es: "Selecciona año" })} —</option>
-                  {VEHICLE_YEARS.map((y) => (
-                    <option key={y} value={y}>{y}</option>
-                  ))}
-                </select>
-              </label>
-
-              {/* Vehicle image */}
-              {imgPath && !imgFailed && (
-                <div className="quote__vehicle-img">
-                  <img
-                    src={imgPath}
-                    alt={`${vehicleText}`}
-                    loading="lazy"
-                    onError={onImgError}
-                  />
-                </div>
-              )}
-
-              <button
-                type="button"
-                className="quote__toggle-custom"
-                onClick={() => setUseCustom(true)}
-              >
-                {t({ en: "I don't see my vehicle", es: "No veo mi vehículo" })}
-              </button>
-            </>
-          )}
-
-          {useCustom && (
-            <>
-              <label className="quote__field">
-                <span className="quote__label">{t(COPY.quote.vehicleTextLabel)}</span>
-                <input
-                  type="text"
-                  value={customText}
-                  onChange={(e) => setCustomText(e.target.value)}
-                  placeholder={t(COPY.quote.vehicleTextPlaceholder)}
-                />
-              </label>
-              <button
-                type="button"
-                className="quote__toggle-custom"
-                onClick={() => setUseCustom(false)}
-              >
-                {t({ en: "Choose from list", es: "Elegir de la lista" })}
-              </button>
-            </>
-          )}
+          <label className="quote__field">
+            <span className="quote__label">{t(COPY.quote.vehicleTextLabel)}</span>
+            <input
+              type="text"
+              value={vehicleText}
+              onChange={(e) => setVehicleText(e.target.value)}
+              placeholder={t(COPY.quote.vehicleTextPlaceholder)}
+            />
+          </label>
+          <p className="quote__hint">{t(COPY.quote.vehicleTextHint)}</p>
 
           {/* Vehicle class (chip override) */}
           <span className="quote__label">{t(COPY.quote.vehicleClassLabel)}</span>
