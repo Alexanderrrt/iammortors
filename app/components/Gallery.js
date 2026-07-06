@@ -81,10 +81,13 @@ export default function Gallery() {
               <div key={vid.src} className="gallery-videos__item reveal-item" style={{ "--d": `${i * 100}ms` }}>
                 <video
                   src={vid.src}
-                  controls
-                  preload="metadata"
-                  playsInline
+                  autoPlay
+                  loop
                   muted
+                  playsInline
+                  preload="auto"
+                  disablePictureInPicture
+                  controlsList="nodownload noplaybackrate nofullscreen"
                   aria-label={t(vid.alt)}
                 />
               </div>
