@@ -153,14 +153,21 @@ export const REELS = [
 
 // Static gallery images shown when REELS is empty.
 export const GALLERY_IMAGES = [
-  { src: "/MASTER-1.jpg", alt: { en: "Shop interior — vehicles on lifts", es: "Interior del taller — vehículos en elevadores" } },
+  { src: "/MASTER-3.jpg", alt: { en: "Professional mechanic at work", es: "Mecánico profesional trabajando" } },
   { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.56_44d9aad2-683x1024.jpg", alt: { en: "Mechanic working on engine", es: "Mecánico trabajando en motor" } },
   { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_6ebabeee-1024x683.jpg", alt: { en: "Engine bay service", es: "Servicio de motor" } },
-  { src: "/MASTER-3.jpg", alt: { en: "Professional mechanic at work", es: "Mecánico profesional trabajando" } },
+  { src: "/Footer.png", alt: { en: "Centro Automotriz BR storefront", es: "Fachada de Centro Automotriz BR" } },
   { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_c3a16bcc-1024x683.jpg", alt: { en: "Engine rebuild with chain hoist", es: "Reconstrucción de motor con grúa" } },
   { src: "/MASTER-4.jpg", alt: { en: "Vehicle maintenance on lift", es: "Mantenimiento de vehículo en elevador" } },
   { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_01d8ad3c-1024x683.jpg", alt: { en: "Team member portrait", es: "Retrato del equipo" } },
-  { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_9da89c4b-1024x683.jpg", alt: { en: "Owner portrait", es: "Retrato del propietario" } },
+  { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_d757e933-1024x576.jpg", alt: { en: "Shop exterior aerial view", es: "Vista aérea del taller" } },
+];
+
+// Shop videos for the gallery.
+export const GALLERY_VIDEOS = [
+  { src: "/Video 1.mp4", alt: { en: "Shop work in action", es: "Trabajo del taller en acción" } },
+  { src: "/Video2.mp4", alt: { en: "Engine repair process", es: "Proceso de reparación de motor" } },
+  { src: "/video3.mp4", alt: { en: "Team at work", es: "Equipo trabajando" } },
 ];
 
 export const OWNERS_RIDE = {

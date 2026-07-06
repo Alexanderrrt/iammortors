@@ -16,20 +16,20 @@ export default function Promos() {
 
   const driverWa = waMsg(
     t({
-      en: "Hi, I'm interested in the Driver Program — 4 tires for $340!",
-      es: "Hola, me interesa el Programa del Conductor — 4 llantas por $340!",
+      en: "Hi, I'm interested in the featured deal!",
+      es: "¡Hola, me interesa la oferta destacada!",
     })
   );
   const financeWa = waMsg(
     t({
-      en: "Hi, I'd like to know more about Snap Finance and Afterpay!",
-      es: "Hola, me gustaría saber más sobre Snap Finance y Afterpay!",
+      en: "Hi, I'd like to know more about financing options!",
+      es: "¡Hola, me gustaría saber más sobre las opciones de financiamiento!",
     })
   );
   const loyaltyWa = waMsg(
     t({
-      en: "Hi, I'd like a loyalty card!",
-      es: "Hola, quiero una tarjeta de fidelidad!",
+      en: "Hi, I'd like to join the loyalty program!",
+      es: "¡Hola, quiero unirme al programa de fidelidad!",
     })
   );
 
@@ -104,8 +104,8 @@ export default function Promos() {
           <div className="promo-card reveal-item" style={{ "--d": "0ms" }}>
             <div className="promo-card__media">
               <img
-                src="/snap-finance.jpg"
-                alt="Snap Finance — buy now pay later at Tires SOS Rescue"
+                src="/Adittional-media2.png"
+                alt={`Financing options available at ${SITE.name}`}
                 loading="lazy"
               />
             </div>
@@ -121,8 +121,8 @@ export default function Promos() {
           <div className="promo-card reveal-item" style={{ "--d": "120ms" }}>
             <div className="promo-card__media">
               <img
-                src="/loyalty-card.jpg"
-                alt="Loyalty card — free oil change after 4 visits"
+                src="/loyalty-card-br.svg"
+                alt="Loyalty card — free oil change after 10 visits"
                 loading="lazy"
               />
             </div>

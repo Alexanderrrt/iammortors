@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useT } from "../i18n/LanguageContext";
-import { COPY, REELS, GALLERY_IMAGES, SITE } from "../site.config";
+import { COPY, REELS, GALLERY_IMAGES, GALLERY_VIDEOS, SITE } from "../site.config";
 import Icon from "./Icons";
 import Reveal from "./Reveal";
 
@@ -74,6 +74,23 @@ export default function Gallery() {
             ))}
           </Reveal>
         ) : null}
+
+        {GALLERY_VIDEOS && GALLERY_VIDEOS.length > 0 && (
+          <Reveal className="gallery-videos">
+            {GALLERY_VIDEOS.map((vid, i) => (
+              <div key={vid.src} className="gallery-videos__item reveal-item" style={{ "--d": `${i * 100}ms` }}>
+                <video
+                  src={vid.src}
+                  controls
+                  preload="metadata"
+                  playsInline
+                  muted
+                  aria-label={t(vid.alt)}
+                />
+              </div>
+            ))}
+          </Reveal>
+        )}
 
         <Reveal>
           <a
