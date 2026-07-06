@@ -4,6 +4,7 @@ import "./globals.css";
 import JsonLd from "./components/JsonLd";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import { SITE } from "./site.config";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 // Barlow Condensed (display) reads like garage / highway signage; Barlow
 // (body) shares that American industrial-signage heritage — a grounded
@@ -98,6 +99,7 @@ export default function RootLayout({ children }) {
       <body>
         <JsonLd />
         <LanguageProvider>{children}</LanguageProvider>
+        <WhatsAppButton />
         <Script src="https://www.instagram.com/embed.js" strategy="afterInteractive" />
       </body>
     </html>
