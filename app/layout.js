@@ -7,7 +7,7 @@ import { SITE } from "./site.config";
 
 // Barlow Condensed (display) reads like garage / highway signage; Barlow
 // (body) shares that American industrial-signage heritage — a grounded
-// pairing for a San José auto shop, deliberately not the generic Inter.
+// pairing for an auto shop, deliberately not the generic Inter.
 const displayFont = Barlow_Condensed({
   weight: ["600", "700", "800"],
   style: ["normal", "italic"],
@@ -27,9 +27,9 @@ const signatureFont = Caveat({
   variable: "--font-signature",
 });
 
-const TITLE = `${SITE.name} — Tire Shop in San José, CA | Llantas San José`;
+const TITLE = `${SITE.name} — Auto Repair & Mechanics in San Jose, CA`;
 const DESCRIPTION =
-  "Tire shop in San José, CA: new tires, flat repair, wheel alignment, brakes, oil changes, batteries and rims. Bilingual English/Spanish, best prices in the Bay Area, walk-ins welcome. Taller de llantas en San José.";
+  "Centro Automotriz BR — high-level automotive maintenance in San Jose, CA. General mechanics, brakes, tune-ups, suspension, electronics, and A/C repair. Bilingual service, expert workmanship.";
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -39,15 +39,16 @@ export const metadata = {
     canonical: "/",
   },
   keywords: [
-    "tire shop San Jose",
-    "llantas San Jose",
-    "flat tire repair San Jose",
-    "wheel alignment San Jose",
-    "brakes San Jose",
-    "oil change San Jose",
-    "rims San Jose",
-    "taller de llantas",
-    "Tires SOS Rescue",
+    "Centro Automotriz BR",
+    "auto repair San Jose",
+    "mechanic San Jose CA",
+    "brake repair",
+    "engine tune-up",
+    "suspension repair",
+    "A/C repair",
+    "car electronics",
+    "taller mecánico San Jose",
+    "mecánica general",
   ],
   openGraph: {
     title: TITLE,
@@ -62,7 +63,7 @@ export const metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Tires SOS Rescue — tire shop in San José, CA",
+        alt: "Centro Automotriz BR — Auto Repair in San Jose, CA",
       },
     ],
   },
@@ -87,7 +88,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#14100c",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }) {

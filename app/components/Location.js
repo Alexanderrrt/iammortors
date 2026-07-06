@@ -10,7 +10,7 @@ function LocationCard({ loc, t }) {
     <div className="location-card">
       <div className="location-card__map">
         <iframe
-          title={`Tires SOS Rescue — ${loc.line1}`}
+          title={`${SITE.name} — ${loc.line1}`}
           src={loc.mapsEmbedSrc}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -48,8 +48,8 @@ export default function Location() {
         <Reveal className="location-storefront">
           <img
             className="location-storefront__img"
-            src="/storefront.jpg"
-            alt="Tires SOS Rescue storefront at 623 E Taylor St, San Jose, CA"
+            src="/MASTER-1.jpg"
+            alt={`${SITE.name} storefront`}
             loading="lazy"
           />
         </Reveal>

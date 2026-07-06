@@ -1,7 +1,7 @@
 "use client";
 
 import { useT } from "../i18n/LanguageContext";
-import { OWNERS_RIDE } from "../site.config";
+import { OWNERS_RIDE, SITE } from "../site.config";
 import Reveal from "./Reveal";
 
 export default function OwnersRide() {
@@ -14,8 +14,8 @@ export default function OwnersRide() {
           <span className="owners-ride__m-stripes" aria-hidden="true" />
           <img
             className="owners-ride__img"
-            src="/owners-m3.jpg"
-            alt="We specialize in taking care of all vehicles at Tires SOS Rescue in San José"
+            src="/OwnersRide.jpg"
+            alt={`Featured vehicle at ${SITE.name}`}
             loading="lazy"
           />
         </div>

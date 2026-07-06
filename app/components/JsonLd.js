@@ -15,13 +15,13 @@ function locationSchema(loc) {
     "@type": ["TireShop", "AutoRepair"],
     name: SITE.name,
     url: SITE.url,
-    telephone: "+1-408-332-8962",
+    telephone: SITE.phoneHref.replace("tel:", ""),
     priceRange: "$$",
     image: `${SITE.url}/og.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: loc.line1,
-      addressLocality: "San José",
+      addressLocality: "San Jose",
       addressRegion: "CA",
       postalCode: loc.postalCode,
       addressCountry: "US",
@@ -34,9 +34,9 @@ function locationSchema(loc) {
         opens: h.open,
         closes: h.close,
       })),
-    sameAs: [SITE.social.instagram, SITE.social.tiktok, SITE.social.facebook],
+    sameAs: [SITE.social.instagram, SITE.social.facebook].filter(Boolean),
     knowsLanguage: ["en", "es"],
-    paymentAccepted: "Cash, Credit Card, Afterpay",
+    paymentAccepted: "Cash, Credit Card, Financing",
   };
 }
 
@@ -51,9 +51,9 @@ export default function JsonLd() {
         name: SITE.name,
         url: SITE.url,
         description:
-          "Tire specialists in San José, CA: new tires, flat repair, wheel alignment, brakes, oil changes, batteries and rims. Bilingual English/Spanish service.",
+          "Centro Automotriz BR — high-level automotive maintenance in San Jose, CA. General mechanics, brakes, tune-ups, suspension, electronics, and A/C repair.",
         logo: `${SITE.url}/logo-mark.png`,
-        sameAs: [SITE.social.instagram, SITE.social.tiktok, SITE.social.facebook],
+        sameAs: [SITE.social.instagram, SITE.social.facebook].filter(Boolean),
         knowsLanguage: ["en", "es"],
       },
       ...SITE.locations.map(locationSchema),

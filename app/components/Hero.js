@@ -44,8 +44,8 @@ export default function Hero() {
         <div className="alignment-spotlight__inner">
           <div className="alignment-spotlight__media">
             <img
-              src="/services/alignment.jpg"
-              alt="Car up on the computerized alignment rack at Tires SOS Rescue"
+              src="/Hero.jpg"
+              alt={`${SITE.name} — alignment service equipment`}
             />
             <span className="alignment-spotlight__scan" aria-hidden="true" />
             <span className="alignment-spotlight__badge">{t(alignment.badge)}</span>
@@ -75,7 +75,7 @@ export default function Hero() {
       </section>
 
       {!dismissed && !open && (
-        <div className="alignment-popup" role="dialog" aria-label="Precision Alignment">
+        <div className="alignment-popup" role="dialog" aria-label="Featured equipment">
           <div className="alignment-popup__inner">
             <button
               type="button"
@@ -86,11 +86,11 @@ export default function Hero() {
               &times;
             </button>
             <div className="alignment-popup__img">
-              <img src="/services/alignment.jpg" alt="Alignment rack" />
+              <img src="/Hero.jpg" alt="Alignment rack" />
             </div>
             <p className="alignment-popup__kicker">{t(alignment.kicker)}</p>
             <p className="alignment-popup__title">{t(alignment.title)}</p>
-            <p className="alignment-popup__stamp">BY HUNTER</p>
+            <p className="alignment-popup__stamp">PROFESSIONAL GRADE</p>
             <a href={SITE.phoneHref} className="btn btn--primary btn--small alignment-popup__cta">
               <Icon name="phone" /> {t(alignment.cta)}
             </a>
@@ -105,7 +105,7 @@ export default function Hero() {
               {t(COPY.hero.kicker)}
             </p>
             <h1 className="hero__title hero__enter" style={{ "--d": "100ms" }}>
-              Tires <span className="hero__title-accent">SOS</span> Rescue
+              {SITE.name}
             </h1>
             <p className="hero__tagline hero__enter" style={{ "--d": "200ms" }}>
               {t(SITE.tagline)}
@@ -124,8 +124,8 @@ export default function Hero() {
             </div>
 
             <p className="hero__afterpay hero__enter" style={{ "--d": "380ms" }}>
-              <span className="afterpay-chip">Snap Finance</span>
-              <span className="afterpay-chip afterpay-chip--mint">Afterpay</span>
+              <span className="afterpay-chip">Financing Option</span>
+              <span className="afterpay-chip afterpay-chip--mint">Pay Later</span>
               {t(COPY.hero.afterpay)}
             </p>
 
@@ -138,8 +138,8 @@ export default function Hero() {
             <TreadRing />
             <img
               className="hero__portrait"
-              src="/owner.jpg"
-              alt="Owner of Tires SOS Rescue in branded uniform"
+              src="/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_9da89c4b-1024x683.jpg"
+              alt={`Owner/staff of ${SITE.name}`}
             />
           </div>
         </div>

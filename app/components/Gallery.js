@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useT } from "../i18n/LanguageContext";
-import { COPY, REELS, SITE } from "../site.config";
+import { COPY, REELS, GALLERY_IMAGES, SITE } from "../site.config";
 import Icon from "./Icons";
 import Reveal from "./Reveal";
 
@@ -41,29 +41,39 @@ export default function Gallery() {
           <p className="section__sub">{t(COPY.gallery.sub)}</p>
         </Reveal>
 
-        <Reveal className="reels-wrapper">
-          <button className="reels-arrow reels-arrow--left" onClick={() => scroll(-1)} aria-label="Previous reel">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </button>
-          <div className="reels-track" ref={trackRef}>
-            {REELS.map((permalink, i) => (
-              <div
-                key={permalink}
-                className="reel-card reveal-item"
-                style={{ "--d": `${i * 80}ms` }}
-              >
-                <blockquote
-                  className="instagram-media"
-                  data-instgrm-permalink={permalink}
-                  data-instgrm-version="14"
-                />
+        {REELS.length > 0 ? (
+          <Reveal className="reels-wrapper">
+            <button className="reels-arrow reels-arrow--left" onClick={() => scroll(-1)} aria-label="Previous reel">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+            <div className="reels-track" ref={trackRef}>
+              {REELS.map((permalink, i) => (
+                <div
+                  key={permalink}
+                  className="reel-card reveal-item"
+                  style={{ "--d": `${i * 80}ms` }}
+                >
+                  <blockquote
+                    className="instagram-media"
+                    data-instgrm-permalink={permalink}
+                    data-instgrm-version="14"
+                  />
+                </div>
+              ))}
+            </div>
+            <button className="reels-arrow reels-arrow--right" onClick={() => scroll(1)} aria-label="Next reel">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </Reveal>
+        ) : GALLERY_IMAGES.length > 0 ? (
+          <Reveal className="gallery-grid">
+            {GALLERY_IMAGES.map((img, i) => (
+              <div key={img.src} className="gallery-grid__item reveal-item" style={{ "--d": `${i * 70}ms` }}>
+                <img src={img.src} alt={t(img.alt)} loading="lazy" />
               </div>
             ))}
-          </div>
-          <button className="reels-arrow reels-arrow--right" onClick={() => scroll(1)} aria-label="Next reel">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </button>
-        </Reveal>
+          </Reveal>
+        ) : null}
 
         <Reveal>
           <a
@@ -72,7 +82,7 @@ export default function Gallery() {
             rel="noopener noreferrer"
             className="btn btn--primary gallery-cta"
           >
-            <Icon name="instagram" /> Follow @tiressosrescue
+            <Icon name="instagram" /> Follow us
           </a>
         </Reveal>
       </div>

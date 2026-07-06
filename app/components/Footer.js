@@ -27,8 +27,8 @@ export default function Footer() {
           ))}
           <a href={SITE.phoneHref}>{SITE.phone}</a>
           <p className="footer__payments">
-            <span className="afterpay-chip">Snap Finance</span>
-            <span className="afterpay-chip afterpay-chip--mint">Afterpay</span>
+            <span className="afterpay-chip">Financing Option</span>
+            <span className="afterpay-chip afterpay-chip--mint">Pay Later</span>
             · Visa · Mastercard · Cash
           </p>
         </div>
@@ -38,9 +38,6 @@ export default function Footer() {
           <div className="footer__social">
             <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer">
               Instagram
-            </a>
-            <a href={SITE.social.tiktok} target="_blank" rel="noopener noreferrer">
-              TikTok
             </a>
             <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer">
               Facebook

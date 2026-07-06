@@ -2,49 +2,47 @@
 // Update here to change anything shown on the site.
 
 export const SITE = {
-  name: "Tires SOS Rescue",
-  nameShort: "Tires SOS",
+  name: "Centro Automotriz BR",
+  nameShort: "BR Auto",
   // Used for canonical URLs, sitemap, robots and Open Graph.
-  // UPDATE this once the real domain is attached in Vercel.
-  url: "https://tires-sos.vercel.app",
+  // UPDATE once your domain is live.
+  url: "https://centroautomotrizbr.com",
   tagline: {
-    en: "Tire specialists. Fast service, best prices in the Bay Area. We speak your language.",
-    es: "Especialistas en llantas. Servicio rápido, los mejores precios del Bay Area. Aquí te atendemos como en casa.",
+    en: "High-level automotive maintenance — precise diagnostics, expert workmanship.",
+    es: "Mantenimiento automotriz de alto nivel — diagnósticos precisos, trabajo experto.",
   },
-  phone: "(408) 332-8962",
-  phoneHref: "tel:+14083328962",
-  // WhatsApp number in international format, digits only (used by wa.me).
-  // Confirm this line is WhatsApp-enabled, or replace with the shop's WhatsApp.
-  whatsapp: "14083328962",
+  phone: "(408) 690-9455",
+  phoneHref: "tel:+14086909455",
+  // WhatsApp number in international format, digits only.
+  whatsapp: "14086909455",
   locations: [
     {
-      id: "taylor",
-      line1: "623 E Taylor St",
-      line2: "San José, CA 95112",
-      full: "623 E Taylor St, San José, CA 95112",
+      id: "main",
+      line1: "1048 N Tenth St",
+      line2: "San Jose, CA 95112",
+      full: "1048 N Tenth St, San Jose, CA 95112",
       mapsHref:
-        "https://www.google.com/maps/dir/?api=1&destination=623+E+Taylor+St,+San+Jose,+CA+95112",
+        "https://www.google.com/maps/dir/?api=1&destination=1048+N+Tenth+St,+San+Jose,+CA+95112",
       mapsEmbedSrc:
-        "https://www.google.com/maps?q=623+E+Taylor+St,+San+Jose,+CA+95112&output=embed",
+        "https://www.google.com/maps?q=1048+N+Tenth+St,+San+Jose,+CA+95112&output=embed",
       postalCode: "95112",
     },
     {
-      id: "tenth",
-      line1: "1407 N 10th St",
-      line2: "San José, CA 95112",
-      full: "1407 N 10th St, San José, CA 95112",
+      id: "second",
+      line1: "804 Park Ave, Ste B",
+      line2: "San Jose, CA 95126",
+      full: "804 Park Ave, Ste B, San Jose, CA 95126",
       mapsHref:
-        "https://www.google.com/maps/dir/?api=1&destination=1407+N+10th+St,+San+Jose,+CA+95112",
+        "https://www.google.com/maps/dir/?api=1&destination=804+Park+Ave+Ste+B,+San+Jose,+CA+95126",
       mapsEmbedSrc:
-        "https://www.google.com/maps?q=1407+N+10th+St,+San+Jose,+CA+95112&output=embed",
-      postalCode: "95112",
+        "https://www.google.com/maps?q=804+Park+Ave+Ste+B,+San+Jose,+CA+95126&output=embed",
+      postalCode: "95126",
     },
   ],
 
   social: {
-    instagram: "https://www.instagram.com/tiressosrescue/",
-    tiktok: "https://www.tiktok.com/@tiressosrescue",
-    facebook: "https://www.facebook.com/61578329462658/",
+    instagram: "https://www.instagram.com/mechanic_tire",
+    facebook: "https://www.facebook.com/centroautomotrizbr/",
   },
   // Hours in 24h time, per weekday (0 = Sunday ... 6 = Saturday). null = closed.
   hours: [
@@ -60,131 +58,141 @@ export const SITE = {
 
 export const SERVICES = [
   {
-    id: "new-tires",
+    id: "mecanica-general",
+    icon: "wrench",
+    image: "/MECANICA-GENERAL.png",
+    title: { en: "General Mechanics", es: "Mecánica General" },
+    desc: {
+      en: "Complete engine and drivetrain repair. From routine maintenance to complex overhauls, we keep your vehicle running at its best.",
+      es: "Reparación completa de motor y tren motriz. Desde mantenimiento de rutina hasta reparaciones complejas, mantenemos tu vehículo en óptimas condiciones.",
+    },
+  },
+  {
+    id: "frenos",
+    icon: "brakes",
+    image: "/FRENOS.png",
+    title: { en: "Brake Repair", es: "Frenos" },
+    desc: {
+      en: "Brake pads, rotors, calipers, and fluid service. We ensure your stopping power is always reliable and safe.",
+      es: "Pastillas, discos, calipers y servicio de líquido de frenos. Garantizamos que tu frenado sea siempre confiable y seguro.",
+    },
+  },
+  {
+    id: "afinacion",
+    icon: "oil",
+    image: "/AFINACION-DE-MOTOR.png",
+    title: { en: "Engine Tune-Up", es: "Afinación de Motor" },
+    desc: {
+      en: "Spark plugs, filters, fuel system cleaning, and ignition service. Restore power, improve fuel economy, and reduce emissions.",
+      es: "Bujías, filtros, limpieza de sistema de combustible y servicio de ignición. Restaura potencia, mejora el consumo y reduce emisiones.",
+    },
+  },
+  {
+    id: "suspension",
+    icon: "alignment",
+    image: "/SUPENSION.png",
+    title: { en: "Suspension", es: "Suspensión" },
+    desc: {
+      en: "Shocks, struts, control arms, and alignment. We restore your ride comfort and handling precision.",
+      es: "Amortiguadores, puntales, brazos de control y alineación. Restauramos la comodidad y precisión de manejo de tu vehículo.",
+    },
+  },
+  {
+    id: "electronica",
+    icon: "battery",
+    image: "/ELECTRONICA.png",
+    title: { en: "General Electronics", es: "Electrónica General" },
+    desc: {
+      en: "Electrical diagnostics, wiring repair, sensors, and computer systems. We solve the toughest electrical problems.",
+      es: "Diagnósticos eléctricos, reparación de cableado, sensores y sistemas computarizados. Resolvemos los problemas eléctricos más difíciles.",
+    },
+  },
+  {
+    id: "aire-acondicionado",
+    icon: "wrench",
+    image: "/AIRE-ACONDICIONADO.png",
+    title: { en: "A/C Repair", es: "Aire Acondicionado" },
+    desc: {
+      en: "Full A/C diagnostics, recharge, compressor repair, and climate control service. Stay cool all year long.",
+      es: "Diagnóstico completo de A/C, recarga, reparación de compresor y servicio de climatización. Mantente fresco todo el año.",
+    },
+  },
+  {
+    id: "llantas-nuevas",
     icon: "tire",
-    image: "/services/new-tires.jpg",
+    image: "",
     title: { en: "New Tires", es: "Llantas Nuevas" },
     desc: {
-      en: "All major brands and sizes, at the best prices in the Bay Area.",
-      es: "Todas las marcas y medidas principales, a los mejores precios del Bay Area.",
-    },
-  },
-  {
-    id: "flat-repair",
-    icon: "wrench",
-    image: "/services/flat-repair.jpg",
-    title: { en: "Flat Repair", es: "Reparación de Ponchaduras" },
-    desc: {
-      en: "Fast, reliable patch and plug repairs while you wait.",
-      es: "Reparaciones rápidas y confiables mientras usted espera.",
-    },
-  },
-  {
-    id: "alignment",
-    icon: "alignment",
-    image: "/services/alignment.jpg",
-    title: { en: "Wheel Alignment", es: "Alineación" },
-    desc: {
-      en: "Precise alignment to extend tire life and improve handling.",
-      es: "Alineación precisa para prolongar la vida de sus llantas y mejorar el manejo.",
-    },
-  },
-  {
-    id: "brakes",
-    icon: "brakes",
-    image: "/services/brakes.jpg",
-    title: { en: "Brakes", es: "Frenos" },
-    desc: {
-      en: "Pads, rotors, and full brake inspections done right.",
-      es: "Pastillas, discos e inspecciones completas de frenos.",
-    },
-  },
-  {
-    id: "oil-change",
-    icon: "oil",
-    image: "/services/oil-change.jpg",
-    title: { en: "Oil Change", es: "Cambio de Aceite" },
-    desc: {
-      en: "Quick, affordable oil changes to keep your engine healthy.",
-      es: "Cambios de aceite rápidos y económicos para su motor.",
-    },
-  },
-  {
-    id: "batteries",
-    icon: "battery",
-    image: "/services/batteries.jpg",
-    title: { en: "Batteries", es: "Baterías" },
-    desc: {
-      en: "Free testing and same-day battery replacement.",
-      es: "Prueba gratis y reemplazo de batería el mismo día.",
-    },
-  },
-  {
-    id: "rims",
-    icon: "rim",
-    image: "/services/rims.jpg",
-    title: { en: "Rims", es: "Rines" },
-    desc: {
-      en: "New rims to fit your ride and your budget.",
-      es: "Rines nuevos para su vehículo y su presupuesto.",
+      en: "New tire sales with installation and balancing included. All major brands available — everything you need in one place.",
+      es: "Venta de llantas nuevas con instalación y balanceo incluido. Todas las marcas principales — todo lo que necesitas en un solo lugar.",
     },
   },
 ];
 
-// Strings for the scrolling marquee strip. Deliberately mixed EN/ES —
-// it reads as one bilingual banner, so it does not switch with the toggle.
+// Strings for the scrolling marquee strip.
 export const MARQUEE_ITEMS = [
+  "Mecánica General",
+  "Frenos",
+  "Afinación de Motor",
+  "Suspensión",
+  "Electrónica",
+  "Aire Acondicionado",
   "Llantas Nuevas",
-  "Brakes",
-  "Alineación",
-  "Oil Change",
-  "Rines",
-  "Batteries",
-  "Flat Repair",
-  "Best Prices in the Bay Area",
-  "Snap Finance Available",
-  "Afterpay Available",
+  "General Mechanics",
+  "Brake Repair",
+  "Engine Tune-Up",
+  "Suspension",
+  "A/C Repair",
+  "Electronics",
+  "New Tires",
 ];
 
-// Instagram reels featured in the "From the Shop" section.
-// Paste new reel permalinks here to rotate the featured content.
+// Social media reels or featured content.
 export const REELS = [
-  "https://www.instagram.com/reel/DaQ2UFdSpnK/",
-  "https://www.instagram.com/reel/DZ7-m7PztjQ/",
-  "https://www.instagram.com/reel/DZsjXNexI8I/",
-  "https://www.instagram.com/reel/DZWBzaGRmS8/",
+];
+
+// Static gallery images shown when REELS is empty.
+export const GALLERY_IMAGES = [
+  { src: "/MASTER-1.jpg", alt: { en: "Shop interior — vehicles on lifts", es: "Interior del taller — vehículos en elevadores" } },
+  { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.56_44d9aad2-683x1024.jpg", alt: { en: "Mechanic working on engine", es: "Mecánico trabajando en motor" } },
+  { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_6ebabeee-1024x683.jpg", alt: { en: "Engine bay service", es: "Servicio de motor" } },
+  { src: "/MASTER-3.jpg", alt: { en: "Professional mechanic at work", es: "Mecánico profesional trabajando" } },
+  { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_c3a16bcc-1024x683.jpg", alt: { en: "Engine rebuild with chain hoist", es: "Reconstrucción de motor con grúa" } },
+  { src: "/MASTER-4.jpg", alt: { en: "Vehicle maintenance on lift", es: "Mantenimiento de vehículo en elevador" } },
+  { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_01d8ad3c-1024x683.jpg", alt: { en: "Team member portrait", es: "Retrato del equipo" } },
+  { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_9da89c4b-1024x683.jpg", alt: { en: "Owner portrait", es: "Retrato del propietario" } },
 ];
 
 export const OWNERS_RIDE = {
-  kicker: { en: "Give your car a little treat", es: "Dale un gusto a tu carrito" },
-  title: { en: "BMW M3 Competition", es: "BMW M3 Competition" },
+  kicker: { en: "Featured spotlight", es: "Destacado especial" },
+  title: { en: "Quality You Can Trust", es: "Calidad en la que Puedes Confiar" },
   body: {
-    en: "Every car that rolls into the shop gets treated the exact same way. Your ride is our ride.",
-    es: "Cada carro que entra al taller recibe exactamente el mismo trato. Tu carro es nuestro carro, parce.",
+    en: "Every vehicle that comes through our doors gets the same expert care and attention to detail. From routine maintenance to complex repairs, we treat your car like it's our own.",
+    es: "Cada vehículo que entra a nuestro taller recibe el mismo cuidado experto y atención al detalle. Desde mantenimiento de rutina hasta reparaciones complejas, tratamos tu auto como si fuera el nuestro.",
   },
 };
 
 export const TESTIMONIALS = [
   {
     quote: {
-      en: "Fast, friendly service and fair prices — got a flat fixed in no time.",
-      es: "Servicio rápido y amable a precios justos — me arreglaron una ponchadura en un momento.",
+      en: "Excellent service! They diagnosed the problem quickly and the repair was done the same day. Very fair prices.",
+      es: "¡Excelente servicio! Diagnosticaron el problema rápidamente y la reparación se hizo el mismo día. Precios muy justos.",
     },
-    author: "Yelp review",
+    author: "Carlos M.",
   },
   {
     quote: {
-      en: "Family-owned shop that actually treats you right. My go-to for tires now.",
-      es: "Negocio familiar que de verdad te trata bien. Ahora es mi lugar de confianza para llantas.",
+      en: "Best mechanic shop in San Jose. They speak Spanish and English, and they really know what they're doing. Highly recommend!",
+      es: "El mejor taller mecánico en San Jose. Hablan español e inglés, y realmente saben lo que hacen. ¡Muy recomendado!",
     },
-    author: "Yelp review",
+    author: "Maria L.",
   },
   {
     quote: {
-      en: "Best tire prices I found in San José, and they speak Spanish too.",
-      es: "Los mejores precios de llantas que encontré en San José, y también hablan español.",
+      en: "I've been coming here for years. Honest, reliable, and always get the job done right the first time.",
+      es: "He venido aquí por años. Honestos, confiables, y siempre hacen el trabajo bien a la primera.",
     },
-    author: "Yelp review",
+    author: "Roberto S.",
   },
 ];
 
@@ -200,8 +208,8 @@ export const COPY = {
   quote: {
     heading: { en: "Instant Price Estimate", es: "Estimado de Precio Instantáneo" },
     sub: {
-      en: "Pick your vehicle and services for a ballpark price. We confirm the exact price at the shop.",
-      es: "Elija su vehículo y servicios para un precio aproximado. Confirmamos el precio exacto en el taller.",
+      en: "Pick your vehicle and services for a ballpark price. We confirm the exact price in person.",
+      es: "Elija su vehículo y servicios para un precio aproximado. Confirmamos el precio exacto en persona.",
     },
       vehicleStep: { en: "1. Your vehicle", es: "1. Su vehículo" },
       vehicleMakeLabel: { en: "Brand", es: "Marca" },
@@ -225,34 +233,34 @@ export const COPY = {
     closed: { en: "Closed", es: "Cerrado" },
   },
   hero: {
-    kicker: { en: "San José, CA", es: "San José, CA" },
+    kicker: { en: "San Jose, CA", es: "San Jose, CA" },
     callNow: { en: "Call Now", es: "Llamar Ahora" },
     directions: { en: "Get Directions", es: "Cómo Llegar" },
     note: {
-      en: "Walk-ins welcome — no appointment needed. Shop service only.",
-      es: "Sin cita, sin problema — llegá cuando quieras. Servicio solo en tienda.",
+      en: "Walk-ins welcome — no appointment needed. In-shop service only.",
+      es: "Sin cita, sin problema — llega cuando quieras. Servicio solo en taller.",
     },
     alignment: {
-      badge: { en: "Our rack, in action", es: "Nuestra rampa en acción" },
-      kicker: { en: "Our key equipment", es: "Nuestro equipo estrella" },
+      badge: { en: "Expert diagnostics in action", es: "Diagnósticos expertos en acción" },
+      kicker: { en: "Precision diagnostics", es: "Diagnósticos de precisión" },
       title: {
-        en: "Specialized Computerized Alignment Machine",
-        es: "Máquina Especializada de Alineación Computarizada",
+        en: "Professional-Grade Diagnostics",
+        es: "Diagnósticos de Nivel Profesional",
       },
       body: {
-        en: "The heart of our shop. Our precision alignment system measures every angle digitally, so your car drives straight, your tires last longer, and you save on gas.",
-        es: "El corazón de nuestro taller. Nuestro sistema de alineación de precisión mide cada ángulo digitalmente, para que tu carro vaya derecho, tus llantas duren más y ahorres gasolina.",
+        en: "We use state-of-the-art diagnostic equipment to pinpoint issues fast and get you back on the road with confidence.",
+        es: "Usamos equipo de diagnóstico de última generación para identificar problemas rápidamente y devolverte a la carretera con confianza.",
       },
       points: {
-        en: ["Digital precision on every angle", "Sedans, SUVs & trucks", "Longer tire life, better MPG"],
-        es: ["Precisión digital en cada ángulo", "Sedanes, SUVs y camionetas", "Llantas que duran más, menos gasolina"],
+        en: ["Computer-aided engine analysis", "Electrical system scanning", "Real-time performance data"],
+        es: ["Análisis de motor asistido por computadora", "Escaneo del sistema eléctrico", "Datos de rendimiento en tiempo real"],
       },
-      cta: { en: "Book an alignment", es: "Agenda tu alineación" },
+      cta: { en: "Schedule a diagnostic", es: "Agenda un diagnóstico" },
       ctaSecondary: { en: "All services", es: "Todos los servicios" },
     },
     afterpay: {
-      en: "Snap Finance & Afterpay available — flexible payments on your terms",
-      es: "Snap Finance y Afterpay disponibles — pagos flexibles a tu manera",
+      en: "Flexible financing available — payments that work for you",
+      es: "Financiamiento flexible disponible — pagos que funcionan para ti",
     },
   },
   services: {
@@ -265,8 +273,8 @@ export const COPY = {
   gallery: {
     heading: { en: "From the Shop", es: "Desde el Taller" },
     sub: {
-      en: "A look at our work. Follow us on Instagram for daily updates.",
-      es: "Un vistazo a nuestro trabajo. Síganos en Instagram para actualizaciones diarias.",
+      en: "A look at our work. Follow us on social for daily updates.",
+      es: "Un vistazo a nuestro trabajo. Síguenos en redes para actualizaciones diarias.",
     },
   },
   location: {
@@ -280,30 +288,30 @@ export const COPY = {
   promos: {
     heading: { en: "Deals & Programs", es: "Ofertas y Programas" },
     sub: {
-      en: "Flexible financing and rewards to keep you on the road.",
-      es: "Financiamiento flexible y recompensas para mantenerte en el camino.",
+      en: "Flexible financing and rewards to keep you coming back.",
+      es: "Financiamiento flexible y recompensas para que sigas regresando.",
     },
-    financeTitle: { en: "Buy Now, Pay Later", es: "Compra Ahora, Paga Después" },
+    financeTitle: { en: "Financing Available", es: "¡Financiamiento Disponible!" },
     financeSub: {
-      en: "Snap Finance & Afterpay available. Snap Finance approvals from $300 to $5,000. Afterpay lets you split purchases into 4 easy payments. No perfect credit needed.",
-      es: "Snap Finance y Afterpay disponibles. Snap Finance con aprobaciones desde $300 hasta $5,000. Afterpay te permite dividir tus compras en 4 pagos fáciles. Sin necesidad de crédito perfecto.",
+      en: "Quick and easy approval! All you need is an ITIN, Social Security, or bank account. Flexible payments that work for your budget.",
+      es: "¡Aprobación rápida y sencilla! Solo necesitas ITIN, Social Security o cuenta bancaria. Pagos flexibles que se ajustan a tu presupuesto.",
     },
     financeCta: { en: "Ask about financing", es: "Pregunta por financiamiento" },
-    loyaltyTitle: { en: "Loyalty Card", es: "Tarjeta de Fidelidad" },
+    loyaltyTitle: { en: "Loyalty Program", es: "Programa de Fidelidad" },
     loyaltySub: {
-      en: "Get your 5th oil change FREE. Every oil change includes fluid top-off, filter, and tire pressure check.",
-      es: "Tu 5to cambio de aceite GRATIS. Cada cambio incluye llenado de líquidos, filtro y calibración de neumáticos.",
+      en: "Earn rewards with every visit. Ask about our loyalty program and start saving today.",
+      es: "Gana recompensas con cada visita. Pregunta por nuestro programa de fidelidad y empieza a ahorrar hoy.",
     },
-    loyaltyCta: { en: "Ask for your card", es: "Pide tu tarjeta" },
-    driverTitle: { en: "Driver Program", es: "Programa del Conductor" },
+    loyaltyCta: { en: "Ask about our program", es: "Pregunta por nuestro programa" },
+    driverTitle: { en: "Full Service Package", es: "Paquete de Servicio Completo" },
     driverSub: {
-      en: "4 new tires for just $340 — includes mount, balance, and alignment. Everything your car needs in one deal.",
-      es: "4 llantas nuevas por solo $340 — incluye montaje, balanceo y alineación. Todo lo que tu carro necesita en un solo paquete.",
+      en: "Our best value package — complete tune-up, oil change, and multi-point inspection at an unbeatable price.",
+      es: "Nuestro paquete de mejor valor — afinación completa, cambio de aceite e inspección multipunto a un precio imbatible.",
     },
-    driverPrice: "$340",
+    driverPrice: "$199",
     driverIncludes: {
-      en: ["4 new tires", "Mount & balance", "Wheel alignment"],
-      es: ["4 llantas nuevas", "Montaje y balanceo", "Alineación"],
+      en: ["Engine Tune-Up", "Oil Change", "Multi-Point Inspection"],
+      es: ["Afinación de Motor", "Cambio de Aceite", "Inspección Multipunto"],
     },
     driverCta: { en: "Claim this deal", es: "Aprovecha esta oferta" },
   },

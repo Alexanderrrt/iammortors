@@ -1,10 +1,10 @@
 {
-  "name": "Tires SOS Rescue",
-  "short_name": "Tires SOS",
+  "name": "Centro Automotriz BR",
+  "short_name": "BR Auto",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#14100c",
-  "theme_color": "#14100c",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
   "icons": [
     {
       "src": "/apple-touch-icon.png",

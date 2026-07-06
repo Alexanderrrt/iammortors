@@ -8,102 +8,46 @@ const BRANDS = [
     name: "Bridgestone",
     logo: "/brands/bridgestone.svg",
     tagline: {
-      en: "Bridgestone tires in stock — engineered for performance & safety",
-      es: "Llantas Bridgestone en stock — diseñadas para rendimiento y seguridad",
+      en: "Leading brand in the industry — quality you can trust",
+      es: "Marca líder en la industria — calidad en la que puedes confiar",
     },
   },
   {
     name: "Goodyear",
     logo: "/brands/goodyear.svg",
     tagline: {
-      en: "Goodyear tires available — trusted for over 125 years",
-      es: "Llantas Goodyear disponibles — confianza por más de 125 años",
+      en: "Premium selection available — built to perform",
+      es: "Selección premium disponible — hecho para rendir",
     },
   },
   {
     name: "Continental",
     logo: "/brands/continental.svg",
     tagline: {
-      en: "Continental tires — German engineering, Bay Area prices",
-      es: "Llantas Continental — ingeniería alemana, precios del Bay Area",
+      en: "Top-rated brand — excellence at every level",
+      es: "Marca mejor calificada — excelencia en cada nivel",
     },
   },
   {
     name: "Pirelli",
     logo: "/brands/pirelli.svg",
     tagline: {
-      en: "Pirelli tires — premium Italian performance for your ride",
-      es: "Llantas Pirelli — rendimiento premium italiano para tu carro",
-    },
-  },
-  {
-    name: "Hankook",
-    logo: "/brands/hankook.svg",
-    tagline: {
-      en: "Hankook tires — quality & value you can count on",
-      es: "Llantas Hankook — calidad y valor en los que puedes confiar",
+      en: "Trusted name in the business — since day one",
+      es: "Nombre de confianza en el negocio — desde el primer día",
     },
   },
   {
     name: "BFGoodrich",
     logo: "/brands/bfgoodrich.svg",
     tagline: {
-      en: "BFGoodrich tires — built tough for every road",
-      es: "Llantas BFGoodrich — hechas para cualquier camino",
-    },
-  },
-  {
-    name: "Yokohama",
-    logo: "/brands/yokohama.svg",
-    tagline: {
-      en: "Yokohama tires — innovation meets the road",
-      es: "Llantas Yokohama — innovación en cada kilómetro",
-    },
-  },
-  {
-    name: "Toyo",
-    logo: "/brands/toyo.svg",
-    tagline: {
-      en: "Toyo tires in stock — designed to perform",
-      es: "Llantas Toyo en stock — diseñadas para rendir",
-    },
-  },
-  {
-    name: "Cooper",
-    logo: "/brands/cooper.svg",
-    tagline: {
-      en: "Cooper tires — American-made quality at great prices",
-      es: "Llantas Cooper — calidad americana a precios increíbles",
-    },
-  },
-  {
-    name: "Falken",
-    logo: "/brands/falken.svg",
-    tagline: {
-      en: "Falken tires — high performance, great value",
-      es: "Llantas Falken — alto rendimiento, gran valor",
-    },
-  },
-  {
-    name: "Firestone",
-    logo: "/brands/firestone.svg",
-    tagline: {
-      en: "Firestone tires available — dependable since 1900",
-      es: "Llantas Firestone disponibles — confiables desde 1900",
-    },
-  },
-  {
-    name: "Nexen",
-    logo: "/brands/nexen.svg",
-    tagline: {
-      en: "Nexen tires — affordable quality for every driver",
-      es: "Llantas Nexen — calidad accesible para cada conductor",
+      en: "Innovative products — designed with you in mind",
+      es: "Productos innovadores — diseñados pensando en ti",
     },
   },
 ];
 
 const CTA = {
-  en: "Ask about this brand",
+  en: "Inquire about this brand",
   es: "Pregunta por esta marca",
 };
 
@@ -117,9 +61,9 @@ const WE_CARRY = {
   es: "Manejamos las mejores marcas",
 };
 
-const AFTERPAY_LINE = {
-  en: "Afterpay & Snap Finance accepted",
-  es: "Aceptamos Afterpay y Snap Finance",
+const FINANCING_LINE = {
+  en: "Flexible financing options available",
+  es: "Opciones de financiamiento flexibles disponibles",
 };
 
 export default function BrandPopups({ phoneHref }) {
@@ -168,14 +112,16 @@ export default function BrandPopups({ phoneHref }) {
 
         <p className="brand-popup__kicker">{t(WE_CARRY)}</p>
         <div className="brand-popup__logo" key={brand.name}>
-          <img src={brand.logo} alt={`${brand.name} logo`} />
+          {brand.logo ? (
+            <img src={brand.logo} alt={brand.name} className="brand-popup__logo-img" />
+          ) : (
+            <div className="brand-popup__placeholder-logo">{brand.name}</div>
+          )}
         </div>
         <p className="brand-popup__tagline">{t(brand.tagline)}</p>
 
         <div className="brand-popup__afterpay">
-          <span className="afterpay-chip afterpay-chip--mint">Afterpay</span>
-          <span className="afterpay-chip">Snap Finance</span>
-          <span className="brand-popup__afterpay-text">{t(AFTERPAY_LINE)}</span>
+          <span className="brand-popup__afterpay-text">{t(FINANCING_LINE)}</span>
         </div>
 
         <a href={phoneHref} className="btn btn--primary btn--small brand-popup__cta">
