@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import PricingEditor from "./PricingEditor";
 import BookingDashboard from "./BookingDashboard";
+import TrainingDashboard from "./TrainingDashboard";
 
 const COPY = {
   pricing: { en: "Pricing", es: "Precios" },
   appointments: { en: "Appointments", es: "Citas" },
+  training: { en: "Training", es: "Entrenamiento" },
 };
 
 export default function AdminTabs({ initialPricing, persistent, authReady }) {
@@ -29,6 +31,15 @@ export default function AdminTabs({ initialPricing, persistent, authReady }) {
         <button
           type="button"
           role="tab"
+          aria-selected={tab === "training"}
+          className={`admin-tabs__btn ${tab === "training" ? "admin-tabs__btn--on" : ""}`}
+          onClick={() => setTab("training")}
+        >
+          {t(COPY.training)}
+        </button>
+        <button
+          type="button"
+          role="tab"
           aria-selected={tab === "appointments"}
           className={`admin-tabs__btn ${tab === "appointments" ? "admin-tabs__btn--on" : ""}`}
           onClick={() => setTab("appointments")}
@@ -39,8 +50,10 @@ export default function AdminTabs({ initialPricing, persistent, authReady }) {
 
       {tab === "pricing" ? (
         <PricingEditor initialPricing={initialPricing} persistent={persistent} authReady={authReady} />
-      ) : (
+      ) : tab === "appointments" ? (
         <BookingDashboard />
+      ) : (
+        <TrainingDashboard initialPricing={initialPricing} />
       )}
     </div>
   );
