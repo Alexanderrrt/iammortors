@@ -26,6 +26,9 @@ const STR = {
     en: "Sorry — something went wrong. Please try again.",
     es: "Lo siento — algo salió mal. Inténtalo de nuevo.",
   },
+  photo: { en: "Analyze a damage photo", es: "Analizar una foto del daño" },
+  analyzing: { en: "Analyzing photo…", es: "Analizando foto…" },
+  photoReady: { en: "Photo analyzed — send for an estimate", es: "Foto analizada — envía para ver el estimado" },
 };
 
 function QuoteCard({ output, lang, onBook }) {
@@ -76,6 +79,10 @@ export default function QuoteChatbot() {
   const t = (o) => (o ? o[lang] || o.en : "");
   const [input, setInput] = useState("");
   const [booking, setBooking] = useState(null);
+  const [photoAnalysis, setPhotoAnalysis] = useState(null);
+  const [photoBusy, setPhotoBusy] = useState(false);
+  const [photoError, setPhotoError] = useState("");
+  const photoRef = useRef(null);
   const scrollRef = useRef(null);
 
   const openBooking = (output) => {
@@ -106,9 +113,32 @@ export default function QuoteChatbot() {
   const submit = (e) => {
     e.preventDefault();
     const text = input.trim();
-    if (!text || busy) return;
-    sendMessage({ text }, { body: { lang } });
+    if ((!text && !photoAnalysis) || busy || photoBusy) return;
+    const message = text || "Please give me an estimate based on this damage photo.";
+    sendMessage({ text: message }, { body: { lang, imageAnalysis: photoAnalysis } });
     setInput("");
+    setPhotoAnalysis(null);
+  };
+
+  const analyzePhoto = async (files) => {
+    const file = Array.from(files || [])[0];
+    if (!file) return;
+    setPhotoError("");
+    setPhotoBusy(true);
+    try {
+      const body = new FormData();
+      body.append("photos", file);
+      body.append("lang", lang);
+      const res = await fetch("/api/quote-analyze", { method: "POST", body });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || "analysis");
+      setPhotoAnalysis(data.analysis);
+    } catch (err) {
+      setPhotoError(err.message || t(STR.error));
+      setPhotoAnalysis(null);
+    } finally {
+      setPhotoBusy(false);
+    }
   };
 
   return (
@@ -165,6 +195,19 @@ export default function QuoteChatbot() {
       {!booking && (
         <form className="qchat__input" onSubmit={submit}>
           <input
+            ref={photoRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            hidden
+            onChange={(e) => {
+              analyzePhoto(e.target.files);
+              e.target.value = "";
+            }}
+          />
+          <button type="button" className="btn btn--ghost qchat__photo" onClick={() => photoRef.current?.click()} disabled={busy || photoBusy}>
+            {photoBusy ? t(STR.analyzing) : t(STR.photo)}
+          </button>
+          <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -172,9 +215,11 @@ export default function QuoteChatbot() {
             aria-label={t(STR.placeholder)}
             disabled={busy}
           />
-          <button type="submit" className="btn btn--primary" disabled={busy || !input.trim()}>
+          <button type="submit" className="btn btn--primary" disabled={busy || photoBusy || (!input.trim() && !photoAnalysis)}>
             {busy ? t(STR.typing) : t(STR.send)}
           </button>
+          {photoAnalysis && <span className="qchat__photo-status">{t(STR.photoReady)}</span>}
+          {photoError && <span className="qchat__photo-error">{photoError}</span>}
         </form>
       )}
     </div>

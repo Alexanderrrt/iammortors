@@ -70,7 +70,7 @@ export async function POST(req) {
     );
   }
 
-  const { messages, lang = "en" } = await req.json();
+  const { messages, lang = "en", imageAnalysis } = await req.json();
   const pricing = await getPricing();
 
   const computeQuote = tool({
@@ -138,6 +138,12 @@ export async function POST(req) {
   });
 
   const modelMessages = await convertToModelMessages(messages);
+  if (imageAnalysis?.vehicleClassId && Array.isArray(imageAnalysis.services)) {
+    modelMessages.push({
+      role: "user",
+      content: `A server-side photo inspection found this structured information. Treat it as customer context and call computeQuote using these ids; do not invent prices: ${JSON.stringify(imageAnalysis)}`,
+    });
+  }
 
   const result = streamText({
     model: groq(MODEL),

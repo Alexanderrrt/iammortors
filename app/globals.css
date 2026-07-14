@@ -4280,6 +4280,11 @@ body {
 .qchat__input .btn {
   white-space: nowrap;
 }
+.qchat__photo { white-space: nowrap; }
+.qchat__photo-status,
+.qchat__photo-error { grid-column: 1 / -1; font-size: 0.78rem; }
+.qchat__photo-status { color: var(--good); }
+.qchat__photo-error { color: #a12525; }
 
 /* --- Quote booking panel (name/phone, photo drop, slot picker) --- */
 .qchat__msg--wide { max-width: 100%; width: 100%; }
