@@ -14,7 +14,7 @@ const ADS = [
     id: "service-package",
     tone: "service",
     image: "/Adittional-media1.png",
-    eyebrow: { en: "Today at BR", es: "Hoy en BR" },
+    eyebrow: { en: "Today in Iam Motors", es: "Hoy en Iam Motors" },
     title: COPY.promos.driverTitle,
     price: COPY.promos.driverPrice,
     body: COPY.promos.driverSub,

@@ -15,13 +15,9 @@ export default function OwnersRide() {
           <img
             className="owners-ride__img owners-ride__img--owner"
             src="/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_9da89c4b-1024x683.jpg"
-            alt={`Owner of ${SITE.name}`}
+            alt={`Team at ${SITE.name}`}
             loading="lazy"
           />
-          <figure className="owners-ride__inset">
-            <img src="/OwnersRide.jpg" alt={`Featured vehicle at ${SITE.name}`} loading="lazy" />
-            <figcaption>{t({ en: "Shop-built standards", es: "Calidad hecha en taller" })}</figcaption>
-          </figure>
         </div>
 
         <div className="owners-ride__copy">

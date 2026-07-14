@@ -27,7 +27,7 @@ export default function Hero() {
   const t = useT();
   const alignment = COPY.hero.alignment;
   const trustItems = [
-    { en: "Two San Jose locations", es: "Dos ubicaciones en San Jose" },
+    { en: "Free Estimates", es: "Estimaciones gratuitas" },
     { en: "Walk-ins welcome", es: "Sin cita, bienvenidos" },
     { en: "English and Spanish", es: "Inglés y español" },
   ];

@@ -2,47 +2,36 @@
 // Update here to change anything shown on the site.
 
 export const SITE = {
-  name: "Centro Automotriz BR",
-  nameShort: "BR Auto Center",
+  name: "IAM MOTORS SERVICES LLC",
+  nameShort: "IAM Motors",
   // Used for canonical URLs, sitemap, robots and Open Graph.
   // UPDATE once your domain is live.
-  url: "https://centroautomotrizbr.com",
+  url: "https://iammotors.com",
   tagline: {
-    en: "High-level automotive maintenance — precise diagnostics, expert workmanship.",
-    es: "Mantenimiento automotriz de alto nivel — diagnósticos precisos, trabajo experto.",
+    en: "Full-service auto body shop and repair — collision repair, paint, body work, Prius/hybrid systems, diagnostics, and maintenance. Quality workmanship, clear communication, honest estimates.",
+    es: "Taller de carrocería y reparación automotriz completo — reparación de colisiones, pintura, trabajo de carrocería, sistemas Prius/híbrido, diagnóstico y mantenimiento. Artesanía de calidad, comunicación clara, estimados honestos.",
   },
-  phone: "(408) 690-9455",
-  phoneHref: "tel:+14086909455",
+  phone: "(669) 324-5719",
+  phoneHref: "tel:+16693245719",
   // WhatsApp number in international format, digits only.
-  whatsapp: "14086909455",
+  whatsapp: "16693245719",
   locations: [
     {
       id: "main",
-      line1: "1048 N Tenth St",
-      line2: "San Jose, CA 95112",
-      full: "1048 N Tenth St, San Jose, CA 95112",
+      line1: "IAM MOTORS SERVICES LLC",
+      line2: "San Jose, CA",
+      full: "San Jose, CA",
       mapsHref:
-        "https://www.google.com/maps/dir/?api=1&destination=1048+N+Tenth+St,+San+Jose,+CA+95112",
+        "https://www.google.com/maps/search/IAM+Motors+San+Jose+California",
       mapsEmbedSrc:
-        "https://www.openstreetmap.org/export/embed.html?bbox=-121.8989356%2C37.3583228%2C-121.8929356%2C37.3643228&layer=mapnik&marker=37.3613228%2C-121.8959356",
-      postalCode: "95112",
-    },
-    {
-      id: "second",
-      line1: "804 Park Ave, Ste B",
-      line2: "San Jose, CA 95126",
-      full: "804 Park Ave, Ste B, San Jose, CA 95126",
-      mapsHref:
-        "https://www.google.com/maps/dir/?api=1&destination=804+Park+Ave+Ste+B,+San+Jose,+CA+95126",
-      mapsEmbedSrc:
-        "https://www.openstreetmap.org/export/embed.html?bbox=-121.9083681%2C37.3222802%2C-121.9023681%2C37.3282802&layer=mapnik&marker=37.3252802%2C-121.9053681",
-      postalCode: "95126",
+        "https://www.openstreetmap.org/export/embed.html?bbox=-121.95%2C37.25%2C-121.77%2C37.37&layer=mapnik",
+      postalCode: "95110",
     },
   ],
 
   social: {
-    instagram: "https://www.instagram.com/mechanic_tire",
-    facebook: "https://www.facebook.com/centroautomotrizbr/",
+    instagram: "https://www.instagram.com/iammotors/",
+    facebook: "https://www.facebook.com/iammotors/",
   },
   // Hours in 24h time, per weekday (0 = Sunday ... 6 = Saturday). null = closed.
   hours: [
@@ -58,93 +47,115 @@ export const SITE = {
 
 export const SERVICES = [
   {
-    id: "mecanica-general",
+    id: "collision-repair",
     icon: "wrench",
-    image: "/MECANICA-GENERAL.png",
-    title: { en: "General Mechanics", es: "Mecánica General" },
+    image: "/collision-repair.png",
+    title: { en: "Collision Repair", es: "Reparación de Colisiones" },
     desc: {
-      en: "Complete engine and drivetrain repair. From routine maintenance to complex overhauls, we keep your vehicle running at its best.",
-      es: "Reparación completa de motor y tren motriz. Desde mantenimiento de rutina hasta reparaciones complejas, mantenemos tu vehículo en óptimas condiciones.",
+      en: "Expert collision and accident repair. We restore your vehicle to pre-accident condition with precision and care.",
+      es: "Reparación experta de colisiones y accidentes. Restauramos tu vehículo a su condición previa con precisión y cuidado.",
     },
   },
   {
-    id: "frenos",
-    icon: "brakes",
-    image: "/FRENOS.png",
-    title: { en: "Brake Repair", es: "Frenos" },
-    desc: {
-      en: "Brake pads, rotors, calipers, and fluid service. We ensure your stopping power is always reliable and safe.",
-      es: "Pastillas, discos, calipers y servicio de líquido de frenos. Garantizamos que tu frenado sea siempre confiable y seguro.",
-    },
-  },
-  {
-    id: "afinacion",
+    id: "paint-body",
     icon: "oil",
-    image: "/AFINACION-DE-MOTOR.png",
-    title: { en: "Engine Tune-Up", es: "Afinación de Motor" },
+    image: "/painting.png",
+    title: { en: "Paint & Body Work", es: "Pintura y Trabajo de Carrocería" },
     desc: {
-      en: "Spark plugs, filters, fuel system cleaning, and ignition service. Restore power, improve fuel economy, and reduce emissions.",
-      es: "Bujías, filtros, limpieza de sistema de combustible y servicio de ignición. Restaura potencia, mejora el consumo y reduce emisiones.",
+      en: "Professional painting, color matching, and body work restoration. We deliver showroom-quality finishes with expert craftsmanship.",
+      es: "Pintura profesional, emparejamiento de colores y restauración de carrocería. Entregamos acabados de calidad showroom con artesanía experta.",
     },
   },
   {
-    id: "suspension",
-    icon: "alignment",
-    image: "/SUPENSION.png",
-    title: { en: "Suspension", es: "Suspensión" },
+    id: "dent-removal",
+    icon: "brakes",
+    image: "/dent-removal.png",
+    title: { en: "Dent Removal & Paintless Repair", es: "Remoción de Abolladuras" },
     desc: {
-      en: "Shocks, struts, control arms, and alignment. We restore your ride comfort and handling precision.",
-      es: "Amortiguadores, puntales, brazos de control y alineación. Restauramos la comodidad y precisión de manejo de tu vehículo.",
+      en: "Paintless dent repair and removal. Fast, affordable, and damage-free restoration of your vehicle's body.",
+      es: "Reparación sin pintura de abolladuras. Restauración rápida, asequible y sin daños de la carrocería de tu vehículo.",
     },
   },
   {
-    id: "electronica",
+    id: "prius-hybrid",
     icon: "battery",
-    image: "/ELECTRONICA.png",
-    title: { en: "General Electronics", es: "Electrónica General" },
+    image: "/hybrid.png",
+    title: { en: "Toyota Prius & Hybrid Systems", es: "Sistemas Toyota Prius e Híbridos" },
     desc: {
-      en: "Electrical diagnostics, wiring repair, sensors, and computer systems. We solve the toughest electrical problems.",
-      es: "Diagnósticos eléctricos, reparación de cableado, sensores y sistemas computarizados. Resolvemos los problemas eléctricos más difíciles.",
+      en: "Specialized diagnostics and repair for Toyota Prius and hybrid vehicle systems. Expert knowledge and certified technicians.",
+      es: "Diagnóstico y reparación especializada de sistemas Toyota Prius e híbridos. Conocimiento experto y técnicos certificados.",
     },
   },
   {
-    id: "aire-acondicionado",
+    id: "diagnostics",
     icon: "wrench",
-    image: "/AIRE-ACONDICIONADO.png",
-    title: { en: "A/C Repair", es: "Aire Acondicionado" },
+    image: "/diagnostics.png",
+    title: { en: "Diagnostics & Check-Engine Repairs", es: "Diagnóstico y Reparación de Luz de Motor" },
     desc: {
-      en: "Full A/C diagnostics, recharge, compressor repair, and climate control service. Stay cool all year long.",
-      es: "Diagnóstico completo de A/C, recarga, reparación de compresor y servicio de climatización. Mantente fresco todo el año.",
+      en: "Complete vehicle diagnostics, check-engine light repairs, and troubleshooting. We identify and fix the root cause of any issue.",
+      es: "Diagnóstico completo de vehículos y reparación de luz de motor. Identificamos y reparamos la causa raíz de cualquier problema.",
     },
   },
   {
-    id: "llantas-nuevas",
-    icon: "tire",
-    image: "",
-    title: { en: "New Tires", es: "Llantas Nuevas" },
+    id: "mechanical",
+    icon: "alignment",
+    image: "/mechanical.png",
+    title: { en: "Brakes, Suspension & Cooling", es: "Frenos, Suspensión y Refrigeración" },
     desc: {
-      en: "New tire sales with installation and balancing included. All major brands available — everything you need in one place.",
-      es: "Venta de llantas nuevas con instalación y balanceo incluido. Todas las marcas principales — todo lo que necesitas en un solo lugar.",
+      en: "Full mechanical service including brake repair, suspension work, cooling system maintenance, and general repairs for all gas and hybrid vehicles.",
+      es: "Servicio mecánico completo incluyendo reparación de frenos, trabajo de suspensión, mantenimiento del sistema de refrigeración y reparaciones generales.",
+    },
+  },
+  {
+    id: "maintenance",
+    icon: "oil",
+    image: "/maintenance.png",
+    title: { en: "Maintenance & Service", es: "Mantenimiento y Servicio" },
+    desc: {
+      en: "Routine maintenance, oil changes, fluid service, filters, and preventive care to keep your vehicle running smoothly.",
+      es: "Mantenimiento rutinario, cambios de aceite, servicio de fluidos, filtros y cuidado preventivo para mantener tu vehículo en perfecto estado.",
+    },
+  },
+  {
+    id: "frame-alignment",
+    icon: "alignment",
+    image: "/frame-alignment.png",
+    title: { en: "Frame Alignment", es: "Alineación de Bastidor" },
+    desc: {
+      en: "Precision frame and structural alignment. We ensure your vehicle's frame is perfectly straight and safe.",
+      es: "Alineación de bastidor y estructura de precisión. Aseguramos que el bastidor de tu vehículo esté perfectamente recto y seguro.",
+    },
+  },
+  {
+    id: "insurance-claims",
+    icon: "wrench",
+    image: "/insurance-claims.png",
+    title: { en: "Insurance Claims", es: "Reclamos de Seguros" },
+    desc: {
+      en: "We work directly with insurance companies. Let us handle your claim — you focus on what matters.",
+      es: "Trabajamos directamente con compañías de seguros. Déjanos manejar tu reclamo — tú enfócate en lo importante.",
     },
   },
 ];
 
 // Strings for the scrolling marquee strip.
 export const MARQUEE_ITEMS = [
-  "Mecánica General",
-  "Frenos",
-  "Afinación de Motor",
-  "Suspensión",
-  "Electrónica",
-  "Aire Acondicionado",
-  "Llantas Nuevas",
-  "General Mechanics",
-  "Brake Repair",
-  "Engine Tune-Up",
-  "Suspension",
-  "A/C Repair",
-  "Electronics",
-  "New Tires",
+  "Reparación de Colisiones",
+  "Pintura y Carrocería",
+  "Sistemas Prius e Híbridos",
+  "Diagnóstico de Motor",
+  "Frenos y Suspensión",
+  "Mantenimiento Completo",
+  "Alineación de Bastidor",
+  "Reclamos de Seguros",
+  "Collision Repair",
+  "Paint & Body Work",
+  "Prius & Hybrid Systems",
+  "Engine Diagnostics",
+  "Brakes & Suspension",
+  "Full Maintenance",
+  "Frame Alignment",
+  "Insurance Claims",
 ];
 
 // Social media reels or featured content.
@@ -156,7 +167,6 @@ export const GALLERY_IMAGES = [
   { src: "/MASTER-3.jpg", alt: { en: "Professional mechanic at work", es: "Mecánico profesional trabajando" } },
   { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.56_44d9aad2-683x1024.jpg", alt: { en: "Mechanic working on engine", es: "Mecánico trabajando en motor" } },
   { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_6ebabeee-1024x683.jpg", alt: { en: "Engine bay service", es: "Servicio de motor" } },
-  { src: "/Footer.png", alt: { en: "Centro Automotriz BR storefront", es: "Fachada de Centro Automotriz BR" } },
   { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_c3a16bcc-1024x683.jpg", alt: { en: "Engine rebuild with chain hoist", es: "Reconstrucción de motor con grúa" } },
   { src: "/MASTER-4.jpg", alt: { en: "Vehicle maintenance on lift", es: "Mantenimiento de vehículo en elevador" } },
   { src: "/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_01d8ad3c-1024x683.jpg", alt: { en: "Team member portrait", es: "Retrato del equipo" } },
@@ -171,42 +181,42 @@ export const GALLERY_VIDEOS = [
 ];
 
 export const OWNERS_RIDE = {
-  kicker: { en: "Featured spotlight", es: "Destacado especial" },
-  title: { en: "Quality You Can Trust", es: "Calidad en la que Puedes Confiar" },
+  kicker: { en: "Our commitment", es: "Nuestro compromiso" },
+  title: { en: "Quality Workmanship & Clear Communication", es: "Artesanía de Calidad y Comunicación Clara" },
   body: {
-    en: "Every vehicle that comes through our doors gets the same expert care and attention to detail. From routine maintenance to complex repairs, we treat your car like it's our own.",
-    es: "Cada vehículo que entra a nuestro taller recibe el mismo cuidado experto y atención al detalle. Desde mantenimiento de rutina hasta reparaciones complejas, tratamos tu auto como si fuera el nuestro.",
+    en: "From collision repair to hybrid systems to routine maintenance, we deliver quality workmanship backed by honest estimates and clear communication. Your vehicle is in trusted hands.",
+    es: "Desde reparación de colisiones hasta sistemas híbridos hasta mantenimiento rutinario, entregamos artesanía de calidad respaldada por estimados honestos y comunicación clara. Tu vehículo está en manos de confianza.",
   },
 };
 
 export const ABOUT_US = {
   brandStatement: {
-    en: "We don't just fix cars — we deliver confidence, safety, and performance you can feel with every mile.",
-    es: "No solo reparamos autos — entregamos confianza, seguridad y rendimiento que puedes sentir en cada kilómetro.",
+    en: "Under new ownership, IAM Motors Services LLC delivers full-service auto repair with quality workmanship, clear communication, and honest estimates.",
+    es: "Bajo nueva administración, IAM Motors Services LLC entrega reparación automotriz completa con artesanía de calidad, comunicación clara y estimados honestos.",
   },
   cards: [
     {
       id: "who-we-are",
       title: { en: "Who We Are", es: "Quiénes Somos" },
       body: {
-        en: "A team of certified professionals with a deep passion for automotive care and customer satisfaction, backed by years of industry experience built on honesty and quality.",
-        es: "Un equipo de profesionales certificados con una profunda pasión por el cuidado automotriz y la satisfacción del cliente, respaldado por años de experiencia en la industria basada en la honestidad y la calidad.",
+        en: "IAM Motors Services LLC is a full-service auto body and repair shop proudly serving San Jose. We specialize in collision repair, paint and body work, and comprehensive mechanical service — from Toyota Prius and hybrid systems to diagnostics, brakes, suspension, cooling systems, and maintenance for all vehicles.",
+        es: "IAM Motors Services LLC es un taller de carrocería y reparación automotriz completo sirviendo con orgullo a San Jose. Nos especializamos en reparación de colisiones, pintura y trabajo de carrocería, y servicio mecánico completo — desde sistemas Toyota Prius e híbridos hasta diagnóstico, frenos, suspensión, sistemas de refrigeración y mantenimiento para todos los vehículos.",
       },
     },
     {
       id: "mission",
       title: { en: "Our Mission", es: "Nuestra Misión" },
       body: {
-        en: "To provide professional, transparent, and efficient automotive services that ensure safety, performance, and peace of mind — building enduring relationships through integrity, technical excellence, and personalized attention.",
-        es: "Brindar servicios automotrices profesionales, transparentes y eficientes que garanticen seguridad, rendimiento y tranquilidad — construyendo relaciones duraderas a través de la integridad, la excelencia técnica y la atención personalizada.",
+        en: "To provide exceptional collision repair, body work, and comprehensive mechanical service — with quality workmanship, clear communication, honest estimates, and seamless insurance claim handling.",
+        es: "Brindar reparación excepcional de colisiones, trabajo de carrocería y servicio mecánico completo — con artesanía de calidad, comunicación clara, estimados honestos y manejo sin problemas de reclamos de seguros.",
       },
     },
     {
       id: "vision",
       title: { en: "Our Vision", es: "Nuestra Visión" },
       body: {
-        en: "To become a benchmark in the automotive service industry, recognized for our commitment to innovation, reliability, and exceptional customer care — a trusted partner for our community.",
-        es: "Convertirnos en un referente en la industria de servicios automotrices, reconocidos por nuestro compromiso con la innovación, la confiabilidad y el servicio excepcional — un socio de confianza para nuestra comunidad.",
+        en: "To be San Jose's trusted full-service auto repair shop — known for quality workmanship, transparency, expertise with hybrid and gas vehicles, and genuine care for every customer.",
+        es: "Ser el taller de reparación automotriz de confianza de San Jose — conocidos por artesanía de calidad, transparencia, experiencia con vehículos híbridos y de gasolina, y atención genuina a cada cliente.",
       },
     },
   ],
@@ -215,24 +225,24 @@ export const ABOUT_US = {
 export const TESTIMONIALS = [
   {
     quote: {
-      en: "Excellent service! They diagnosed the problem quickly and the repair was done the same day. Very fair prices.",
-      es: "¡Excelente servicio! Diagnosticaron el problema rápidamente y la reparación se hizo el mismo día. Precios muy justos.",
+      en: "After my accident, IAM Motors handled everything. Insurance claim, repairs, perfect paint match. Car looks brand new. Highly recommend!",
+      es: "Después de mi accidente, IAM Motors manejó todo. Reclamo de seguros, reparaciones, emparejamiento de pintura perfecto. Auto se ve como nuevo. ¡Muy recomendado!",
     },
-    author: "Carlos M.",
+    author: "David R.",
   },
   {
     quote: {
-      en: "Best mechanic shop in San Jose. They speak Spanish and English, and they really know what they're doing. Highly recommend!",
-      es: "El mejor taller mecánico en San Jose. Hablan español e inglés, y realmente saben lo que hacen. ¡Muy recomendado!",
+      en: "Professional work, honest pricing, and they really care about your vehicle. Best collision shop I've found. They speak Spanish too!",
+      es: "Trabajo profesional, precios honestos, y realmente les importa tu vehículo. Mejor taller de colisiones que he encontrado. ¡También hablan español!",
     },
-    author: "Maria L.",
+    author: "Sandra G.",
   },
   {
     quote: {
-      en: "I've been coming here for years. Honest, reliable, and always get the job done right the first time.",
-      es: "He venido aquí por años. Honestos, confiables, y siempre hacen el trabajo bien a la primera.",
+      en: "Insurance approved their work immediately. Fast turnaround, excellent results. My car was fixed perfectly in 2 weeks.",
+      es: "El seguro aprobó su trabajo inmediatamente. Entrega rápida, excelentes resultados. Mi auto se reparó perfectamente en 2 semanas.",
     },
-    author: "Roberto S.",
+    author: "Miguel C.",
   },
 ];
 
@@ -272,48 +282,48 @@ export const COPY = {
     closed: { en: "Closed", es: "Cerrado" },
   },
   hero: {
-    kicker: { en: "San Jose, CA", es: "San Jose, CA" },
+    kicker: { en: "Full-Service Auto Repair & Body Shop", es: "Taller de Carrocería y Reparación Automotriz Completo" },
     callNow: { en: "Call Now", es: "Llamar Ahora" },
     directions: { en: "Get Directions", es: "Cómo Llegar" },
     note: {
-      en: "Walk-ins welcome — no appointment needed. In-shop service only.",
-      es: "Sin cita, sin problema — llega cuando quieras. Servicio solo en taller.",
+      en: "Collision repair, paint, body work, hybrid systems, diagnostics, brakes, suspension, maintenance. Insurance welcome.",
+      es: "Reparación de colisiones, pintura, carrocería, sistemas híbridos, diagnóstico, frenos, suspensión, mantenimiento. Seguros bienvenidos.",
     },
     alignment: {
-      badge: { en: "Expert diagnostics in action", es: "Diagnósticos expertos en acción" },
-      kicker: { en: "Precision diagnostics", es: "Diagnósticos de precisión" },
+      badge: { en: "Collision & mechanical expertise", es: "Experiencia en colisiones y mecánica" },
+      kicker: { en: "Quality workmanship", es: "Artesanía de calidad" },
       title: {
-        en: "Professional-Grade Diagnostics",
-        es: "Diagnósticos de Nivel Profesional",
+        en: "Expert Collision Repair, Paint & Mechanical Service",
+        es: "Reparación Experta de Colisiones, Pintura y Servicio Mecánico",
       },
       body: {
-        en: "We use state-of-the-art diagnostic equipment to pinpoint issues fast and get you back on the road with confidence.",
-        es: "Usamos equipo de diagnóstico de última generación para identificar problemas rápidamente y devolverte a la carretera con confianza.",
+        en: "IAM Motors Services LLC provides complete auto repair — from collision damage and paint to Toyota Prius systems, diagnostics, brakes, suspension, cooling systems, and preventive maintenance. Quality workmanship, clear communication, honest estimates.",
+        es: "IAM Motors Services LLC proporciona reparación automotriz completa — desde daño de colisión y pintura hasta sistemas Toyota Prius, diagnóstico, frenos, suspensión, sistemas de refrigeración y mantenimiento preventivo. Artesanía de calidad, comunicación clara, estimados honestos.",
       },
       points: {
-        en: ["Computer-aided engine analysis", "Electrical system scanning", "Real-time performance data"],
-        es: ["Análisis de motor asistido por computadora", "Escaneo del sistema eléctrico", "Datos de rendimiento en tiempo real"],
+        en: ["Prius & hybrid system specialists", "Complete mechanical diagnostics", "Professional paint & body work"],
+        es: ["Especialistas en sistemas Prius e híbridos", "Diagnóstico mecánico completo", "Pintura y carrocería profesional"],
       },
-      cta: { en: "Schedule a diagnostic", es: "Agenda un diagnóstico" },
+      cta: { en: "Get a free estimate", es: "Obtén un estimado gratis" },
       ctaSecondary: { en: "All services", es: "Todos los servicios" },
     },
     afterpay: {
-      en: "Flexible financing available — payments that work for you",
-      es: "Financiamiento flexible disponible — pagos que funcionan para ti",
+      en: "Insurance claims handled — we work with your insurance company",
+      es: "Reclamos de seguros manejados — trabajamos con tu compañía de seguros",
     },
   },
   about: {
     heading: { en: "Our Company", es: "Nuestra Empresa" },
     sub: {
-      en: "Certified professionals, honest work, and a genuine passion for automotive care.",
-      es: "Profesionales certificados, trabajo honesto y una pasión genuina por el cuidado automotriz.",
+      en: "Full-service auto repair under new ownership. Quality workmanship, clear communication, honest estimates, and expertise with all vehicles including Toyota Prius and hybrid systems.",
+      es: "Reparación automotriz completa bajo nueva administración. Artesanía de calidad, comunicación clara, estimados honestos y experiencia con todos los vehículos incluyendo Toyota Prius y sistemas híbridos.",
     },
   },
   services: {
-    heading: { en: "What We Do", es: "Lo Que Hacemos" },
+    heading: { en: "Our Services", es: "Nuestros Servicios" },
     sub: {
-      en: "Tap a service to learn more.",
-      es: "Toque un servicio para más información.",
+      en: "Complete auto repair: collision repair, paint & body work, Toyota Prius & hybrid systems, diagnostics, brakes, suspension, cooling systems, and maintenance.",
+      es: "Reparación automotriz completa: reparación de colisiones, pintura y carrocería, sistemas Toyota Prius e híbridos, diagnóstico, frenos, suspensión, sistemas de refrigeración y mantenimiento.",
     },
   },
   gallery: {
@@ -332,34 +342,34 @@ export const COPY = {
     heading: { en: "What Customers Say", es: "Lo Que Dicen Nuestros Clientes" },
   },
   promos: {
-    heading: { en: "Deals & Programs", es: "Ofertas y Programas" },
+    heading: { en: "Why Choose IAM Motors", es: "Por Qué Elegirnos" },
     sub: {
-      en: "Flexible financing and rewards to keep you coming back.",
-      es: "Financiamiento flexible y recompensas para que sigas regresando.",
+      en: "Quality workmanship, clear communication, honest estimates, Prius expertise, and full-service repair.",
+      es: "Artesanía de calidad, comunicación clara, estimados honestos, experiencia Prius y reparación completa.",
     },
-    financeTitle: { en: "Financing Available", es: "¡Financiamiento Disponible!" },
+    financeTitle: { en: "Hybrid & Gas Vehicle Expertise", es: "Experiencia en Vehículos Híbridos y de Gasolina" },
     financeSub: {
-      en: "Quick and easy approval! All you need is an ITIN, Social Security, or bank account. Flexible payments that work for your budget.",
-      es: "¡Aprobación rápida y sencilla! Solo necesitas ITIN, Social Security o cuenta bancaria. Pagos flexibles que se ajustan a tu presupuesto.",
+      en: "We specialize in Toyota Prius and hybrid systems while serving all gas vehicles. Complete diagnostics and repair for every vehicle type.",
+      es: "Nos especializamos en sistemas Toyota Prius e híbridos mientras servimos todos los vehículos de gasolina. Diagnóstico y reparación completa para cada tipo de vehículo.",
     },
-    financeCta: { en: "Ask about financing", es: "Pregunta por financiamiento" },
-    loyaltyTitle: { en: "Loyalty Program", es: "Programa de Fidelidad" },
+    financeCta: { en: "Ask about hybrid service", es: "Pregunta sobre servicio híbrido" },
+    loyaltyTitle: { en: "Insurance Direct Repair", es: "Reparación Directa de Seguros" },
     loyaltySub: {
-      en: "Earn rewards with every visit. Ask about our loyalty program and start saving today.",
-      es: "Gana recompensas con cada visita. Pregunta por nuestro programa de fidelidad y empieza a ahorrar hoy.",
+      en: "We are preferred vendors for most insurance companies. We handle your claim, manage deductibles, and get you back on the road fast.",
+      es: "Somos vendedores preferentes para la mayoría de compañías de seguros. Manejamos tu reclamo, gestionamos deducciones y te devolvemos a la carretera rápidamente.",
     },
-    loyaltyCta: { en: "Ask about our program", es: "Pregunta por nuestro programa" },
-    driverTitle: { en: "Full Service Package", es: "Paquete de Servicio Completo" },
+    loyaltyCta: { en: "Contact us for insurance work", es: "Contáctanos para trabajo de seguros" },
+    driverTitle: { en: "Free Honest Estimates", es: "Estimaciones Gratuitas y Honestas" },
     driverSub: {
-      en: "Our best value package — complete tune-up, oil change, and multi-point inspection at an unbeatable price.",
-      es: "Nuestro paquete de mejor valor — afinación completa, cambio de aceite e inspección multipunto a un precio imbatible.",
+      en: "Get a detailed, honest estimate for any work — free, no obligation. We believe in transparent pricing and clear communication.",
+      es: "Obtén un estimado detallado y honesto para cualquier trabajo — gratis, sin obligación. Creemos en precios transparentes y comunicación clara.",
     },
-    driverPrice: "$199",
+    driverPrice: "FREE",
     driverIncludes: {
-      en: ["Engine Tune-Up", "Oil Change", "Multi-Point Inspection"],
-      es: ["Afinación de Motor", "Cambio de Aceite", "Inspección Multipunto"],
+      en: ["Detailed Assessment", "Honest Pricing", "Clear Communication"],
+      es: ["Evaluación Detallada", "Precios Honestos", "Comunicación Clara"],
     },
-    driverCta: { en: "Claim this deal", es: "Aprovecha esta oferta" },
+    driverCta: { en: "Request an estimate", es: "Solicita un estimado" },
   },
   footer: {
     rights: {

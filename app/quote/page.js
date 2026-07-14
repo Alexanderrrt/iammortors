@@ -1,27 +1,25 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import QuoteCalculator from "./QuoteCalculator";
+import QuoteChatbot from "../components/QuoteChatbot";
 import QuoteIntro from "./QuoteIntro";
-import { getPricing } from "../../lib/pricing-store";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Get a Quote — Instant Price Estimate",
+  title: "Get a Quote — Chat for an Instant Estimate",
   description:
-    "Get an instant price estimate for your vehicle. Select services, see the estimated range, and send your quote request via WhatsApp.",
+    "Describe your vehicle and the damage in your own words and our assistant builds an instant price estimate, then books your appointment.",
   alternates: { canonical: "/quote" },
 };
 
-export default async function QuotePage() {
-  const pricing = await getPricing();
+export default function QuotePage() {
   return (
     <>
       <Header />
       <main className="section">
-        <div className="section__inner">
+        <div className="section__inner qchat__page">
           <QuoteIntro />
-          <QuoteCalculator pricing={pricing} />
+          <QuoteChatbot />
         </div>
       </main>
       <Footer />

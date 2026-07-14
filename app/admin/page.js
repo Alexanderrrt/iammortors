@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { verifySession, authConfigured, SESSION_COOKIE } from "../../lib/auth";
 import { getPricing, storeConfigured } from "../../lib/pricing-store";
-import PricingEditor from "./PricingEditor";
+import AdminTabs from "./AdminTabs";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +19,7 @@ export default async function AdminPage() {
   const pricing = await getPricing();
   return (
     <main className="admin">
-      <PricingEditor
+      <AdminTabs
         initialPricing={pricing}
         persistent={storeConfigured()}
         authReady={authConfigured()}
