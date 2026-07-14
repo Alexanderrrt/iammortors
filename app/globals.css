@@ -1346,17 +1346,18 @@ body.no-scroll {
 }
 
 .gallery-film {
-  margin-block: 2.75rem 2rem;
+  margin-block: 1.75rem 2.75rem;
 }
 
 .gallery-film__frame {
   position: relative;
-  min-height: clamp(360px, 46vw, 620px);
+  min-height: clamp(380px, 48vw, 640px);
   overflow: hidden;
   isolation: isolate;
   border-radius: 18px;
   background: #07121b;
-  box-shadow: 0 24px 70px rgba(5, 18, 28, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 80px rgba(5, 18, 28, 0.28);
 }
 
 .gallery-film__frame video {
@@ -1373,9 +1374,11 @@ body.no-scroll {
   position: absolute;
   inset: 0;
   z-index: 1;
+  /* Lighter scrim so the footage stays clear and sharp while the left-side
+     copy remains readable. */
   background:
-    linear-gradient(90deg, rgba(3, 13, 22, 0.9) 0%, rgba(3, 13, 22, 0.48) 42%, rgba(3, 13, 22, 0.08) 80%),
-    linear-gradient(0deg, rgba(3, 13, 22, 0.68), transparent 44%);
+    linear-gradient(90deg, rgba(3, 13, 22, 0.78) 0%, rgba(3, 13, 22, 0.32) 40%, transparent 72%),
+    linear-gradient(0deg, rgba(3, 13, 22, 0.5), transparent 46%);
   pointer-events: none;
 }
 
@@ -1773,65 +1776,165 @@ body.no-scroll {
   grid-template-columns: 1fr;
 }
 
+/* Unified visit panel: map on one side, address + hours on the other. */
 .location-card {
   display: grid;
-  gap: 1.5rem;
   grid-template-columns: 1fr;
+  gap: 0;
   background: var(--surface);
   border-radius: var(--r-lg);
   border: 1px solid var(--line);
-  padding: 1.25rem;
+  overflow: hidden;
+  padding: 0;
 }
 
 .location-card__map {
-  border-radius: var(--r-md);
+  position: relative;
   overflow: hidden;
-  min-height: 240px;
+  min-height: 300px;
 }
 
 .location-card__map iframe {
   width: 100%;
   height: 100%;
-  min-height: 240px;
+  min-height: 300px;
   border: 0;
   display: block;
 }
 
+.location-card__logobadge {
+  position: absolute;
+  left: 0.55rem;
+  bottom: 0.55rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  padding: 8px;
+  border-radius: 12px;
+  background: #0a0e12;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 6px 18px rgba(12, 16, 18, 0.32);
+}
+
+.location-card__logobadge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.location-card__maplink {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font-family: var(--display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--paper);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 18px rgba(12, 16, 18, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  backdrop-filter: blur(10px) saturate(160%);
+  transition: transform 0.16s ease, background 0.16s ease;
+}
+
+.location-card__maplink .icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--blue);
+}
+
+.location-card__maplink:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.location-card__info {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.75rem;
+}
+
+.location-card__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .location-card__details h3 {
-  margin: 0 0 0.6rem;
-  font-size: 1.35rem;
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  line-height: 1.05;
 }
 
-.location-card__details p {
-  margin: 0.15rem 0;
-  color: var(--paper-dim);
+.location-card__address {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0 0 0.7rem;
+  color: var(--paper);
+  font-size: 1.02rem;
+  line-height: 1.4;
 }
 
-.location-card__details > a:not(.btn) {
-  display: block;
+.location-card__address .icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--blue);
+}
+
+.location-card__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   width: fit-content;
   text-decoration: none;
   font-family: var(--display);
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   color: var(--blue);
-  margin-top: 0.4rem;
+}
+
+.location-card__phone .icon {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.location-card__phone:hover {
+  color: var(--blue-deep);
 }
 
 .location-directions {
-  margin-top: 1.1rem;
+  margin-top: 1.2rem;
+  align-self: flex-start;
 }
 
-.location-block--hours {
-  background: var(--surface);
-  border-radius: var(--r-lg);
-  border: 1px solid var(--line);
-  padding: 1.25rem;
+/* Divider between address and hours within the info column. */
+.location-card__hours {
+  margin-top: 1.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line-soft);
 }
 
-.location-block--hours h3 {
-  margin: 0 0 0.6rem;
-  font-size: 1.35rem;
+.location-card__hours h4 {
+  margin: 0 0 0.5rem;
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
 }
 
 .hours-table {
@@ -1842,9 +1945,13 @@ body.no-scroll {
 }
 
 .hours-table td {
-  padding: 0.45rem 0;
+  padding: 0.5rem 0;
   border-bottom: 1px solid var(--line-soft);
   color: var(--paper-dim);
+}
+
+.hours-table tr:last-child td {
+  border-bottom: 0;
 }
 
 .hours-table td:last-child {
@@ -1853,22 +1960,38 @@ body.no-scroll {
 
 .hours-table__today td {
   color: var(--blue);
-  font-weight: 600;
+  font-weight: 700;
 }
 
-@media (min-width: 820px) {
-  .location-card {
-    grid-template-columns: 1.2fr 1fr;
-    align-items: start;
-  }
-}
-
-@media (min-width: 1100px) {
-  .location-grid {
+/* When the map is stacked on top but the card is still wide, place the address
+   block and the hours side by side so the row width is used instead of leaving
+   the phone and button stranded on the left. */
+@media (min-width: 600px) and (max-width: 859px) {
+  .location-card__info {
+    display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: start;
+    column-gap: 2.5rem;
   }
-  .location-grid > .location-block--hours {
-    grid-column: 1 / -1;
+
+  .location-card__hours {
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 2.5rem;
+    border-top: 0;
+    border-left: 1px solid var(--line-soft);
+  }
+}
+
+@media (min-width: 860px) {
+  .location-card {
+    grid-template-columns: 1.25fr 1fr;
+    align-items: stretch;
+  }
+
+  .location-card__info {
+    padding: 2rem 2.15rem;
+    justify-content: center;
   }
 }
 
@@ -2315,6 +2438,65 @@ body.no-scroll {
   .promo-card__media img {
     aspect-ratio: auto;
     max-height: 360px;
+  }
+}
+
+/* ---------- Loyalty card ---------- */
+
+.loyalty {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.loyalty__media {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: #0b1725;
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.7));
+  box-shadow: 0 18px 48px rgba(12, 16, 18, 0.2);
+}
+
+.loyalty__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.loyalty__eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--blue);
+  font-family: var(--display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.loyalty__body h2 {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  line-height: 1;
+  color: var(--paper);
+}
+
+.loyalty__body > p {
+  margin: 0 0 1.5rem;
+  max-width: 46ch;
+  color: var(--paper-dim);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.loyalty__cta {
+  width: fit-content;
+}
+
+@media (min-width: 860px) {
+  .loyalty {
+    grid-template-columns: 1.35fr 1fr;
+    gap: 3rem;
   }
 }
 
@@ -3213,11 +3395,9 @@ body.no-scroll {
   transform: translateY(3px);
 }
 
-.location-card__map,
 .location-storefront {
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-.location-card__map:hover,
 .location-storefront:hover {
   transform: translateY(-2px);
 }
@@ -3962,6 +4142,11 @@ body {
 
 .promo-popups--poster {
   width: min(310px, calc(100vw - 2rem));
+}
+
+/* Landscape flyers need more width to stay legible when shown whole. */
+.promo-popups--poster.promo-popups--wide {
+  width: min(420px, calc(100vw - 2rem));
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -18,13 +18,16 @@ export const SITE = {
   locations: [
     {
       id: "main",
-      line1: "IAM MOTORS SERVICES LLC",
-      line2: "San Jose, CA",
-      full: "San Jose, CA",
+      line1: "423 W San Carlos St",
+      line2: "San Jose, CA 95110",
+      full: "423 W San Carlos St, San Jose, CA 95110",
+      // Apple Maps deep link for clicks — opens directions to the shop on Apple
+      // devices, and the Apple Maps web app elsewhere.
       mapsHref:
-        "https://www.google.com/maps/search/IAM+Motors+San+Jose+California",
+        "https://maps.apple.com/?daddr=IAM+Motors+Services+LLC,+423+W+San+Carlos+St,+San+Jose,+CA+95110&q=IAM+Motors+Services+LLC",
+      // Google Maps for the embedded preview (Apple Maps has no free iframe embed).
       mapsEmbedSrc:
-        "https://www.openstreetmap.org/export/embed.html?bbox=-121.95%2C37.25%2C-121.77%2C37.37&layer=mapnik",
+        "https://maps.google.com/maps?q=IAM+Motors+Services+LLC,+423+W+San+Carlos+St,+San+Jose,+CA+95110&z=15&output=embed",
       postalCode: "95110",
     },
   ],

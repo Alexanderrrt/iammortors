@@ -42,44 +42,6 @@ export default function Gallery() {
           <p className="section__sub">{t(COPY.gallery.sub)}</p>
         </Reveal>
 
-        {REELS.length > 0 ? (
-          <Reveal className="reels-wrapper">
-            <button className="reels-arrow reels-arrow--left" onClick={() => scroll(-1)} aria-label="Previous reel">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-            <div className="reels-track" ref={trackRef}>
-              {REELS.map((permalink, i) => (
-                <div
-                  key={permalink}
-                  className="reel-card reveal-item"
-                  style={{ "--d": `${i * 80}ms` }}
-                >
-                  <blockquote
-                    className="instagram-media"
-                    data-instgrm-permalink={permalink}
-                    data-instgrm-version="14"
-                  />
-                </div>
-              ))}
-            </div>
-            <button className="reels-arrow reels-arrow--right" onClick={() => scroll(1)} aria-label="Next reel">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </button>
-          </Reveal>
-        ) : GALLERY_IMAGES.length > 0 ? (
-          <Reveal className="gallery-grid">
-            {GALLERY_IMAGES.map((img, i) => (
-              <div
-                key={img.src}
-                className={`gallery-grid__item reveal-item${i === 0 ? " gallery-grid__item--featured" : ""}${img.fit === "contain" ? " gallery-grid__item--contain" : ""}`}
-                style={{ "--d": `${i * 70}ms` }}
-              >
-                <img src={img.src} alt={t(img.alt)} loading="lazy" />
-              </div>
-            ))}
-          </Reveal>
-        ) : null}
-
         {GALLERY_VIDEOS && GALLERY_VIDEOS.length > 0 && (
           <>
             <Reveal className="gallery-film">
@@ -139,6 +101,44 @@ export default function Gallery() {
             )}
           </>
         )}
+
+        {REELS.length > 0 ? (
+          <Reveal className="reels-wrapper">
+            <button className="reels-arrow reels-arrow--left" onClick={() => scroll(-1)} aria-label="Previous reel">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+            <div className="reels-track" ref={trackRef}>
+              {REELS.map((permalink, i) => (
+                <div
+                  key={permalink}
+                  className="reel-card reveal-item"
+                  style={{ "--d": `${i * 80}ms` }}
+                >
+                  <blockquote
+                    className="instagram-media"
+                    data-instgrm-permalink={permalink}
+                    data-instgrm-version="14"
+                  />
+                </div>
+              ))}
+            </div>
+            <button className="reels-arrow reels-arrow--right" onClick={() => scroll(1)} aria-label="Next reel">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </Reveal>
+        ) : GALLERY_IMAGES.length > 0 ? (
+          <Reveal className="gallery-grid">
+            {GALLERY_IMAGES.map((img, i) => (
+              <div
+                key={img.src}
+                className={`gallery-grid__item reveal-item${i === 0 ? " gallery-grid__item--featured" : ""}${img.fit === "contain" ? " gallery-grid__item--contain" : ""}`}
+                style={{ "--d": `${i * 70}ms` }}
+              >
+                <img src={img.src} alt={t(img.alt)} loading="lazy" />
+              </div>
+            ))}
+          </Reveal>
+        ) : null}
 
         <Reveal>
           <a

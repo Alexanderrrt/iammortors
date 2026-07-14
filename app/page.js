@@ -6,6 +6,7 @@ import Services from "./components/Services";
 import BrandStrip from "./components/BrandStrip";
 import Gallery from "./components/Gallery";
 import Promos from "./components/Promos";
+import LoyaltyCard from "./components/LoyaltyCard";
 import OwnersRide from "./components/OwnersRide";
 import Location from "./components/Location";
 import Reviews from "./components/Reviews";
@@ -24,6 +25,7 @@ export default function HomePage() {
         <BrandStrip />
         <OwnersRide />
         <Promos />
+        <LoyaltyCard />
         <Gallery />
         <Reviews />
         <Location />

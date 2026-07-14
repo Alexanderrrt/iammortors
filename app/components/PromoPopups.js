@@ -45,17 +45,13 @@ const ADS = [
   },
   {
     id: "tires",
-    type: "card",
+    type: "poster",
     tone: "tires",
+    wide: true,
     image: "/services/new-tires-shop.png",
-    eyebrow: { en: "Tire counter", es: "Llantas" },
-    title: {
-      en: "Need tires? Ask what is in stock today.",
-      es: "Necesita llantas? Pregunte que tenemos disponible hoy.",
-    },
-    body: {
-      en: "Major brands, mounting, balancing, and honest guidance for your driving style.",
-      es: "Marcas reconocidas, instalacion, balanceo y guia honesta para su forma de manejar.",
+    alt: {
+      en: "IAM Motors — tires, body shop and auto repair. Insurance welcome. 423 W San Carlos St, San Jose.",
+      es: "IAM Motors — llantas, body shop y reparacion de autos. Seguros bienvenidos. 423 W San Carlos St, San Jose.",
     },
     cta: { en: "Ask about tires", es: "Preguntar por llantas" },
     message: {
@@ -132,7 +128,7 @@ export default function PromoPopups() {
 
   return (
     <aside
-      className={`promo-popups promo-popups--${ad.type} promo-popups--${ad.tone}`}
+      className={`promo-popups promo-popups--${ad.type} promo-popups--${ad.tone}${ad.wide ? " promo-popups--wide" : ""}`}
       aria-label={t({ en: "Current shop offers", es: "Ofertas actuales del taller" })}
     >
       {ad.type === "poster" ? (

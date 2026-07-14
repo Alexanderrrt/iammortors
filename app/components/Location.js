@@ -5,7 +5,7 @@ import { COPY, SITE } from "../site.config";
 import Icon from "./Icons";
 import Reveal from "./Reveal";
 
-function LocationCard({ loc, t }) {
+function LocationCard({ loc, t, today }) {
   return (
     <div className="location-card">
       <div className="location-card__map">
@@ -15,20 +15,64 @@ function LocationCard({ loc, t }) {
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
-      </div>
-      <div className="location-card__details">
-        <h3>{SITE.name}</h3>
-        <p>{loc.line1}</p>
-        <p>{loc.line2}</p>
-        <a href={SITE.phoneHref}>{SITE.phone}</a>
+        <span className="location-card__logobadge" aria-hidden="true">
+          <img src="/media/brand/logo.png" alt="" />
+        </span>
         <a
+          className="location-card__maplink"
           href={loc.mapsHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn btn--ghost btn--small location-directions"
         >
-          <Icon name="pin" /> {t(COPY.hero.directions)}
+          <Icon name="pin" /> Apple Maps
         </a>
+      </div>
+
+      <div className="location-card__info">
+        <div className="location-card__details">
+          <h3>{SITE.name}</h3>
+
+          <p className="location-card__address">
+            <Icon name="pin" />
+            <span>
+              {loc.line1}
+              <br />
+              {loc.line2}
+            </span>
+          </p>
+
+          <a className="location-card__phone" href={SITE.phoneHref}>
+            <Icon name="phone" />
+            {SITE.phone}
+          </a>
+
+          <a
+            href={loc.mapsHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--primary btn--small location-directions"
+          >
+            <Icon name="pin" /> {t(COPY.hero.directions)}
+          </a>
+        </div>
+
+        <div className="location-card__hours">
+          <h4>{t(COPY.location.hoursTitle)}</h4>
+          <table className="hours-table">
+            <tbody>
+              {SITE.hours.map((h) => (
+                <tr key={h.day} className={h.day === today ? "hours-table__today" : ""}>
+                  <td>{t(h.label)}</td>
+                  <td>
+                    {h.open && h.close
+                      ? `${h.open} – ${h.close}`
+                      : t(COPY.location.closedLabel)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
@@ -56,28 +100,8 @@ export default function Location() {
 
         <Reveal className="location-grid">
           {SITE.locations.map((loc) => (
-            <LocationCard key={loc.id} loc={loc} t={t} />
+            <LocationCard key={loc.id} loc={loc} t={t} today={today} />
           ))}
-        </Reveal>
-
-        <Reveal>
-          <div className="location-block location-block--hours">
-            <h3>{t(COPY.location.hoursTitle)}</h3>
-            <table className="hours-table">
-              <tbody>
-                {SITE.hours.map((h) => (
-                  <tr key={h.day} className={h.day === today ? "hours-table__today" : ""}>
-                    <td>{t(h.label)}</td>
-                    <td>
-                      {h.open && h.close
-                        ? `${h.open} – ${h.close}`
-                        : t(COPY.location.closedLabel)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </Reveal>
       </div>
     </section>
