@@ -109,7 +109,7 @@ export const SERVICES = [
   {
     id: "maintenance",
     icon: "oil",
-    image: "/services/oil-change.jpg",
+    image: "/media/posters/general-mechanics.png",
     title: { en: "Maintenance & Service", es: "Mantenimiento y Servicio" },
     desc: {
       en: "Routine maintenance, oil changes, fluid service, filters, and preventive care to keep your vehicle running smoothly.",
@@ -119,7 +119,7 @@ export const SERVICES = [
   {
     id: "frame-alignment",
     icon: "alignment",
-    image: "/services/alignment.jpg",
+    image: "/media/hero/hero.jpg",
     title: { en: "Frame Alignment", es: "Alineación de Bastidor" },
     desc: {
       en: "Precision frame and structural alignment. We ensure your vehicle's frame is perfectly straight and safe.",
@@ -169,7 +169,7 @@ export const GALLERY_IMAGES = [
   { src: "/media/hero/hero.jpg", alt: { en: "IAM Motors service bay", es: "Área de servicio de IAM Motors" } },
   { src: "/media/posters/general-mechanics.png", alt: { en: "General mechanical service", es: "Servicio mecánico general" } },
   { src: "/services/brakes.jpg", alt: { en: "Brake service", es: "Servicio de frenos" } },
-  { src: "/services/oil-change.jpg", alt: { en: "Oil change service", es: "Servicio de cambio de aceite" } },
+  { src: "/media/posters/air-conditioning.png", alt: { en: "Technician at work in the shop", es: "Técnico trabajando en el taller" } },
   { src: "/services/new-tires-shop.png", alt: { en: "Tire service at the shop", es: "Servicio de llantas en el taller" } },
 ];
 
