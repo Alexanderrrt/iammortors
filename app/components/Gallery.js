@@ -76,23 +76,53 @@ export default function Gallery() {
         ) : null}
 
         {GALLERY_VIDEOS && GALLERY_VIDEOS.length > 0 && (
-          <Reveal className="gallery-videos">
-            {GALLERY_VIDEOS.map((vid, i) => (
-              <div key={vid.src} className="gallery-videos__item reveal-item" style={{ "--d": `${i * 100}ms` }}>
+          <>
+            <Reveal className="gallery-film">
+              <div className="gallery-film__frame">
                 <video
-                  src={vid.src}
+                  src={GALLERY_VIDEOS[0].src}
+                  poster="/media/hero/shop-lift.jpg"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   disablePictureInPicture
                   controlsList="nodownload noplaybackrate nofullscreen"
-                  aria-label={t(vid.alt)}
+                  aria-label={t(GALLERY_VIDEOS[0].alt)}
                 />
+                <div className="gallery-film__wash" aria-hidden="true" />
+                <div className="gallery-film__content">
+                  <span className="gallery-film__eyebrow">IAM MOTORS / IN MOTION</span>
+                  <h3>Precision in motion.</h3>
+                  <p>Real people. Real craft. Every vehicle handled with care.</p>
+                  <span className="gallery-film__cue"><span aria-hidden="true" /> Watch the shop</span>
+                </div>
+                <span className="gallery-film__mark" aria-hidden="true">IAM</span>
               </div>
-            ))}
-          </Reveal>
+            </Reveal>
+
+            {GALLERY_VIDEOS.length > 1 && (
+              <Reveal className="gallery-videos">
+                {GALLERY_VIDEOS.slice(1).map((vid, i) => (
+                  <div key={vid.src} className="gallery-videos__item reveal-item" style={{ "--d": `${i * 100}ms` }}>
+                    <video
+                      src={vid.src}
+                      poster="/media/hero/shop-lift.jpg"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      disablePictureInPicture
+                      controlsList="nodownload noplaybackrate nofullscreen"
+                      aria-label={t(vid.alt)}
+                    />
+                  </div>
+                ))}
+              </Reveal>
+            )}
+          </>
         )}
 
         <Reveal>
