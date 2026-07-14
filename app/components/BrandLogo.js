@@ -12,15 +12,6 @@ export default function BrandLogo({ className = "", alt = "IAM Motors", width = 
         priority={priority}
         draggable={false}
       />
-      <Image
-        className="brand-logo__image brand-logo__image--blue"
-        src="/media/brand/logo.png"
-        alt=""
-        width={width}
-        height={height}
-        aria-hidden="true"
-        draggable={false}
-      />
     </span>
   );
 }
