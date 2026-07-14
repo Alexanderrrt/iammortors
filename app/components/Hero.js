@@ -121,6 +121,13 @@ export default function Hero() {
           </div>
 
           <div className="hero__visual" aria-hidden="true">
+            <Image
+              className="hero__visual-image"
+              src="/media/hero/porsche-workshop.png"
+              alt=""
+              fill
+              sizes="(max-width: 860px) 0vw, 55vw"
+            />
             <div className="hero__visual-glow" />
             <div className="hero__visual-caption">IAM MOTORS / IN MOTION</div>
           </div>

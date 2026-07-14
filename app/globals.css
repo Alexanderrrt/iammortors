@@ -4014,6 +4014,47 @@ body {
 .hero--reference .hero__ghost:hover {
   color: var(--hero-navy);
 }
+
+/* Supplied workshop photo: let it emerge from the right side of the hero. */
+.hero--reference .hero__visual {
+  min-height: 500px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 26px;
+  background: #020b18;
+}
+
+.hero--reference .hero__visual-image {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 68% center;
+  filter: saturate(0.82) contrast(1.12) brightness(0.8);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.86) 19%, #000 43%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.86) 19%, #000 43%, #000 100%);
+}
+
+.hero--reference .hero__visual-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--hero-navy) 0%, rgba(2, 11, 24, 0.32) 32%, rgba(2, 11, 24, 0.04) 72%),
+    linear-gradient(180deg, rgba(2, 11, 24, 0.06), rgba(2, 11, 24, 0.48));
+}
+
+.hero--reference .hero__visual::before {
+  z-index: 0;
+  inset: 0;
+  border: 1px solid rgba(145, 190, 235, 0.2);
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(8, 120, 249, 0.12), transparent 42%);
+  box-shadow: inset 0 0 80px rgba(8, 120, 249, 0.08);
+}
+
+.hero--reference .hero__visual-caption {
+  z-index: 1;
+}
 }
 
 .btn {
@@ -6283,4 +6324,45 @@ body::before {
 
 .hero--reference .hero__ghost:hover {
   color: var(--hero-navy);
+}
+
+/* Supplied workshop photo: let it emerge from the right side of the hero. */
+.hero--reference .hero__visual {
+  min-height: 500px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 26px;
+  background: #020b18;
+}
+
+.hero--reference .hero__visual-image {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 68% center;
+  filter: saturate(0.82) contrast(1.12) brightness(0.8);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.86) 19%, #000 43%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.86) 19%, #000 43%, #000 100%);
+}
+
+.hero--reference .hero__visual-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--hero-navy) 0%, rgba(2, 11, 24, 0.32) 32%, rgba(2, 11, 24, 0.04) 72%),
+    linear-gradient(180deg, rgba(2, 11, 24, 0.06), rgba(2, 11, 24, 0.48));
+}
+
+.hero--reference .hero__visual::before {
+  z-index: 0;
+  inset: 0;
+  border: 1px solid rgba(145, 190, 235, 0.2);
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(8, 120, 249, 0.12), transparent 42%);
+  box-shadow: inset 0 0 80px rgba(8, 120, 249, 0.08);
+}
+
+.hero--reference .hero__visual-caption {
+  z-index: 1;
 }
