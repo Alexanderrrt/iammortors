@@ -13,7 +13,7 @@ import { SITE } from "../../site.config";
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
 
-const MODEL = "llama-3.1-8b-instant";
+const MODEL = "meta-llama/llama-4-scout-17b-16e-instruct";
 
 const pick = (obj, lang) => (obj ? obj[lang] || obj.en : "");
 

@@ -82,6 +82,7 @@ export default function QuoteChatbot() {
   const [photoAnalysis, setPhotoAnalysis] = useState(null);
   const [photoBusy, setPhotoBusy] = useState(false);
   const [photoError, setPhotoError] = useState("");
+  const [photoDragOver, setPhotoDragOver] = useState(false);
   const photoRef = useRef(null);
   const scrollRef = useRef(null);
 
@@ -204,9 +205,24 @@ export default function QuoteChatbot() {
               e.target.value = "";
             }}
           />
-          <button type="button" className="btn btn--ghost qchat__photo" onClick={() => photoRef.current?.click()} disabled={busy || photoBusy}>
-            {photoBusy ? t(STR.analyzing) : t(STR.photo)}
-          </button>
+          <div
+            className={`qchat__photo-drop${photoDragOver ? " qchat__photo-drop--active" : ""}`}
+            onDragOver={(e) => {
+              e.preventDefault();
+              if (!busy && !photoBusy) setPhotoDragOver(true);
+            }}
+            onDragLeave={() => setPhotoDragOver(false)}
+            onDrop={(e) => {
+              e.preventDefault();
+              setPhotoDragOver(false);
+              if (!busy && !photoBusy) analyzePhoto(e.dataTransfer.files);
+            }}
+          >
+            <button type="button" className="btn btn--ghost qchat__photo" onClick={() => photoRef.current?.click()} disabled={busy || photoBusy}>
+              {photoBusy ? t(STR.analyzing) : t(STR.photo)}
+            </button>
+            <span>or drop an image here</span>
+          </div>
           <input
             type="text"
             value={input}

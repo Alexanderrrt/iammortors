@@ -4281,6 +4281,18 @@ body {
   white-space: nowrap;
 }
 .qchat__photo { white-space: nowrap; }
+.qchat__photo-drop {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 42px;
+  padding: 0.2rem 0.45rem;
+  border: 1px dashed var(--line);
+  border-radius: 4px;
+  color: var(--paper-dim);
+  font-size: 0.75rem;
+}
+.qchat__photo-drop--active { border-color: var(--blue); background: var(--line-soft); }
 .qchat__photo-status,
 .qchat__photo-error { grid-column: 1 / -1; font-size: 0.78rem; }
 .qchat__photo-status { color: var(--good); }

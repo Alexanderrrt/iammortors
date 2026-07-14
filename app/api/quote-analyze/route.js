@@ -3,7 +3,7 @@ import { getPricing } from "../../../lib/pricing-store";
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
 
-const MODEL = "gemini-2.5-flash";
+const MODEL = "meta-llama/llama-4-scout-17b-16e-instruct";
 const MAX_FILES = 5;
 const MAX_BYTES = 4 * 1024 * 1024;
 const MIME_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -69,7 +69,7 @@ function parseResult(text, pricing) {
 }
 
 export async function POST(request) {
-  if (!process.env.GEMINI_API_KEY) return json({ ok: false, error: "Vision analysis is not configured." }, 500);
+  if (!process.env.GROQ_API_KEY) return json({ ok: false, error: "Vision analysis is not configured." }, 500);
 
   let form;
   try {
@@ -87,33 +87,30 @@ export async function POST(request) {
   }
 
   const images = await Promise.all(
-    files.map(async (file) => ({
-      mime_type: file.type,
-      data: Buffer.from(await file.arrayBuffer()).toString("base64"),
-    })),
+    files.map(async (file) => `data:${file.type};base64,${Buffer.from(await file.arrayBuffer()).toString("base64")}`),
   );
   const pricing = await getPricing();
   const content = [
     { type: "text", text: buildPrompt(pricing, lang) },
-    ...images.map((inline_data) => ({ inline_data })),
+    ...images.map((image_url) => ({ type: "image_url", image_url: { url: image_url } })),
   ];
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
-      {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
-      headers: { "x-goog-api-key": process.env.GEMINI_API_KEY, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${process.env.GROQ_API_KEY}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        contents: [{ role: "user", parts: content }],
-        generationConfig: { temperature: 0.1, maxOutputTokens: 500, responseMimeType: "application/json" },
+        model: MODEL,
+        messages: [{ role: "user", content }],
+        temperature: 0.1,
+        max_tokens: 500,
+        response_format: { type: "json_object" },
       }),
       cache: "no-store",
-      },
-    );
+    });
     const payload = await response.json().catch(() => null);
     if (!response.ok) throw new Error(payload?.error?.message || "vision_request_failed");
-    const result = parseResult(payload?.candidates?.[0]?.content?.parts?.[0]?.text || "", pricing);
+    const result = parseResult(payload?.choices?.[0]?.message?.content || "", pricing);
     return json({ ok: true, analysis: result });
   } catch (error) {
     console.error("quote image analysis failed", error);
