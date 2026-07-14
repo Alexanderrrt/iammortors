@@ -5406,7 +5406,9 @@ body {
   color: var(--paper-dim);
 }
 .qchat__input {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 2fr) auto;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.75rem;
   border-top: 1px solid var(--line);
@@ -5443,11 +5445,16 @@ body {
 .qchat__photo-drop--active { border-color: var(--blue); background: var(--line-soft); }
 
 .qchat__turnstile {
-  min-height: 65px;
+  min-height: 66px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   grid-column: 1 / -1;
+  overflow: hidden;
+}
+
+.qchat__turnstile > div {
+  max-width: 100%;
 }
 
 .qchat__security-error {
@@ -5459,6 +5466,23 @@ body {
 .qchat__photo-error { grid-column: 1 / -1; font-size: 0.78rem; }
 .qchat__photo-status { color: var(--good); }
 .qchat__photo-error { color: #a12525; }
+
+@media (max-width: 620px) {
+  .qchat__input {
+    grid-template-columns: 1fr;
+  }
+
+  .qchat__photo-drop,
+  .qchat__input input[type="text"],
+  .qchat__input > .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .qchat__turnstile {
+    justify-content: flex-start;
+  }
+}
 
 /* --- Quote booking panel (name/phone, photo drop, slot picker) --- */
 .qchat__msg--wide { max-width: 100%; width: 100%; }
