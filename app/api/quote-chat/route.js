@@ -2,8 +2,11 @@ import { groq } from "@ai-sdk/groq";
 import { streamText, tool, convertToModelMessages, stepCountIs } from "ai";
 import { z } from "zod";
 import { getPricing } from "../../../lib/pricing-store";
+import { getChatRecords } from "../../../lib/booking-store";
 import { estimateTotal, buildWhatsAppMessage } from "../../../lib/quote";
+import { asksForOilChange, inferVehicleClassId, routeServices, buildLeadLearningContext, sanitizeImageAnalysis } from "../../../lib/quote-intelligence";
 import { SITE } from "../../site.config";
+import { CHAT_SESSION_COOKIE, turnstileConfigured, verifyChatSession } from "../../../lib/chat-session";
 
 // The chatbot never invents prices. The model only extracts what the customer
 // wants (vehicle class + services); the `computeQuote` tool runs the same
@@ -49,6 +52,8 @@ STRICT RULES ABOUT PRICES:
 - The ONLY way a price reaches the customer is by calling the computeQuote tool. The app shows the tool's result to the customer as a price card.
 - If you don't yet know the vehicle type or what service they need, ask a short, friendly question. Do not call the tool until you have at least the vehicle class and one service.
 - Only ever reference services and vehicle classes from the lists below (use the exact ids when calling the tool). If a customer asks for something not on the list, say the shop will confirm it in person and offer to estimate the closest listed services.
+- Intent routing is strict: oil change, cambio de aceite, aceite, routine maintenance, or service interval means oil-change. Never substitute mechanical-repair for an oil change.
+- Keep routine maintenance separate from damage repair. Only add mechanical-repair when the customer describes a separate mechanical fault or repair, not because the vehicle is a performance model.
 
 VEHICLE CLASSES (pick the closest id from the customer's description):
 ${classes}
@@ -63,6 +68,11 @@ STYLE:
 }
 
 export async function POST(req) {
+  const session = await verifyChatSession(req.cookies?.get?.(CHAT_SESSION_COOKIE)?.value || "");
+  if (!session || (turnstileConfigured() && !session.challengeVerified)) {
+    return Response.json({ error: "Please complete the security check first.", code: "turnstile_required" }, { status: 401 });
+  }
+
   if (!process.env.GROQ_API_KEY) {
     return Response.json(
       { error: "GROQ_API_KEY is not set on the server." },
@@ -70,8 +80,21 @@ export async function POST(req) {
     );
   }
 
-  const { messages, lang = "en", imageAnalysis } = await req.json();
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: "Invalid chat request." }, { status: 400 });
+  }
+  const { messages, lang = "en", imageAnalysis } = body || {};
+  if (!Array.isArray(messages) || messages.length > 50) {
+    return Response.json({ error: "Invalid or oversized chat history." }, { status: 400 });
+  }
   const pricing = await getPricing();
+  const records = await getChatRecords();
+  const learnedLeadContext = buildLeadLearningContext(records.leads);
+
+  const oilIntent = asksForOilChange(messages);
 
   const computeQuote = tool({
     description:
@@ -101,8 +124,12 @@ export async function POST(req) {
         .describe("The services the customer wants estimated."),
     }),
     execute: async ({ vehicleClassId, vehicleText, services }) => {
+      const normalizedVehicleClassId = inferVehicleClassId(pricing, vehicleClassId, vehicleText);
+      const knownServiceIds = new Set(pricing.services.map((service) => service.id));
+      const routedServices = routeServices(services, oilIntent, pricing).filter((service) => knownServiceIds.has(service.serviceId));
+      if (!routedServices.length) return { hasSelection: false, currency: pricing.currency, low: 0, high: 0, lines: [], vehicleClassLabel: "", vehicleText: vehicleText || "", disclaimer: pick(pricing.disclaimer, lang), whatsapp: null };
       const selections = {};
-      for (const s of services) {
+      for (const s of routedServices) {
         selections[s.serviceId] = {
           selected: true,
           qty: s.qty,
@@ -110,11 +137,11 @@ export async function POST(req) {
         };
       }
 
-      const result = estimateTotal(pricing, vehicleClassId, selections);
-      const vc = pricing.vehicleClasses.find((c) => c.id === vehicleClassId);
+      const result = estimateTotal(pricing, normalizedVehicleClassId, selections);
+      const vc = pricing.vehicleClasses.find((c) => c.id === normalizedVehicleClassId);
 
       const whatsappText = result.hasSelection
-        ? buildWhatsAppMessage({ pricing, lang, vehicleClass: vehicleClassId, vehicleText, result })
+        ? buildWhatsAppMessage({ pricing, lang, vehicleClass: normalizedVehicleClassId, vehicleText, result })
         : "";
 
       // Structured payload the client renders as the authoritative price card.
@@ -138,16 +165,17 @@ export async function POST(req) {
   });
 
   const modelMessages = await convertToModelMessages(messages);
-  if (imageAnalysis?.vehicleClassId && Array.isArray(imageAnalysis.services)) {
+  const trustedImageAnalysis = sanitizeImageAnalysis(imageAnalysis, pricing);
+  if (trustedImageAnalysis) {
     modelMessages.push({
       role: "user",
-      content: `A server-side photo inspection found this structured information. Treat it as customer context and call computeQuote using these ids; do not invent prices: ${JSON.stringify(imageAnalysis)}`,
+      content: `A server-side photo inspection found this structured information. Treat it as customer context and call computeQuote using these ids; do not invent prices: ${JSON.stringify(trustedImageAnalysis)}`,
     });
   }
 
   const result = streamText({
     model: groq(MODEL),
-    system: buildSystemPrompt(pricing, lang),
+    system: buildSystemPrompt(pricing, lang) + learnedLeadContext,
     messages: modelMessages,
     tools: { computeQuote },
     stopWhen: stepCountIs(5),

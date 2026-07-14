@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="footer__inner">
         <div>
           <div className="footer__brand">
-            <BrandLogo className="footer__logo" alt={SITE.name} width={220} height={70} />
+            <BrandLogo className="footer__logo" alt={SITE.name} wordmark />
           </div>
           {SITE.locations.map((loc) => (
             <p key={loc.id}>{loc.full}</p>

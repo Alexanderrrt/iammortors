@@ -1,4 +1,5 @@
 import { getPricing } from "../../../lib/pricing-store";
+import { CHAT_SESSION_COOKIE, turnstileConfigured, verifyChatSession } from "../../../lib/chat-session";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -69,6 +70,11 @@ function parseResult(text, pricing) {
 }
 
 export async function POST(request) {
+  const session = await verifyChatSession(request.cookies?.get?.(CHAT_SESSION_COOKIE)?.value || "");
+  if (!session || (turnstileConfigured() && !session.challengeVerified)) {
+    return json({ ok: false, error: "Please complete the security check first.", code: "turnstile_required" }, 401);
+  }
+
   if (!process.env.GROQ_API_KEY) return json({ ok: false, error: "Vision analysis is not configured." }, 500);
 
   let form;

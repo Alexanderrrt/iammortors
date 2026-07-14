@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
+import Script from "next/script";
 import { useLanguage } from "../i18n/LanguageContext";
 import { formatMoney } from "../../lib/quote";
 import Icon from "./Icons";
@@ -85,6 +86,13 @@ export default function QuoteChatbot() {
   const [photoDragOver, setPhotoDragOver] = useState(false);
   const photoRef = useRef(null);
   const scrollRef = useRef(null);
+  const turnstileRef = useRef(null);
+  const turnstileWidgetRef = useRef(null);
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+  const [turnstileLoaded, setTurnstileLoaded] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [sessionReady, setSessionReady] = useState(!turnstileSiteKey);
+  const [securityError, setSecurityError] = useState("");
 
   const openBooking = (output) => {
     const cur = output.currency || "USD";
@@ -107,6 +115,59 @@ export default function QuoteChatbot() {
   const busy = status === "submitted" || status === "streaming";
 
   useEffect(() => {
+    if (!turnstileSiteKey || !turnstileLoaded || !turnstileRef.current || !window.turnstile) return undefined;
+    turnstileWidgetRef.current = window.turnstile.render(turnstileRef.current, {
+      sitekey: turnstileSiteKey,
+      theme: "dark",
+      callback: (token) => {
+        setSecurityError("");
+        setTurnstileToken(token);
+      },
+      "expired-callback": () => {
+        setTurnstileToken("");
+        setSessionReady(false);
+      },
+      "error-callback": () => {
+        setTurnstileToken("");
+        setSessionReady(false);
+        setSecurityError("Please complete the security check again.");
+      },
+    });
+    return () => {
+      if (window.turnstile && turnstileWidgetRef.current !== null) window.turnstile.remove(turnstileWidgetRef.current);
+      turnstileWidgetRef.current = null;
+    };
+  }, [turnstileLoaded, turnstileSiteKey]);
+
+  useEffect(() => {
+    let cancelled = false;
+    if (turnstileSiteKey && !turnstileToken) return undefined;
+    (async () => {
+      try {
+        const response = await fetch("/api/chat-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: turnstileToken || undefined }),
+        });
+        const data = await response.json().catch(() => null);
+        if (!response.ok || !data?.ok) throw new Error(data?.error || "Security verification failed.");
+        if (!cancelled) {
+          setSecurityError("");
+          setSessionReady(true);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setSessionReady(false);
+          setSecurityError(error.message || "Security verification failed.");
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [turnstileSiteKey, turnstileToken]);
+
+  useEffect(() => {
     const el = scrollRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, status]);
@@ -114,7 +175,7 @@ export default function QuoteChatbot() {
   const submit = (e) => {
     e.preventDefault();
     const text = input.trim();
-    if ((!text && !photoAnalysis) || busy || photoBusy) return;
+    if ((!text && !photoAnalysis) || busy || photoBusy || !sessionReady) return;
     const message = text || "Please give me an estimate based on this damage photo.";
     sendMessage({ text: message }, { body: { lang, imageAnalysis: photoAnalysis } });
     setInput("");
@@ -144,6 +205,14 @@ export default function QuoteChatbot() {
 
   return (
     <div className="qchat">
+      {turnstileSiteKey && (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+          strategy="afterInteractive"
+          onLoad={() => setTurnstileLoaded(true)}
+          onError={() => setSecurityError("Security verification could not load. Please disable blockers and try again.")}
+        />
+      )}
       <div className="qchat__log" ref={scrollRef} aria-live="polite">
         <div className="qchat__msg qchat__msg--bot">
           <div className="qchat__bubble">{t(STR.intro)}</div>
@@ -195,6 +264,7 @@ export default function QuoteChatbot() {
 
       {!booking && (
         <form className="qchat__input" onSubmit={submit}>
+          {turnstileSiteKey && <div ref={turnstileRef} className="qchat__turnstile" aria-label="Security verification" />}
           <input
             ref={photoRef}
             type="file"
@@ -231,9 +301,10 @@ export default function QuoteChatbot() {
             aria-label={t(STR.placeholder)}
             disabled={busy}
           />
-          <button type="submit" className="btn btn--primary" disabled={busy || photoBusy || (!input.trim() && !photoAnalysis)}>
+          <button type="submit" className="btn btn--primary" disabled={busy || photoBusy || !sessionReady || (!input.trim() && !photoAnalysis)}>
             {busy ? t(STR.typing) : t(STR.send)}
           </button>
+          {securityError && <span className="qchat__security-error">{securityError}</span>}
           {photoAnalysis && <span className="qchat__photo-status">{t(STR.photoReady)}</span>}
           {photoError && <span className="qchat__photo-error">{photoError}</span>}
         </form>

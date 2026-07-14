@@ -17,7 +17,7 @@ function LocationCard({ loc, t, today }) {
           referrerPolicy="no-referrer-when-downgrade"
         />
         <span className="location-card__logobadge" aria-hidden="true">
-          <Image src="/media/brand/logo.png" alt="" width={180} height={58} />
+          <Image src="/media/brand/logo-mark.png" alt="" width={200} height={80} />
         </span>
         <a
           className="location-card__maplink"

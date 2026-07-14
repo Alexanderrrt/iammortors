@@ -47,7 +47,7 @@ export default function Header() {
       <div className="header__inner">
         <a href="/" className="header__brand">
           <span className="header__logo-hit" role="presentation" onClick={onSecretAdminTap}>
-            <BrandLogo className="header__logo" alt={SITE.name} width={220} height={70} priority />
+            <BrandLogo className="header__logo" alt={SITE.name} priority wordmark />
           </span>
         </a>
 
