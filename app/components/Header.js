@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import Link from "next/link";
 import { useLanguage, useT } from "../i18n/LanguageContext";
 import { useOpenStatus } from "../hooks/useOpenStatus";
 import { useSecretAdminTap } from "../hooks/useSecretAdminTap";
@@ -40,16 +41,17 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+  const homeLabel = lang === "es" ? "IAM Motors — Inicio" : "IAM Motors — Home";
 
   return (
     <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="header__inner">
-        <a href="/" className="header__brand">
+        <Link href="/" className="header__brand" aria-label={homeLabel} title={homeLabel}>
           <span className="header__logo-hit" role="presentation" onClick={onSecretAdminTap}>
             <BrandLogo className="header__logo" alt={SITE.name} priority wordmark />
           </span>
-        </a>
+        </Link>
 
         <nav className="header__nav" aria-label="Primary navigation">
           <a href="/#about">{t(COPY.nav.about)}</a>

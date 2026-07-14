@@ -241,6 +241,18 @@ h3 {
   text-decoration: none;
   color: var(--paper);
   white-space: nowrap;
+  border-radius: 8px;
+  transition: opacity 0.2s ease, transform 0.2s ease, outline-color 0.2s ease;
+}
+
+.header__brand:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.header__brand:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 5px;
 }
 
 .header__brand-copy {
