@@ -1,13 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 import Icon from "./Icons";
 
-const SHOW_DELAY_MS = 1400;
-const ROTATE_MS = 7800;
-const STORAGE_KEY = "br-promo-popups-hidden";
+// Give visitors time to orient themselves before showing an offer, and let
+// each offer breathe instead of competing with the first viewport.
+const SHOW_DELAY_MS = 5200;
+const ROTATE_MS = 12000;
+const STORAGE_KEY = "iam-promo-popups-hidden";
 
 // "poster" ads are complete flyer artwork (headline, offer, contact baked in),
 // so they are shown whole and never cropped. "card" ads pair a plain photo with
@@ -135,7 +138,7 @@ export default function PromoPopups() {
         <article className="promo-popups__card promo-popups__card--poster" aria-live="polite">
           {closeButton}
           <a className="promo-popups__poster" href={waHref} target="_blank" rel="noopener noreferrer">
-            <img src={ad.image} alt={t(ad.alt)} loading="lazy" />
+            <Image src={ad.image} alt={t(ad.alt)} loading="lazy" width={900} height={1100} sizes="(max-width: 720px) 280px, 360px" />
             {counter}
           </a>
           <footer className="promo-popups__bar">
@@ -153,7 +156,7 @@ export default function PromoPopups() {
         <article className="promo-popups__card promo-popups__card--split" aria-live="polite">
           {closeButton}
           <div className="promo-popups__media">
-            <img src={ad.image} alt="" loading="lazy" />
+            <Image src={ad.image} alt="" loading="lazy" width={400} height={520} sizes="118px" />
             {counter}
           </div>
           <div className="promo-popups__body">

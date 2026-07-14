@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import { SITE } from "../site.config";
 import Reveal from "./Reveal";
@@ -19,13 +20,16 @@ export default function LoyaltyCard() {
       <div className="section__inner">
         <Reveal className="loyalty">
           <div className="loyalty__media">
-            <img
+            <Image
               src="/media/promotions/loyalty-card.png"
               alt={t({
                 en: "IAM Motors loyalty card — collect ten visits and the tenth service is free.",
                 es: "Tarjeta de fidelidad IAM Motors — junta diez visitas y el décimo servicio es gratis.",
               })}
               loading="lazy"
+              width={1000}
+              height={700}
+              sizes="(max-width: 800px) 100vw, 50vw"
             />
           </div>
 

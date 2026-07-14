@@ -30,7 +30,7 @@ const signatureFont = Caveat({
 
 const TITLE = `${SITE.name} — Auto Repair & Mechanics in San Jose, CA`;
 const DESCRIPTION =
-  "Centro Automotriz BR — high-level automotive maintenance in San Jose, CA. General mechanics, brakes, tune-ups, suspension, electronics, and A/C repair. Bilingual service, expert workmanship.";
+  "IAM Motors Services LLC is a bilingual auto body and repair shop in San Jose, CA specializing in collision repair, paint and body work, Prius and hybrid systems, diagnostics, brakes, suspension, and maintenance.";
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -40,7 +40,7 @@ export const metadata = {
     canonical: "/",
   },
   keywords: [
-    "Centro Automotriz BR",
+    "IAM Motors",
     "auto repair San Jose",
     "mechanic San Jose CA",
     "brake repair",
@@ -62,7 +62,7 @@ export const metadata = {
     images: [
       {
         url: "/media/brand/logo.png",
-        alt: "Centro Automotriz BR — Auto Repair in San Jose, CA",
+        alt: "IAM Motors Services LLC — Auto Repair in San Jose, CA",
       },
     ],
   },

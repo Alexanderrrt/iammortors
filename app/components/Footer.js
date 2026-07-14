@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 
@@ -12,7 +13,7 @@ export default function Footer() {
       <div className="footer__inner">
         <div>
           <div className="footer__brand">
-            <img className="footer__logo" src="/media/brand/logo.png" alt={SITE.name} />
+            <Image className="footer__logo" src="/media/brand/logo.png" alt={SITE.name} width={220} height={70} />
           </div>
           {SITE.locations.map((loc) => (
             <p key={loc.id}>{loc.full}</p>

@@ -51,7 +51,7 @@ export default function JsonLd() {
         name: SITE.name,
         url: SITE.url,
         description:
-          "Centro Automotriz BR — high-level automotive maintenance in San Jose, CA. General mechanics, brakes, tune-ups, suspension, electronics, and A/C repair.",
+          "IAM Motors Services LLC is a bilingual auto body and repair shop in San Jose, CA specializing in collision repair, paint and body work, Prius and hybrid systems, diagnostics, brakes, suspension, and maintenance.",
         logo: `${SITE.url}/media/brand/logo.png`,
         sameAs: [SITE.social.instagram, SITE.social.facebook].filter(Boolean),
         knowsLanguage: ["en", "es"],

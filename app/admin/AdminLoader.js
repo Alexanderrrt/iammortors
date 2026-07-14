@@ -1,6 +1,7 @@
 "use client";
 
 import { useT } from "../i18n/LanguageContext";
+import { SITE } from "../site.config";
 
 // `message` accepts a plain string or a bilingual { en, es } object so both
 // client components (which translate up-front) and server loading.js files
@@ -23,10 +24,10 @@ export default function AdminLoader({ message = { en: "Loading…", es: "Cargand
             <circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" strokeWidth="1.5" />
             <circle cx="100" cy="100" r="48" fill="none" stroke="currentColor" strokeWidth="6" strokeDasharray="8 10" />
           </svg>
-          <span className="admin-loader__mark">BR</span>
+          <span className="admin-loader__mark">IAM</span>
         </div>
 
-        <p className="admin-loader__brand">Centro Automotriz BR</p>
+        <p className="admin-loader__brand">{SITE.nameShort}</p>
         <p className="admin-loader__message">{text}</p>
 
         <div className="admin-loader__track" aria-hidden="true">

@@ -66,6 +66,30 @@ a {
   color: inherit;
 }
 
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 300;
+  transform: translateY(-180%);
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--r-sm);
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -3427,9 +3451,14 @@ body.no-scroll {
 /* ---------- Clean Local Pro redesign ---------- */
 
 body {
+  background-color: #fff;
   background:
-    linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(245, 239, 229, 0.72)),
-    var(--ink);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(248, 251, 253, 0.88) 42%, rgba(255, 250, 242, 0.94) 100%),
+    url("/media/hero/Background.png");
+  background-size: 100% 100%, min(760px, 88vw) auto;
+  background-position: center top, center top;
+  background-repeat: no-repeat, repeat;
+  background-attachment: scroll, fixed;
 }
 
 .btn {
@@ -3695,12 +3724,12 @@ body {
 }
 
 .section--muted {
-  background: #f5efe5;
+  background: rgba(245, 239, 229, 0.72);
 }
 
 .section--tread {
   background-image:
-    linear-gradient(180deg, rgba(255, 253, 248, 0.88), rgba(255, 250, 242, 0.88)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 250, 242, 0.78)),
     var(--tread);
 }
 
@@ -4570,6 +4599,14 @@ body {
    --------------------------------------------------------------------------- */
 .qchat__page {
   max-width: 760px;
+}
+
+.qchat__helper {
+  max-width: 62ch;
+  margin: -0.75rem auto 1.5rem;
+  color: var(--paper-dim);
+  font-size: 0.92rem;
+  text-align: center;
 }
 .qchat__title {
   font-family: var(--display);

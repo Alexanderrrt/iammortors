@@ -16,7 +16,7 @@ export default function QuotePage() {
   return (
     <>
       <Header />
-      <main className="section">
+      <main id="main-content" className="section">
         <div className="section__inner qchat__page">
           <QuoteIntro />
           <QuoteChatbot />

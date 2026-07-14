@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import { OWNERS_RIDE, SITE } from "../site.config";
 import Reveal from "./Reveal";
@@ -12,11 +13,14 @@ export default function OwnersRide() {
       <Reveal className="owners-ride__inner">
         <div className="owners-ride__media">
           <span className="owners-ride__m-stripes" aria-hidden="true" />
-          <img
+          <Image
             className="owners-ride__img owners-ride__img--owner"
             src="/media/hero/hero.jpg"
             alt={`Team at ${SITE.name}`}
             loading="lazy"
+            width={1000}
+            height={700}
+            sizes="(max-width: 800px) 100vw, 50vw"
           />
         </div>
 

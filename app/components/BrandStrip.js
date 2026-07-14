@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import { SITE } from "../site.config";
 import Reveal from "./Reveal";
@@ -43,7 +44,7 @@ export default function BrandStrip() {
         <div className="brand-strip__logos" aria-label={t(COPY.kicker)}>
           {BRANDS.map((brand) => (
             <span className="brand-strip__logo" key={brand.name}>
-              <img src={brand.logo} alt={brand.name} loading="lazy" />
+              <Image src={brand.logo} alt={brand.name} loading="lazy" width={180} height={56} />
             </span>
           ))}
         </div>

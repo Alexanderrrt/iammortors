@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 import Icon from "./Icons";
@@ -16,7 +17,7 @@ function LocationCard({ loc, t, today }) {
           referrerPolicy="no-referrer-when-downgrade"
         />
         <span className="location-card__logobadge" aria-hidden="true">
-          <img src="/media/brand/logo.png" alt="" />
+          <Image src="/media/brand/logo.png" alt="" width={180} height={58} />
         </span>
         <a
           className="location-card__maplink"
@@ -90,11 +91,14 @@ export default function Location() {
         </Reveal>
 
         <Reveal className="location-storefront">
-          <img
+          <Image
             className="location-storefront__img"
             src="/media/hero/shop-lift.jpg"
             alt={`${SITE.name} storefront`}
             loading="lazy"
+            width={1400}
+            height={520}
+            sizes="(max-width: 900px) 100vw, 1140px"
           />
         </Reveal>
 

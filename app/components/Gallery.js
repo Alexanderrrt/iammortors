@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, REELS, GALLERY_IMAGES, GALLERY_VIDEOS, SITE } from "../site.config";
@@ -134,7 +135,14 @@ export default function Gallery() {
                 className={`gallery-grid__item reveal-item${i === 0 ? " gallery-grid__item--featured" : ""}${img.fit === "contain" ? " gallery-grid__item--contain" : ""}`}
                 style={{ "--d": `${i * 70}ms` }}
               >
-                <img src={img.src} alt={t(img.alt)} loading="lazy" />
+                <Image
+                  src={img.src}
+                  alt={t(img.alt)}
+                  loading="lazy"
+                  width={1000}
+                  height={750}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 25vw"
+                />
               </div>
             ))}
           </Reveal>

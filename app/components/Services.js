@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SERVICES } from "../site.config";
 import Icon from "./Icons";
@@ -36,11 +37,14 @@ export default function Services() {
                 style={{ "--d": `${i * 70}ms` }}
               >
                 {image && (
-                  <img
+                  <Image
                     className="service-card__image"
                     src={image}
                     alt={t(service.title)}
                     loading="lazy"
+                    width={800}
+                    height={500}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw"
                   />
                 )}
                 <div className="service-card__body">

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 import Icon from "./Icons";
@@ -35,11 +36,14 @@ export default function Hero() {
   return (
     <>
       <section id="top" className="hero">
-        <img
+        <Image
           className="hero__bg"
           src="/media/hero/shop-lift.jpg"
           alt=""
           aria-hidden="true"
+          fill
+          priority
+          sizes="100vw"
         />
         <div className="hero__shade" aria-hidden="true" />
 
@@ -94,10 +98,13 @@ export default function Hero() {
       <section className="alignment-spotlight" aria-label={t(alignment.title)}>
         <div className="alignment-spotlight__inner">
           <div className="alignment-spotlight__media">
-            <img
+            <Image
               src="/media/hero/hero.jpg"
               alt={`${SITE.name} alignment diagnostic equipment`}
               loading="lazy"
+              width={1200}
+              height={350}
+              sizes="(max-width: 859px) 100vw, 60vw"
             />
             <span className="alignment-spotlight__badge">{t(alignment.badge)}</span>
           </div>

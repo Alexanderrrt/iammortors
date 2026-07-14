@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 import Reveal from "./Reveal";
@@ -67,10 +68,13 @@ export default function Promos() {
         <Reveal className="promos-grid">
           <div className="promo-card reveal-item" style={{ "--d": "0ms" }}>
             <div className="promo-card__media">
-              <img
+              <Image
                 src="/media/gallery/hybrid-systems.png"
                 alt={`Technician servicing a hybrid vehicle battery at ${SITE.name}`}
                 loading="lazy"
+                width={900}
+                height={600}
+                sizes="(max-width: 800px) 100vw, 50vw"
               />
             </div>
             <div className="promo-card__body">
@@ -84,10 +88,13 @@ export default function Promos() {
 
           <div className="promo-card reveal-item" style={{ "--d": "120ms" }}>
             <div className="promo-card__media">
-              <img
+              <Image
                 src="/media/gallery/insurance-claims.png"
                 alt={`Service advisor reviewing an insurance claim at ${SITE.name}`}
                 loading="lazy"
+                width={900}
+                height={600}
+                sizes="(max-width: 800px) 100vw, 50vw"
               />
             </div>
             <div className="promo-card__body">

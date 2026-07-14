@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLanguage, useT } from "../i18n/LanguageContext";
@@ -26,7 +27,14 @@ export default function Header() {
   useEffect(() => {
     if (!menuOpen) return;
     document.body.classList.add("no-scroll");
-    return () => document.body.classList.remove("no-scroll");
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.classList.remove("no-scroll");
+      document.removeEventListener("keydown", onKeyDown);
+    };
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
@@ -35,14 +43,15 @@ export default function Header() {
 
   return (
     <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="header__inner">
         <a href="/" className="header__brand">
           <span className="header__logo-hit" role="presentation" onClick={onSecretAdminTap}>
-            <img className="header__logo" src="/media/brand/logo.png" alt={SITE.name} draggable={false} />
+            <Image className="header__logo" src="/media/brand/logo.png" alt={SITE.name} width={220} height={70} priority draggable={false} />
           </span>
         </a>
 
-        <nav className="header__nav">
+        <nav className="header__nav" aria-label="Primary navigation">
           <a href="/#about">{t(COPY.nav.about)}</a>
           <a href="/#services">{t(COPY.nav.services)}</a>
           <a href="/quote">{t(COPY.nav.quote)}</a>
@@ -93,7 +102,7 @@ export default function Header() {
             aria-hidden={!menuOpen}
           >
             <div className="mobile-nav__backdrop" onClick={closeMenu} />
-            <nav className="mobile-nav__panel">
+            <nav className="mobile-nav__panel" aria-label="Mobile navigation">
               <a href="/#about" onClick={closeMenu}>{t(COPY.nav.about)}</a>
               <a href="/#services" onClick={closeMenu}>{t(COPY.nav.services)}</a>
               <a href="/quote" onClick={closeMenu}>{t(COPY.nav.quote)}</a>
