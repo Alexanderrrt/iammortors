@@ -380,6 +380,9 @@ export const COPY = {
       es: "Todos los derechos reservados.",
     },
     followUs: { en: "Follow us", es: "Síganos" },
+    legal: { en: "Legal", es: "Legal" },
+    privacy: { en: "Privacy Policy", es: "Política de Privacidad" },
+    terms: { en: "Terms of Use", es: "Términos de Uso" },
   },
   admin: {
     login: {
@@ -417,7 +420,8 @@ export const COPY = {
       saveFailed: { en: "Save failed.", es: "No se pudo guardar." },
       globalHeading: { en: "Global", es: "General" },
       laborRate: { en: "Labor rate ($/hr)", es: "Mano de obra ($/hr)" },
-      spread: { en: "Estimate spread (%)", es: "Margen del estimado (%)" },
+      spread: { en: "Default uncertainty — fallback (%)", es: "Variación predeterminada — respaldo (%)" },
+      serviceSpread: { en: "Service uncertainty (%)", es: "Variación del servicio (%)" },
       currency: { en: "Currency", es: "Moneda" },
       vehicleHeading: { en: "Vehicle multipliers", es: "Multiplicadores por vehículo" },
       vehicleHint: {

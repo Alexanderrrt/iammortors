@@ -2,11 +2,12 @@ import { groq } from "@ai-sdk/groq";
 import { streamText, tool, convertToModelMessages, stepCountIs } from "ai";
 import { z } from "zod";
 import { getPricing } from "../../../lib/pricing-store";
-import { getChatRecords } from "../../../lib/booking-store";
+import { getLeadLearningRecords } from "../../../lib/booking-store";
 import { estimateTotal, buildWhatsAppMessage } from "../../../lib/quote";
-import { asksForOilChange, inferVehicleClassId, routeServices, buildLeadLearningContext, sanitizeImageAnalysis } from "../../../lib/quote-intelligence";
+import { detectServiceIntents, detectUnpricedServiceIntents, detectVehicleClassId, extractUserTexts, inferVehicleClassId, routeServices, buildLeadLearningContext, needsBodyDamageClarification, sanitizeImageAnalysis } from "../../../lib/quote-intelligence";
 import { SITE } from "../../site.config";
 import { CHAT_SESSION_COOKIE, turnstileConfigured, verifyChatSession } from "../../../lib/chat-session";
+import { checkChatRateLimits, getClientIp } from "../../../lib/chat-rate-limit";
 
 // The chatbot never invents prices. The model only extracts what the customer
 // wants (vehicle class + services); the `computeQuote` tool runs the same
@@ -17,6 +18,8 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 30;
 
 const MODEL = "meta-llama/llama-4-scout-17b-16e-instruct";
+const MAX_BODY_BYTES = 250_000;
+const MAX_MESSAGE_BYTES = 24_000;
 
 const pick = (obj, lang) => (obj ? obj[lang] || obj.en : "");
 
@@ -50,10 +53,16 @@ Your job: chat with the customer, figure out their vehicle and what repairs they
 STRICT RULES ABOUT PRICES:
 - You must NEVER state, guess, calculate, or negotiate a dollar amount yourself.
 - The ONLY way a price reaches the customer is by calling the computeQuote tool. The app shows the tool's result to the customer as a price card.
+- Every result is a preliminary range whose width reflects how much that service can vary. Never describe it as a fixed price or imply that it is guaranteed before inspection.
 - If you don't yet know the vehicle type or what service they need, ask a short, friendly question. Do not call the tool until you have at least the vehicle class and one service.
 - Only ever reference services and vehicle classes from the lists below (use the exact ids when calling the tool). If a customer asks for something not on the list, say the shop will confirm it in person and offer to estimate the closest listed services.
-- Intent routing is strict: oil change, cambio de aceite, aceite, routine maintenance, or service interval means oil-change. Never substitute mechanical-repair for an oil change.
-- Keep routine maintenance separate from damage repair. Only add mechanical-repair when the customer describes a separate mechanical fault or repair, not because the vehicle is a performance model.
+- Never force an unpriced request into a vaguely similar service merely to produce a number. Quote supported services only and clearly say the remaining work needs shop confirmation.
+- Prefer the most specific listed service. Never substitute mechanical-repair for oil changes, diagnostics, brakes, suspension, cooling, batteries, wheel alignment, or scheduled maintenance.
+- If the customer gives a year, make, and model, infer the closest class and continue; do not ask them whether it is a sedan/SUV/truck unless the model is genuinely unknown.
+- If a glass request does not identify windshield, door window, or rear window, ask one short clarification before estimating.
+- For collision, dent, paint, or frame work, do not estimate from only a generic service name. First get one useful detail such as the damaged area, visible damage, what happened, or a photo.
+- If the request is vague (for example, only "it makes a noise"), ask one focused symptom question instead of guessing an expensive repair.
+- Never show a $0 estimate. For insurance-only handling or a service without a usable price, explain that the shop must confirm it directly.
 
 VEHICLE CLASSES (pick the closest id from the customer's description):
 ${classes}
@@ -64,6 +73,8 @@ ${services}
 STYLE:
 - Reply in ${langName}. Keep messages short and warm — you're texting a busy customer.
 - When the customer describes damage (e.g. "someone dented my door"), map it to the right service(s) and pick the vehicle class from their car ("Camry" -> sedan, "F-150" -> suv_truck, etc.). Confirm briefly if unsure.
+- Never expose internal ids such as luxury_perf, suv_truck, oil-change, or brake-service. Use natural customer-facing labels only.
+- Once the vehicle and service are known, call computeQuote immediately. Do not narrate your internal classification or ask the customer to confirm a class the server already verified.
 - After the tool returns, give a one-line friendly summary and tell them they can tap the WhatsApp button to lock in the real price with the shop. Do not restate the exact dollar figures — the card already shows them.`;
 }
 
@@ -80,21 +91,81 @@ export async function POST(req) {
     );
   }
 
+  const rate = await checkChatRateLimits({ ip: getClientIp(req), sessionId: session.id });
+  if (!rate.allowed) {
+    return Response.json(
+      { error: "Too many requests. Please wait and try again.", code: "rate_limited" },
+      { status: 429, headers: { "Retry-After": String(rate.retryAfter), "Cache-Control": "no-store" } },
+    );
+  }
+
+  const declaredLength = Number(req.headers.get("content-length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_BODY_BYTES) {
+    return Response.json({ error: "Chat request is too large.", code: "too_large" }, { status: 413 });
+  }
+
   let body;
   try {
-    body = await req.json();
+    const text = await req.text();
+    if (new TextEncoder().encode(text).byteLength > MAX_BODY_BYTES) {
+      return Response.json({ error: "Chat request is too large.", code: "too_large" }, { status: 413 });
+    }
+    body = JSON.parse(text);
   } catch {
     return Response.json({ error: "Invalid chat request." }, { status: 400 });
   }
   const { messages, lang = "en", imageAnalysis } = body || {};
-  if (!Array.isArray(messages) || messages.length > 50) {
+  if (
+    !Array.isArray(messages) ||
+    messages.length > 50 ||
+    messages.some((message) =>
+      !message ||
+      typeof message !== "object" ||
+      !["user", "assistant"].includes(message.role) ||
+      new TextEncoder().encode(JSON.stringify(message)).byteLength > MAX_MESSAGE_BYTES
+    )
+  ) {
     return Response.json({ error: "Invalid or oversized chat history." }, { status: 400 });
   }
   const pricing = await getPricing();
-  const records = await getChatRecords();
-  const learnedLeadContext = buildLeadLearningContext(records.leads);
-
-  const oilIntent = asksForOilChange(messages);
+  const learnedLeadContext = buildLeadLearningContext(await getLeadLearningRecords());
+  const detectedIntent = detectServiceIntents(messages, pricing);
+  const unpricedIntents = detectUnpricedServiceIntents(messages);
+  const trustedImageAnalysis = sanitizeImageAnalysis(imageAnalysis, pricing);
+  const userTexts = extractUserTexts(messages);
+  const latestUserText = (userTexts[userTexts.length - 1] || "").slice(0, 500);
+  const detectedVehicleClassId = [...userTexts]
+    .reverse()
+    .map((text) => detectVehicleClassId(pricing, text))
+    .find(Boolean) || "";
+  const detectedIntentContext = detectedIntent.services.length
+    ? `\nSERVER_VERIFIED_SERVICE_INTENTS=${JSON.stringify(detectedIntent.services)}\nUse these exact service ids when calling computeQuote. They override conflicting model guesses.`
+    : "";
+  const detectedVehicleContext = detectedVehicleClassId
+    ? `\nSERVER_VERIFIED_VEHICLE_CLASS=${detectedVehicleClassId}\nUse this exact class id when calling computeQuote. Do not mention the id to the customer.`
+    : "";
+  const unpricedIntentContext = unpricedIntents.length
+    ? `\nSERVER_VERIFIED_UNPRICED_REQUESTS=${JSON.stringify(unpricedIntents)}\nDo not map these requests to a priced service. If supported requests also exist, quote only those; otherwise explain that the shop must inspect and confirm pricing.`
+    : "";
+  const authoritativeServices = detectedIntent.services.length
+    ? detectedIntent.services
+    : trustedImageAnalysis?.services || [];
+  const authoritativeVehicleClassId = detectedVehicleClassId || trustedImageAnalysis?.vehicleClassId || "";
+  const needsOptionClarification = authoritativeServices.some((selection) => {
+    const service = pricing.services.find((candidate) => candidate.id === selection.serviceId);
+    return service?.model === "options" && !service.options?.some((option) => option.id === selection.optionId);
+  });
+  const needsDamageClarification = needsBodyDamageClarification(
+    messages,
+    authoritativeServices.map((service) => service.serviceId),
+    Boolean(trustedImageAnalysis),
+  );
+  const mustComputeQuote = Boolean(
+    authoritativeVehicleClassId &&
+    authoritativeServices.length &&
+    !needsOptionClarification &&
+    !needsDamageClarification,
+  );
 
   const computeQuote = tool({
     description:
@@ -104,6 +175,7 @@ export async function POST(req) {
     inputSchema: z.object({
       vehicleClassId: z
         .string()
+        .refine((id) => pricing.vehicleClasses.some((vehicleClass) => vehicleClass.id === id), "Unknown vehicle class id.")
         .describe("One of the vehicle class ids from the system prompt."),
       vehicleText: z
         .string()
@@ -112,7 +184,10 @@ export async function POST(req) {
       services: z
         .array(
           z.object({
-            serviceId: z.string().describe("A service id from the system prompt."),
+            serviceId: z
+              .string()
+              .refine((id) => pricing.services.some((service) => service.id === id), "Unknown service id.")
+              .describe("A service id from the system prompt."),
             qty: z.number().optional().describe("Quantity, for per-unit services."),
             optionId: z
               .string()
@@ -124,10 +199,63 @@ export async function POST(req) {
         .describe("The services the customer wants estimated."),
     }),
     execute: async ({ vehicleClassId, vehicleText, services }) => {
-      const normalizedVehicleClassId = inferVehicleClassId(pricing, vehicleClassId, vehicleText);
+      if (unpricedIntents.length && !detectedIntent.services.length) {
+        return {
+          hasSelection: false,
+          contactRequired: true,
+          unpricedRequests: unpricedIntents.map((intent) => intent.label),
+          currency: pricing.currency,
+          low: 0,
+          high: 0,
+          lines: [],
+          vehicleClassLabel: "",
+          vehicleText: vehicleText || "",
+          disclaimer: pick(pricing.disclaimer, lang),
+          whatsapp: null,
+        };
+      }
+      const normalizedVehicleClassId = detectedVehicleClassId || inferVehicleClassId(pricing, vehicleClassId, vehicleText || latestUserText);
       const knownServiceIds = new Set(pricing.services.map((service) => service.id));
-      const routedServices = routeServices(services, oilIntent, pricing).filter((service) => knownServiceIds.has(service.serviceId));
+      const routedServices = routeServices(services, detectedIntent.services, pricing).filter((service) => knownServiceIds.has(service.serviceId));
       if (!routedServices.length) return { hasSelection: false, currency: pricing.currency, low: 0, high: 0, lines: [], vehicleClassLabel: "", vehicleText: vehicleText || "", disclaimer: pick(pricing.disclaimer, lang), whatsapp: null };
+
+      if (needsBodyDamageClarification(messages, routedServices.map((service) => service.serviceId), Boolean(trustedImageAnalysis))) {
+        return {
+          hasSelection: false,
+          needsClarification: true,
+          clarification: lang === "es"
+            ? "¿Qué parte del vehículo está dañada y qué daño puede ver? También puede agregar una foto."
+            : "Which part of the vehicle is damaged, and what damage can you see? You can also add a photo.",
+          currency: pricing.currency,
+          low: 0,
+          high: 0,
+          lines: [],
+          vehicleClassLabel: "",
+          vehicleText: vehicleText || "",
+          disclaimer: pick(pricing.disclaimer, lang),
+          whatsapp: null,
+        };
+      }
+
+      const unresolvedOption = routedServices.find((selection) => {
+        const service = pricing.services.find((candidate) => candidate.id === selection.serviceId);
+        return service?.model === "options" && !service.options?.some((option) => option.id === selection.optionId);
+      });
+      if (unresolvedOption) {
+        return {
+          hasSelection: false,
+          needsClarification: true,
+          clarification: lang === "es" ? "¿Es el parabrisas, una ventana de puerta o el vidrio trasero?" : "Is it the windshield, a door window, or the rear window?",
+          currency: pricing.currency,
+          low: 0,
+          high: 0,
+          lines: [],
+          vehicleClassLabel: "",
+          vehicleText: vehicleText || "",
+          disclaimer: pick(pricing.disclaimer, lang),
+          whatsapp: null,
+        };
+      }
       const selections = {};
       for (const s of routedServices) {
         selections[s.serviceId] = {
@@ -139,14 +267,17 @@ export async function POST(req) {
 
       const result = estimateTotal(pricing, normalizedVehicleClassId, selections);
       const vc = pricing.vehicleClasses.find((c) => c.id === normalizedVehicleClassId);
+      const contactRequired = result.hasSelection && result.subtotal <= 0;
 
-      const whatsappText = result.hasSelection
+      const whatsappText = result.hasSelection && !contactRequired
         ? buildWhatsAppMessage({ pricing, lang, vehicleClass: normalizedVehicleClassId, vehicleText, result })
         : "";
 
       // Structured payload the client renders as the authoritative price card.
       return {
-        hasSelection: result.hasSelection,
+        hasSelection: result.hasSelection && !contactRequired,
+        contactRequired,
+        unpricedRequests: unpricedIntents.map((intent) => intent.label),
         currency: pricing.currency,
         low: result.low,
         high: result.high,
@@ -155,6 +286,8 @@ export async function POST(req) {
         lines: result.lines.map((l) => ({
           label: pick(l.label, lang),
           amount: l.amount,
+          low: l.low,
+          high: l.high,
         })),
         disclaimer: pick(pricing.disclaimer, lang),
         whatsapp: whatsappText
@@ -165,7 +298,6 @@ export async function POST(req) {
   });
 
   const modelMessages = await convertToModelMessages(messages);
-  const trustedImageAnalysis = sanitizeImageAnalysis(imageAnalysis, pricing);
   if (trustedImageAnalysis) {
     modelMessages.push({
       role: "user",
@@ -175,10 +307,13 @@ export async function POST(req) {
 
   const result = streamText({
     model: groq(MODEL),
-    system: buildSystemPrompt(pricing, lang) + learnedLeadContext,
+    system: buildSystemPrompt(pricing, lang) + detectedIntentContext + detectedVehicleContext + unpricedIntentContext + learnedLeadContext,
     messages: modelMessages,
     tools: { computeQuote },
     stopWhen: stepCountIs(5),
+    prepareStep: ({ stepNumber }) => ({
+      toolChoice: mustComputeQuote && stepNumber === 0 ? "required" : "auto",
+    }),
     temperature: 0.3,
   });
 

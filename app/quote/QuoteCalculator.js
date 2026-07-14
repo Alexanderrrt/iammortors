@@ -156,7 +156,7 @@ export default function QuoteCalculator({ pricing }) {
                 {result.lines.map((l) => (
                   <li key={l.id}>
                     <span>{t(l.label)}</span>
-                    <span>{formatMoney(l.amount, cur)}</span>
+                    <span>{formatMoney(l.low, cur)} – {formatMoney(l.high, cur)}</span>
                   </li>
                 ))}
               </ul>

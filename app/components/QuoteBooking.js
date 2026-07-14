@@ -10,10 +10,6 @@ const STR = {
   photosLabel: { en: "Add photos of the damage (optional)", es: "Agrega fotos del daño (opcional)" },
   photosHint: { en: "Drag & drop or tap to upload — up to 8 images.", es: "Arrastra o toca para subir — hasta 8 imágenes." },
   uploading: { en: "Uploading…", es: "Subiendo…" },
-  consent: {
-    en: "I agree to be contacted about this request.",
-    es: "Acepto ser contactado sobre esta solicitud.",
-  },
   continue: { en: "See available times", es: "Ver horarios disponibles" },
   pickTime: { en: "Pick a time that works for you", es: "Elige un horario que te convenga" },
   noSlots: {
@@ -107,7 +103,9 @@ export default function QuoteBooking({ lang, quoteContext, onDone }) {
           vehicle: quoteContext?.vehicle || "",
           service: quoteContext?.service || "",
           summary: quoteContext?.summary || "",
+          lastMessage: quoteContext?.requestText || "",
           photos,
+          legalConsent: true,
         }),
       });
       const leadData = await leadRes.json();
@@ -247,7 +245,17 @@ export default function QuoteBooking({ lang, quoteContext, onDone }) {
 
       <label className="qbook__consent">
         <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
-        <span>{t(STR.consent)}</span>
+        <span>
+          {lang === "es" ? (
+            <>
+              Acepto los <a href="/terms" target="_blank" rel="noopener noreferrer">Términos de Uso</a>, reconozco la <a href="/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> y autorizo llamadas, textos o WhatsApp sobre esta solicitud. El consentimiento no es condición de compra; pueden aplicar cargos de mensajes y datos.
+            </>
+          ) : (
+            <>
+              I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>, acknowledge the <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>, and consent to calls, texts, or WhatsApp about this request. Consent is not a condition of purchase; message and data rates may apply.
+            </>
+          )}
+        </span>
       </label>
 
       {error && <p className="qbook__error">{error}</p>}

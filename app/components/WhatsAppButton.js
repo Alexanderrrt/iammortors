@@ -6,7 +6,13 @@ import { SITE } from "../site.config";
 export default function WhatsAppButton() {
   const pathname = usePathname();
   const wa = SITE.whatsapp;
-  if (!wa || pathname?.startsWith("/quote") || pathname?.startsWith("/admin")) return null;
+  if (
+    !wa ||
+    pathname?.startsWith("/quote") ||
+    pathname?.startsWith("/admin") ||
+    pathname?.startsWith("/privacy") ||
+    pathname?.startsWith("/terms")
+  ) return null;
 
   return (
     <a

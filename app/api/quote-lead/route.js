@@ -1,6 +1,7 @@
 import { CHAT_SESSION_COOKIE, turnstileConfigured, verifyChatSession } from "../../../lib/chat-session";
 import { checkChatRateLimits, getClientIp } from "../../../lib/chat-rate-limit";
 import { saveQuoteLead } from "../../../lib/booking-store";
+import { legalConsentNote } from "../../../lib/legal";
 
 export const dynamic = "force-dynamic";
 
@@ -39,16 +40,24 @@ export async function POST(request) {
   if (!name.trim() || !phone.trim()) {
     return json({ ok: false, error: "Name and phone are required.", code: "missing_contact" }, 422);
   }
+  if (body.legalConsent !== true) {
+    return json({ ok: false, error: "Legal and contact consent are required.", code: "legal_consent_required" }, 400);
+  }
 
   try {
+    const lang = body.lang === "es" ? "es" : "en";
+    const summary = [legalConsentNote(lang), typeof body.summary === "string" ? body.summary : ""]
+      .filter(Boolean)
+      .join(" | ");
     const result = await saveQuoteLead({
       sessionId: session.id,
-      lang: body.lang === "es" ? "es" : "en",
+      lang,
       customerName: name,
       phone,
       vehicle: typeof body.vehicle === "string" ? body.vehicle : "",
       service: typeof body.service === "string" ? body.service : "",
-      summary: typeof body.summary === "string" ? body.summary : "",
+      summary,
+      lastMessage: typeof body.lastMessage === "string" ? body.lastMessage : "",
       photos: Array.isArray(body.photos) ? body.photos : [],
     });
     return json({ ok: true, persisted: result.persisted });

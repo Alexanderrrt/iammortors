@@ -148,6 +148,17 @@ export default function PricingEditor({ initialPricing, persistent, authReady })
             <p className="editor__hint">{t(E.modelHelp[svc.model])}</p>
 
             <div className="editor__row">
+              <label>
+                <span>{t(E.serviceSpread)}</span>
+                <input
+                  type="number"
+                  min="0"
+                  max="90"
+                  value={Math.round((svc.rangePct ?? pricing.rangePct) * 100)}
+                  onChange={numHandler((n, v) => (n.services[i].rangePct = Math.min(0.9, v / 100)))}
+                />
+              </label>
+
               {svc.model === "perUnit" && (
                 <>
                   <label>

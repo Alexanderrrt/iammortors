@@ -53,7 +53,7 @@ function QuoteCard({ output, lang, onBook }) {
         {output.lines.map((l, i) => (
           <li key={i}>
             <span>{l.label}</span>
-            <span>{formatMoney(l.amount, cur)}</span>
+            <span>{formatMoney(l.low, cur)} – {formatMoney(l.high, cur)}</span>
           </li>
         ))}
       </ul>
@@ -105,7 +105,15 @@ export default function QuoteChatbot() {
     ]
       .filter(Boolean)
       .join(" · ");
-    setBooking({ vehicle, service, summary });
+    const requestText = messages
+      .filter((message) => message.role === "user")
+      .flatMap((message) => message.parts || [])
+      .filter((part) => part.type === "text" && typeof part.text === "string")
+      .map((part) => part.text.trim())
+      .filter(Boolean)
+      .join(" | ")
+      .slice(-400);
+    setBooking({ vehicle, service, summary, requestText });
   };
 
   const { messages, sendMessage, status, error } = useChat({
@@ -307,6 +315,13 @@ export default function QuoteChatbot() {
           {securityError && <span className="qchat__security-error">{securityError}</span>}
           {photoAnalysis && <span className="qchat__photo-status">{t(STR.photoReady)}</span>}
           {photoError && <span className="qchat__photo-error">{photoError}</span>}
+          <p className="qchat__legal">
+            {lang === "es" ? (
+              <>Al usar el estimador, acepta los <a href="/terms" target="_blank" rel="noopener noreferrer">Términos de Uso</a> y reconoce la <a href="/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidad</a>. El texto y las fotos pueden ser procesados por IA para crear un estimado preliminar.</>
+            ) : (
+              <>By using the estimator, you agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a> and acknowledge the <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>. Chat text and photos may be processed by AI to provide a preliminary estimate.</>
+            )}
+          </p>
         </form>
       )}
     </div>

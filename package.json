@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .js,.jsx"
+    "lint": "eslint . --ext .js,.jsx",
+    "test:quote": "node --experimental-default-type=module scripts/quote-stress.mjs && node --experimental-default-type=module scripts/lead-learning-stress.mjs",
+    "test:legal": "node --experimental-default-type=module scripts/legal-content-stress.mjs"
   },
   "dependencies": {
     "@ai-sdk/groq": "^4.0.10",
