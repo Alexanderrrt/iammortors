@@ -3446,6 +3446,13 @@ body {
   gap: 1.15rem;
 }
 
+/* Service cards should never appear faded while a user is scrolling through the grid. */
+.services-grid .service-card.reveal-item {
+  opacity: 1;
+  transform: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
 .service-card {
   padding: 0;
   gap: 0;
