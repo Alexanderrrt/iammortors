@@ -38,7 +38,7 @@ export default function Header() {
       <div className="header__inner">
         <a href="/" className="header__brand">
           <span className="header__logo-hit" role="presentation" onClick={onSecretAdminTap}>
-            <img className="header__logo" src="/logo.png" alt={SITE.name} draggable={false} />
+            <img className="header__logo" src="/media/brand/logo.png" alt={SITE.name} draggable={false} />
           </span>
         </a>
 

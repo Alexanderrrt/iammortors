@@ -14,7 +14,7 @@ export default function OwnersRide() {
           <span className="owners-ride__m-stripes" aria-hidden="true" />
           <img
             className="owners-ride__img owners-ride__img--owner"
-            src="/Imagen-de-WhatsApp-2025-05-09-a-las-15.41.57_9da89c4b-1024x683.jpg"
+            src="/media/hero/hero.jpg"
             alt={`Team at ${SITE.name}`}
             loading="lazy"
           />

@@ -12,7 +12,7 @@ export default function Footer() {
       <div className="footer__inner">
         <div>
           <div className="footer__brand">
-            <img className="footer__logo" src="/logo.png" alt={SITE.name} />
+            <img className="footer__logo" src="/media/brand/logo.png" alt={SITE.name} />
           </div>
           {SITE.locations.map((loc) => (
             <p key={loc.id}>{loc.full}</p>

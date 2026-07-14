@@ -13,7 +13,7 @@ const ADS = [
   {
     id: "service-package",
     tone: "service",
-    image: "/Adittional-media1.png",
+    image: "/media/promotions/body-shop-poster.png",
     eyebrow: { en: "Today in Iam Motors", es: "Hoy en Iam Motors" },
     title: COPY.promos.driverTitle,
     price: COPY.promos.driverPrice,
@@ -27,7 +27,7 @@ const ADS = [
   {
     id: "financing",
     tone: "finance",
-    image: "/Adittional-media2.png",
+    image: "/media/promotions/financing-poster.png",
     eyebrow: { en: "Flexible payments", es: "Pagos flexibles" },
     title: COPY.promos.financeTitle,
     body: COPY.promos.financeSub,

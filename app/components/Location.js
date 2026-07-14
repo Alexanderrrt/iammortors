@@ -48,7 +48,7 @@ export default function Location() {
         <Reveal className="location-storefront">
           <img
             className="location-storefront__img"
-            src="/MASTER-1.jpg"
+            src="/media/hero/shop-lift.jpg"
             alt={`${SITE.name} storefront`}
             loading="lazy"
           />

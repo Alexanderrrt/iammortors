@@ -37,7 +37,7 @@ export default function Hero() {
       <section id="top" className="hero">
         <img
           className="hero__bg"
-          src="/MASTER-1.jpg"
+          src="/media/hero/shop-lift.jpg"
           alt=""
           aria-hidden="true"
         />
@@ -95,7 +95,7 @@ export default function Hero() {
         <div className="alignment-spotlight__inner">
           <div className="alignment-spotlight__media">
             <img
-              src="/Hero.jpg"
+              src="/media/hero/hero.jpg"
               alt={`${SITE.name} alignment diagnostic equipment`}
               loading="lazy"
             />

@@ -17,7 +17,7 @@ function locationSchema(loc) {
     url: SITE.url,
     telephone: SITE.phoneHref.replace("tel:", ""),
     priceRange: "$$",
-    image: `${SITE.url}/logo.png`,
+    image: `${SITE.url}/media/brand/logo.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: loc.line1,
@@ -52,7 +52,7 @@ export default function JsonLd() {
         url: SITE.url,
         description:
           "Centro Automotriz BR — high-level automotive maintenance in San Jose, CA. General mechanics, brakes, tune-ups, suspension, electronics, and A/C repair.",
-        logo: `${SITE.url}/logo.png`,
+        logo: `${SITE.url}/media/brand/logo.png`,
         sameAs: [SITE.social.instagram, SITE.social.facebook].filter(Boolean),
         knowsLanguage: ["en", "es"],
       },

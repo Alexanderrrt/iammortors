@@ -3446,7 +3446,7 @@ body {
 .driver-banner {
   background:
     linear-gradient(135deg, rgba(255, 253, 248, 0.92), rgba(238, 245, 247, 0.94)),
-    url("/Adittional-media1.png") center / cover;
+    url("/media/promotions/body-shop-poster.png") center / cover;
   border: 1px solid var(--line-soft);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow);

@@ -61,7 +61,7 @@ export const metadata = {
     alternateLocale: "es_US",
     images: [
       {
-        url: "/logo.png",
+        url: "/media/brand/logo.png",
         alt: "Centro Automotriz BR — Auto Repair in San Jose, CA",
       },
     ],
@@ -70,7 +70,7 @@ export const metadata = {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/logo.png"],
+        images: ["/media/brand/logo.png"],
   },
   robots: {
     index: true,
@@ -79,12 +79,9 @@ export const metadata = {
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/logo.png", type: "image/png", sizes: "any" },
+      { url: "/media/brand/logo.png", type: "image/png", sizes: "any" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-      { url: "/apple-touch-icon-152.png", sizes: "152x152", type: "image/png" },
-    ],
+    apple: { url: "/media/brand/logo.png", sizes: "any", type: "image/png" },
   },
   manifest: "/manifest.json",
 };
