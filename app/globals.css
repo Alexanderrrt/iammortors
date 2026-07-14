@@ -3453,7 +3453,7 @@ body.no-scroll {
 body {
   background-color: #fff;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 251, 253, 0.95) 42%, rgba(255, 250, 242, 0.97) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76) 0%, rgba(248, 251, 253, 0.8) 42%, rgba(255, 250, 242, 0.86) 100%),
     url("/media/hero/Background.png");
   background-size: 100% 100%, min(760px, 88vw) auto;
   background-position: center top, center top;
@@ -3724,12 +3724,12 @@ body {
 }
 
 .section--muted {
-  background: rgba(245, 239, 229, 0.52);
+  background: rgba(245, 239, 229, 0.34);
 }
 
 .section--tread {
   background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 250, 242, 0.9)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 250, 242, 0.7)),
     var(--tread);
 }
 
