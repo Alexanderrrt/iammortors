@@ -1542,10 +1542,10 @@ body.no-scroll {
   background: rgba(245, 183, 43, 0.2);
 }
 
+/* Uniform grid of cinematic shop photos — every tile the same size. */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-flow: dense;
   gap: 14px;
   margin-block: 2rem;
 }
@@ -1570,8 +1570,8 @@ body.no-scroll {
   transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.5s ease;
 }
 
-/* Film scrim + vignette — photographic tiles only, so flyer text stays crisp. */
-.gallery-grid__item:not(.gallery-grid__item--contain)::after {
+/* Film scrim + vignette. */
+.gallery-grid__item::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -1593,58 +1593,13 @@ body.no-scroll {
   filter: saturate(1.18) contrast(1.12) brightness(1);
 }
 
-.gallery-grid__item:not(.gallery-grid__item--contain):hover::after {
+.gallery-grid__item:hover::after {
   opacity: 1;
-}
-
-/* Featured cinematic frame — a large hero still that anchors the reel. */
-.gallery-grid__item--featured {
-  grid-column: span 2;
-  grid-row: span 2;
-  aspect-ratio: auto;
-}
-
-.gallery-grid__item--featured img {
-  animation: gallery-kenburns 22s ease-in-out infinite alternate;
-}
-
-@keyframes gallery-kenburns {
-  from {
-    transform: scale(1.05) translate(0, 0);
-  }
-  to {
-    transform: scale(1.16) translate(-2.5%, -2%);
-  }
-}
-
-/* Branded flyers: show the whole graphic, uncropped. Their dark navy artwork
-   blends into this tile background so the letterbox reads as a framed poster. */
-.gallery-grid__item--contain img {
-  object-fit: contain;
-  transform: none;
-  filter: none;
-  animation: none;
-}
-
-.gallery-grid__item--contain:hover img {
-  transform: scale(1.03);
 }
 
 @media (max-width: 768px) {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .gallery-grid__item--featured {
-    grid-column: span 2;
-    grid-row: span 1;
-    aspect-ratio: 16 / 9;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gallery-grid__item--featured img {
-    animation: none;
   }
 }
 

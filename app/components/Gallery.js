@@ -132,7 +132,7 @@ export default function Gallery() {
             {GALLERY_IMAGES.map((img, i) => (
               <div
                 key={img.src}
-                className={`gallery-grid__item reveal-item${i === 0 ? " gallery-grid__item--featured" : ""}${img.fit === "contain" ? " gallery-grid__item--contain" : ""}`}
+                className="gallery-grid__item reveal-item"
                 style={{ "--d": `${i * 70}ms` }}
               >
                 <Image

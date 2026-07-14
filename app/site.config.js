@@ -166,64 +166,16 @@ export const REELS = [
 ];
 
 // Static gallery images shown when REELS is empty.
-// The first entry becomes the large cinematic "feature" tile, so it should be a
-// real photograph. Branded flyers (fit: "contain") are shown whole — their
-// baked-in text and logos stay legible instead of being cropped by the grid.
+// Real shop photography only — displayed in a uniform, colour-graded grid.
 export const GALLERY_IMAGES = [
-  // Cinematic photography — cover-cropped and colour-graded.
+  { src: "/media/gallery/collision-repair.png", alt: { en: "Technicians performing collision repair on a vehicle", es: "Técnicos reparando una colisión en un vehículo" } },
+  { src: "/media/gallery/diagnostics.png", alt: { en: "Technician running computer diagnostics under the hood", es: "Técnico realizando diagnóstico por computadora bajo el capó" } },
+  { src: "/media/gallery/paint-body.png", alt: { en: "Technician painting a vehicle in the spray booth", es: "Técnico pintando un vehículo en la cabina de pintura" } },
+  { src: "/media/gallery/brakes-suspension.png", alt: { en: "Technician servicing brakes and suspension", es: "Técnico reparando frenos y suspensión" } },
   { src: "/media/gallery/gallery-workshop.png", alt: { en: "IAM Motors workshop at golden hour", es: "Taller de IAM Motors al atardecer" } },
+  { src: "/media/gallery/frame-alignment.png", alt: { en: "Frame straightening on the alignment rack", es: "Enderezado de chasis en el banco de alineación" } },
+  { src: "/media/gallery/maintenance.png", alt: { en: "Technician performing routine maintenance", es: "Técnico realizando mantenimiento de rutina" } },
   { src: "/media/hero/shop-lift.jpg", alt: { en: "Vehicles being serviced on the lifts", es: "Vehículos en servicio sobre los elevadores" } },
-  { src: "/media/posters/general-mechanics.png", alt: { en: "Technician performing general mechanical service", es: "Técnico realizando servicio mecánico general" } },
-  { src: "/media/posters/suspension.png", alt: { en: "Suspension service detail", es: "Detalle del servicio de suspensión" } },
-  // Branded promo flyers — shown whole (contain) so their baked-in text stays legible.
-  {
-    src: "/media/gallery/mechanic-at-work.jpg",
-    fit: "contain",
-    alt: {
-      en: "IAM Motors — expert care, quality repairs. Body shop, auto repair, frame straightening. Insurance welcome.",
-      es: "IAM Motors — cuidado experto, reparaciones de calidad. Body shop, reparación de autos, enderezado de chasis. Seguros bienvenidos.",
-    },
-  },
-  {
-    src: "/services/new-tires-shop.png",
-    fit: "contain",
-    alt: {
-      en: "IAM Motors body shop and auto repair — tires, body work, paint, mechanical service, diagnostics.",
-      es: "Body shop y reparación de autos IAM Motors — llantas, carrocería, pintura, servicio mecánico, diagnóstico.",
-    },
-  },
-  {
-    src: "/media/posters/air-conditioning.png",
-    fit: "contain",
-    alt: {
-      en: "A/C maintenance service by IAM Motors",
-      es: "Servicio de mantenimiento de aire acondicionado por IAM Motors",
-    },
-  },
-  {
-    src: "/media/gallery/extramedia1.png",
-    fit: "contain",
-    alt: {
-      en: "IAM Motors body shop and auto repair — expert care, quality repairs, insurance welcome.",
-      es: "Body shop y reparación de autos IAM Motors — cuidado experto, reparaciones de calidad, seguros bienvenidos.",
-    },
-  },
-  {
-    src: "/media/gallery/extramedia2.png",
-    fit: "contain",
-    alt: {
-      en: "Expert care auto repair and body shop — collision repair, paint, frame straightening, diagnostics.",
-      es: "Cuidado experto en reparación de autos y body shop — reparación de colisión, pintura, enderezado de chasis y diagnóstico.",
-    },
-  },
-  {
-    src: "/media/gallery/extramedia3.png",
-    fit: "contain",
-    alt: {
-      en: "Expert care, quality repairs — body work, paint, mechanical service, dent repair, and diagnostics.",
-      es: "Cuidado experto, reparaciones de calidad — carrocería, pintura, servicio mecánico, reparación de abolladuras y diagnóstico.",
-    },
-  },
 ];
 
 // Shop videos for the gallery.
