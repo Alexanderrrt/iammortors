@@ -69,7 +69,11 @@ export default function Gallery() {
         ) : GALLERY_IMAGES.length > 0 ? (
           <Reveal className="gallery-grid">
             {GALLERY_IMAGES.map((img, i) => (
-              <div key={img.src} className="gallery-grid__item reveal-item" style={{ "--d": `${i * 70}ms` }}>
+              <div
+                key={img.src}
+                className={`gallery-grid__item reveal-item${i === 0 ? " gallery-grid__item--featured" : ""}${img.fit === "contain" ? " gallery-grid__item--contain" : ""}`}
+                style={{ "--d": `${i * 70}ms` }}
+              >
                 <img src={img.src} alt={t(img.alt)} loading="lazy" />
               </div>
             ))}

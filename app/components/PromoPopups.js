@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, SITE } from "../site.config";
 import Icon from "./Icons";
@@ -9,28 +9,34 @@ const SHOW_DELAY_MS = 1400;
 const ROTATE_MS = 7800;
 const STORAGE_KEY = "br-promo-popups-hidden";
 
+// "poster" ads are complete flyer artwork (headline, offer, contact baked in),
+// so they are shown whole and never cropped. "card" ads pair a plain photo with
+// copy from the site config.
 const ADS = [
   {
     id: "service-package",
+    type: "poster",
     tone: "service",
     image: "/media/promotions/body-shop-poster.png",
-    eyebrow: { en: "Today in Iam Motors", es: "Hoy en Iam Motors" },
-    title: COPY.promos.driverTitle,
-    price: COPY.promos.driverPrice,
-    body: COPY.promos.driverSub,
+    alt: {
+      en: "Body shop and auto repair — we work with all major insurances. Call (408) 920-0555.",
+      es: "Body shop y reparacion de autos — trabajamos con todas las aseguranzas. Llame al (408) 920-0555.",
+    },
     cta: COPY.promos.driverCta,
     message: {
-      en: "Hi, I saw the full service package popup and would like to claim the deal.",
-      es: "Hola, vi el popup del paquete de servicio completo y quiero aprovechar la oferta.",
+      en: "Hi, I saw the body shop popup and would like a free estimate.",
+      es: "Hola, vi el popup del body shop y quiero un estimado gratis.",
     },
   },
   {
     id: "financing",
+    type: "poster",
     tone: "finance",
     image: "/media/promotions/financing-poster.png",
-    eyebrow: { en: "Flexible payments", es: "Pagos flexibles" },
-    title: COPY.promos.financeTitle,
-    body: COPY.promos.financeSub,
+    alt: {
+      en: "Financing available — fast, simple approval. Call (408) 920-0555.",
+      es: "Financiamiento disponible — aprobacion rapida y sencilla. Llame al (408) 920-0555.",
+    },
     cta: COPY.promos.financeCta,
     message: {
       en: "Hi, I saw the financing popup and would like to know my options.",
@@ -39,6 +45,7 @@ const ADS = [
   },
   {
     id: "tires",
+    type: "card",
     tone: "tires",
     image: "/services/new-tires-shop.png",
     eyebrow: { en: "Tire counter", es: "Llantas" },
@@ -80,35 +87,62 @@ export default function PromoPopups() {
     return () => window.clearInterval(timer);
   }, [visible]);
 
+  const close = useCallback(() => {
+    window.sessionStorage.setItem(STORAGE_KEY, "1");
+    setVisible(false);
+  }, []);
+
   if (!visible) return null;
 
   const ad = ADS[active];
   const waHref = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(t(ad.message))}`;
 
-  function close() {
-    window.sessionStorage.setItem(STORAGE_KEY, "1");
-    setVisible(false);
-  }
+  const counter = (
+    <span className="promo-popups__counter">
+      {active + 1}/{ADS.length}
+    </span>
+  );
+
+  const dots = (
+    <div className="promo-popups__dots" role="tablist" aria-label={t({ en: "Choose offer", es: "Elegir oferta" })}>
+      {ADS.map((item, index) => (
+        <button
+          key={item.id}
+          type="button"
+          role="tab"
+          aria-selected={index === active}
+          className={index === active ? "promo-popups__dot promo-popups__dot--active" : "promo-popups__dot"}
+          onClick={() => setActive(index)}
+          aria-label={t({ en: `Show offer ${index + 1}`, es: `Mostrar oferta ${index + 1}` })}
+        />
+      ))}
+    </div>
+  );
+
+  const closeButton = (
+    <button
+      type="button"
+      className="promo-popups__close"
+      onClick={close}
+      aria-label={t({ en: "Hide offers", es: "Ocultar ofertas" })}
+    >
+      <Icon name="close" />
+    </button>
+  );
 
   return (
-    <aside className={`promo-popups promo-popups--${ad.tone}`} aria-label={t({ en: "Current shop offers", es: "Ofertas actuales del taller" })}>
-      <article className="promo-popups__card" aria-live="polite">
-        <button className="promo-popups__close" type="button" onClick={close} aria-label={t({ en: "Hide offers", es: "Ocultar ofertas" })}>
-          <Icon name="close" />
-        </button>
-
-        <div className="promo-popups__media" aria-hidden="true">
-          <img src={ad.image} alt="" loading="lazy" />
-          <span>{active + 1}/{ADS.length}</span>
-        </div>
-
-        <div className="promo-popups__body">
-          <p className="promo-popups__eyebrow">{t(ad.eyebrow)}</p>
-          <h2>{t(ad.title)}</h2>
-          {ad.price ? <strong className="promo-popups__price">{ad.price}</strong> : null}
-          <p>{t(ad.body)}</p>
-
-          <div className="promo-popups__actions">
+    <aside
+      className={`promo-popups promo-popups--${ad.type} promo-popups--${ad.tone}`}
+      aria-label={t({ en: "Current shop offers", es: "Ofertas actuales del taller" })}
+    >
+      {ad.type === "poster" ? (
+        <article className="promo-popups__card promo-popups__card--poster" aria-live="polite">
+          {closeButton}
+          <a className="promo-popups__poster" href={waHref} target="_blank" rel="noopener noreferrer">
+            <img src={ad.image} alt={t(ad.alt)} loading="lazy" />
+            {counter}
+          </a>
+          <footer className="promo-popups__bar">
             <a className="btn btn--primary btn--small" href={waHref} target="_blank" rel="noopener noreferrer">
               {t(ad.cta)}
             </a>
@@ -116,21 +150,33 @@ export default function PromoPopups() {
               <Icon name="phone" />
               {SITE.phone}
             </a>
+            {dots}
+          </footer>
+        </article>
+      ) : (
+        <article className="promo-popups__card promo-popups__card--split" aria-live="polite">
+          {closeButton}
+          <div className="promo-popups__media">
+            <img src={ad.image} alt="" loading="lazy" />
+            {counter}
           </div>
-
-          <div className="promo-popups__dots" aria-label={t({ en: "Choose offer", es: "Elegir oferta" })}>
-            {ADS.map((item, index) => (
-              <button
-                key={item.id}
-                className={index === active ? "promo-popups__dot promo-popups__dot--active" : "promo-popups__dot"}
-                type="button"
-                onClick={() => setActive(index)}
-                aria-label={t({ en: `Show offer ${index + 1}`, es: `Mostrar oferta ${index + 1}` })}
-              />
-            ))}
+          <div className="promo-popups__body">
+            <p className="promo-popups__eyebrow">{t(ad.eyebrow)}</p>
+            <h2>{t(ad.title)}</h2>
+            <p>{t(ad.body)}</p>
+            <div className="promo-popups__actions">
+              <a className="btn btn--primary btn--small" href={waHref} target="_blank" rel="noopener noreferrer">
+                {t(ad.cta)}
+              </a>
+              <a className="promo-popups__call" href={SITE.phoneHref}>
+                <Icon name="phone" />
+                {SITE.phone}
+              </a>
+            </div>
+            {dots}
           </div>
-        </div>
-      </article>
+        </article>
+      )}
     </aside>
   );
 }

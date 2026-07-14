@@ -16,6 +16,22 @@
   --charcoal: #15191c;
   --shadow: 0 20px 60px rgba(21, 25, 28, 0.12);
 
+  /* ---------- Liquid glass system ---------- */
+  /* Light glass: frosted translucent surface for panels sitting on the paper
+     background and over imagery. */
+  --glass-blur: 20px;
+  --glass-saturate: 175%;
+  --glass-tint: rgba(255, 253, 248, 0.6);
+  --glass-tint-strong: rgba(255, 253, 248, 0.78);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-highlight: rgba(255, 255, 255, 0.92);
+  --glass-edge: rgba(21, 25, 28, 0.08);
+  --glass-shadow: 0 10px 34px rgba(21, 25, 28, 0.12), 0 2px 8px rgba(21, 25, 28, 0.07);
+  /* Dark glass: for tinted/photographic surfaces (popups, overlays). */
+  --glass-dark-tint: rgba(13, 24, 34, 0.55);
+  --glass-dark-border: rgba(255, 255, 255, 0.22);
+  --glass-dark-highlight: rgba(255, 255, 255, 0.5);
+
   --r: 12px;
   --r-sm: 8px;
   --r-md: 12px;
@@ -1460,30 +1476,106 @@ body.no-scroll {
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-auto-flow: dense;
+  gap: 14px;
   margin-block: 2rem;
 }
 
 .gallery-grid__item {
-  border-radius: 12px;
+  position: relative;
+  border-radius: 14px;
   overflow: hidden;
   aspect-ratio: 4 / 3;
+  background: #0b1725;
+  box-shadow: 0 12px 30px rgba(12, 16, 18, 0.16);
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.5s ease;
 }
 
 .gallery-grid__item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transform: scale(1.03);
+  /* cinematic color grade */
+  filter: saturate(1.06) contrast(1.07) brightness(0.98);
+  transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.5s ease;
+}
+
+/* Film scrim + vignette — photographic tiles only, so flyer text stays crisp. */
+.gallery-grid__item:not(.gallery-grid__item--contain)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(6, 11, 17, 0.55) 0%, rgba(6, 11, 17, 0.08) 34%, transparent 52%),
+    radial-gradient(130% 105% at 50% 38%, transparent 56%, rgba(6, 11, 17, 0.42) 100%);
+  opacity: 0.9;
+  transition: opacity 0.5s ease;
+}
+
+.gallery-grid__item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 60px rgba(12, 16, 18, 0.32);
 }
 
 .gallery-grid__item:hover img {
-  transform: scale(1.05);
+  transform: scale(1.11);
+  filter: saturate(1.18) contrast(1.12) brightness(1);
+}
+
+.gallery-grid__item:not(.gallery-grid__item--contain):hover::after {
+  opacity: 1;
+}
+
+/* Featured cinematic frame — a large hero still that anchors the reel. */
+.gallery-grid__item--featured {
+  grid-column: span 2;
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+.gallery-grid__item--featured img {
+  animation: gallery-kenburns 22s ease-in-out infinite alternate;
+}
+
+@keyframes gallery-kenburns {
+  from {
+    transform: scale(1.05) translate(0, 0);
+  }
+  to {
+    transform: scale(1.16) translate(-2.5%, -2%);
+  }
+}
+
+/* Branded flyers: show the whole graphic, uncropped. Their dark navy artwork
+   blends into this tile background so the letterbox reads as a framed poster. */
+.gallery-grid__item--contain img {
+  object-fit: contain;
+  transform: none;
+  filter: none;
+  animation: none;
+}
+
+.gallery-grid__item--contain:hover img {
+  transform: scale(1.03);
 }
 
 @media (max-width: 768px) {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid__item--featured {
+    grid-column: span 2;
+    grid-row: span 1;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-grid__item--featured img {
+    animation: none;
   }
 }
 
@@ -3868,6 +3960,10 @@ body {
   pointer-events: none;
 }
 
+.promo-popups--poster {
+  width: min(310px, calc(100vw - 2rem));
+}
+
 @media (prefers-reduced-motion: reduce) {
   .gallery-film__frame video,
   .gallery-videos__item video {
@@ -3877,42 +3973,74 @@ body {
 
 .promo-popups__card {
   position: relative;
-  display: grid;
-  grid-template-columns: 118px minmax(0, 1fr);
-  gap: 0.95rem;
   overflow: hidden;
-  padding: 0.75rem;
+  color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 22px;
-  color: #fff;
-  background:
-    linear-gradient(135deg, rgba(11, 24, 34, 0.96), rgba(8, 74, 125, 0.9)),
-    radial-gradient(circle at 10% 0%, rgba(244, 185, 66, 0.34), transparent 34%);
   box-shadow: 0 22px 62px rgba(12, 16, 18, 0.34);
   pointer-events: auto;
   animation: promo-popup-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.promo-popups__card::before {
-  content: "";
-  position: absolute;
-  inset: auto 1rem 0 1rem;
-  height: 4px;
-  border-radius: 999px 999px 0 0;
-  background: linear-gradient(90deg, var(--amber), #fff2c2, var(--blue));
-  opacity: 0.9;
-}
-
-.promo-popups--finance .promo-popups__card {
-  background:
-    linear-gradient(135deg, rgba(13, 51, 72, 0.97), rgba(47, 155, 100, 0.85)),
-    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.22), transparent 36%);
-}
-
-.promo-popups--tires .promo-popups__card {
+.promo-popups__card--split {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 0.95rem;
+  padding: 0.75rem;
   background:
     linear-gradient(135deg, rgba(20, 23, 25, 0.97), rgba(15, 111, 191, 0.86)),
     repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 9px);
+}
+
+/* Poster ads are self-contained artwork: show them whole, framed by a slim
+   contact bar. Nothing overlaps the flyer content. */
+.promo-popups__card--poster {
+  background: #0b1822;
+}
+
+.promo-popups__poster {
+  display: block;
+  position: relative;
+  line-height: 0;
+}
+
+.promo-popups__poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 58vh;
+  object-fit: contain;
+}
+
+.promo-popups__counter {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 0.6rem;
+  padding: 0.22rem 0.5rem;
+  border-radius: 999px;
+  color: #0b1822;
+  background: rgba(255, 255, 255, 0.88);
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.promo-popups__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.8rem;
+  background: linear-gradient(135deg, rgba(11, 24, 34, 0.98), rgba(8, 74, 125, 0.94));
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.promo-popups__bar .btn {
+  padding: 0.6rem 0.8rem;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.promo-popups__bar .promo-popups__dots {
+  margin: 0 0 0 auto;
 }
 
 .promo-popups__close {
@@ -3927,14 +4055,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 999px;
   color: #fff;
-  background: rgba(9, 13, 16, 0.34);
+  background: rgba(9, 13, 16, 0.5);
   cursor: pointer;
   transition: transform 0.18s ease, background 0.18s ease;
 }
 
 .promo-popups__close:hover {
   transform: rotate(6deg) scale(1.05);
-  background: rgba(9, 13, 16, 0.56);
+  background: rgba(9, 13, 16, 0.72);
 }
 
 .promo-popups__close .icon {
@@ -3944,30 +4072,18 @@ body {
 
 .promo-popups__media {
   position: relative;
-  min-height: 168px;
   overflow: hidden;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.12);
+  aspect-ratio: 3 / 4;
 }
 
 .promo-popups__media img {
   width: 100%;
   height: 100%;
-  min-height: 168px;
   object-fit: cover;
+  object-position: center 35%;
   filter: saturate(1.08) contrast(1.05);
-}
-
-.promo-popups__media span {
-  position: absolute;
-  left: 0.55rem;
-  bottom: 0.55rem;
-  padding: 0.22rem 0.5rem;
-  border-radius: 999px;
-  color: var(--paper);
-  background: rgba(255, 255, 255, 0.88);
-  font-size: 0.7rem;
-  font-weight: 900;
 }
 
 .promo-popups__body {
@@ -3992,18 +4108,6 @@ body {
   font-size: clamp(1.15rem, 4vw, 1.55rem);
   line-height: 0.96;
   letter-spacing: -0.035em;
-}
-
-.promo-popups__price {
-  display: block;
-  margin: 0.35rem 0;
-  color: #fff2c2;
-  font-family: var(--display);
-  font-size: 2.4rem;
-  font-style: italic;
-  line-height: 0.9;
-  letter-spacing: -0.06em;
-  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
 }
 
 .promo-popups__body > p:not(.promo-popups__eyebrow) {
@@ -4085,15 +4189,20 @@ body {
     width: auto;
   }
 
-  .promo-popups__card {
+  .promo-popups--poster {
+    left: auto;
+    right: 0.85rem;
+    width: min(280px, calc(100vw - 1.7rem));
+  }
+
+  .promo-popups__poster img {
+    max-height: 52vh;
+  }
+
+  .promo-popups__card--split {
     grid-template-columns: 92px minmax(0, 1fr);
     gap: 0.75rem;
     border-radius: 18px;
-  }
-
-  .promo-popups__media,
-  .promo-popups__media img {
-    min-height: 142px;
   }
 
   .promo-popups__body {
@@ -4105,33 +4214,29 @@ body {
     font-size: 1.18rem;
   }
 
-  .promo-popups__price {
-    font-size: 2rem;
-  }
-
   .promo-popups__body > p:not(.promo-popups__eyebrow) {
     font-size: 0.78rem;
   }
 
-  .promo-popups__call {
+  .promo-popups__card--split .promo-popups__call {
     display: none;
   }
 }
 
 @media (max-width: 430px) {
-  .promo-popups__card {
+  .promo-popups__card--split {
     grid-template-columns: 1fr;
   }
 
-  .promo-popups__media {
+  .promo-popups__card--split .promo-popups__media {
     display: none;
   }
 
-  .promo-popups__body {
+  .promo-popups__card--split .promo-popups__body {
     padding: 0.1rem 1.75rem 0.2rem 0.2rem;
   }
 
-  .promo-popups__body h2 {
+  .promo-popups__card--split .promo-popups__body h2 {
     max-width: none;
   }
 }
@@ -5198,3 +5303,177 @@ body {
 .training-proposal p { color: var(--paper-dim); font-size: .85rem; }
 .training-proposal__summary { display: grid; width: 100%; gap: .25rem; color: var(--paper); font-size: .84rem; }
 @media (max-width: 720px) { .training-form { grid-template-columns: 1fr; } .training-form__wide { grid-column: auto; } .training-card { grid-template-columns: 1fr; } .training-card__actions { justify-content: flex-start; } }
+
+/* ============================================================
+   Liquid glass layer
+   A reusable frosted-glass primitive plus cohesive application to
+   the site's recurring surfaces. Translucency lives inside an
+   @supports block so browsers without backdrop-filter keep the
+   original opaque, readable surfaces.
+   ============================================================ */
+
+.glass {
+  position: relative;
+  background: var(--glass-tint);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+}
+
+/* Specular sheen — a soft light sweep across the top of the glass. */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.12) 18%,
+    transparent 42%
+  );
+  opacity: 0.7;
+  mix-blend-mode: screen;
+}
+
+@supports ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .glass {
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  }
+
+  /* ---- Header: frosted bar that refracts the hero and page ---- */
+  .header {
+    background: var(--glass-tint-strong);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-bottom-color: var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight), 0 6px 22px rgba(21, 25, 28, 0.08);
+  }
+
+  /* ---- Cards ---- */
+  .service-card,
+  .about-card,
+  .review-card,
+  .location-card {
+    background: var(--glass-tint);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+    border-color: var(--glass-border);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+  }
+
+  .service-card:hover,
+  .service-card--active,
+  .review-card:hover {
+    background: var(--glass-tint-strong);
+    box-shadow: 0 16px 44px rgba(21, 25, 28, 0.16), inset 0 1px 0 var(--glass-highlight);
+  }
+
+  /* ---- Small chips / badges ---- */
+  .status-badge {
+    background: var(--glass-tint);
+    -webkit-backdrop-filter: blur(14px) saturate(var(--glass-saturate));
+    backdrop-filter: blur(14px) saturate(var(--glass-saturate));
+    border-color: var(--glass-border);
+    box-shadow: inset 0 1px 0 var(--glass-highlight);
+  }
+
+  /* ---- Slide-in mobile navigation + its scrim ---- */
+  .mobile-nav__backdrop {
+    background: rgba(13, 24, 34, 0.35);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  .mobile-nav__panel {
+    background: var(--glass-tint-strong);
+    -webkit-backdrop-filter: blur(26px) saturate(var(--glass-saturate));
+    backdrop-filter: blur(26px) saturate(var(--glass-saturate));
+    border-left-color: var(--glass-border);
+    box-shadow: inset 1px 0 0 var(--glass-highlight), -18px 0 44px rgba(21, 25, 28, 0.16);
+  }
+
+  /* ---- Promo popups: dark, photographic liquid glass ---- */
+  .promo-popups__card--split {
+    background: var(--glass-dark-tint);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    backdrop-filter: blur(22px) saturate(160%);
+    border-color: var(--glass-dark-border);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-dark-highlight);
+  }
+
+  .promo-popups__bar {
+    background: rgba(13, 24, 34, 0.45);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+  }
+
+  .promo-popups__close {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Site-wide aurora: soft, fixed brand-tinted light pools that give frosted
+   surfaces something to refract even over flat sections. Very low opacity so
+   the clean paper look is preserved. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -15%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 44% at 10% 14%, rgba(15, 111, 191, 0.1), transparent 62%),
+    radial-gradient(36% 42% at 90% 20%, rgba(244, 185, 66, 0.09), transparent 62%),
+    radial-gradient(46% 48% at 74% 86%, rgba(15, 111, 191, 0.08), transparent 62%);
+}
+
+/* Glossy specular sheen on glass cards — a soft top-corner light that reads as
+   glass regardless of what sits behind. Sits above the fill, below content. */
+.service-card::after,
+.about-card::after,
+.review-card::after,
+.location-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    142deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.14) 16%,
+    transparent 38%
+  );
+  mix-blend-mode: screen;
+}
+
+.service-card > *,
+.about-card > *,
+.review-card > *,
+.location-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Glossy specular edge on the WhatsApp button — keeps the brand green
+   but adopts the glass light language. */
+.whatsapp-btn {
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.55),
+    inset 0 -3px 6px rgba(0, 60, 30, 0.25);
+}
+
+/* The blue top-accent bars on cards render over the glass, not under it. */
+.service-card::before,
+.about-card::before {
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass::after {
+    display: none;
+  }
+}
