@@ -49,7 +49,7 @@ export const SERVICES = [
   {
     id: "collision-repair",
     icon: "wrench",
-    image: "/media/promotions/body-shop-poster.png",
+    image: "/media/gallery/collision-repair.png",
     title: { en: "Collision Repair", es: "Reparación de Colisiones" },
     desc: {
       en: "Expert collision and accident repair. We restore your vehicle to pre-accident condition with precision and care.",
@@ -59,7 +59,7 @@ export const SERVICES = [
   {
     id: "paint-body",
     icon: "oil",
-    image: "/media/promotions/body-shop-poster.png",
+    image: "/media/gallery/paint-body.png",
     title: { en: "Paint & Body Work", es: "Pintura y Trabajo de Carrocería" },
     desc: {
       en: "Professional painting, color matching, and body work restoration. We deliver showroom-quality finishes with expert craftsmanship.",
@@ -69,7 +69,7 @@ export const SERVICES = [
   {
     id: "dent-removal",
     icon: "brakes",
-    image: "/media/hero/hero.jpg",
+    image: "/media/gallery/dent-removal.png",
     title: { en: "Dent Removal & Paintless Repair", es: "Remoción de Abolladuras" },
     desc: {
       en: "Paintless dent repair and removal. Fast, affordable, and damage-free restoration of your vehicle's body.",
@@ -79,7 +79,7 @@ export const SERVICES = [
   {
     id: "prius-hybrid",
     icon: "battery",
-    image: "/media/posters/electronics.png",
+    image: "/media/gallery/hybrid-systems.png",
     title: { en: "Toyota Prius & Hybrid Systems", es: "Sistemas Toyota Prius e Híbridos" },
     desc: {
       en: "Specialized diagnostics and repair for Toyota Prius and hybrid vehicle systems. Expert knowledge and certified technicians.",
@@ -89,7 +89,7 @@ export const SERVICES = [
   {
     id: "diagnostics",
     icon: "wrench",
-    image: "/media/posters/engine-tune-up.png",
+    image: "/media/gallery/diagnostics.png",
     title: { en: "Diagnostics & Check-Engine Repairs", es: "Diagnóstico y Reparación de Luz de Motor" },
     desc: {
       en: "Complete vehicle diagnostics, check-engine light repairs, and troubleshooting. We identify and fix the root cause of any issue.",
@@ -99,7 +99,7 @@ export const SERVICES = [
   {
     id: "mechanical",
     icon: "alignment",
-    image: "/media/posters/general-mechanics.png",
+    image: "/media/gallery/brakes-suspension.png",
     title: { en: "Brakes, Suspension & Cooling", es: "Frenos, Suspensión y Refrigeración" },
     desc: {
       en: "Full mechanical service including brake repair, suspension work, cooling system maintenance, and general repairs for all gas and hybrid vehicles.",
@@ -109,7 +109,7 @@ export const SERVICES = [
   {
     id: "maintenance",
     icon: "oil",
-    image: "/media/posters/general-mechanics.png",
+    image: "/media/gallery/maintenance.png",
     title: { en: "Maintenance & Service", es: "Mantenimiento y Servicio" },
     desc: {
       en: "Routine maintenance, oil changes, fluid service, filters, and preventive care to keep your vehicle running smoothly.",
@@ -119,7 +119,7 @@ export const SERVICES = [
   {
     id: "frame-alignment",
     icon: "alignment",
-    image: "/media/hero/hero.jpg",
+    image: "/media/gallery/frame-alignment.png",
     title: { en: "Frame Alignment", es: "Alineación de Bastidor" },
     desc: {
       en: "Precision frame and structural alignment. We ensure your vehicle's frame is perfectly straight and safe.",
@@ -129,7 +129,7 @@ export const SERVICES = [
   {
     id: "insurance-claims",
     icon: "wrench",
-    image: "/media/promotions/body-shop-poster.png",
+    image: "/media/gallery/insurance-claims.png",
     title: { en: "Insurance Claims", es: "Reclamos de Seguros" },
     desc: {
       en: "We work directly with insurance companies. Let us handle your claim — you focus on what matters.",
@@ -166,11 +166,11 @@ export const REELS = [
 export const GALLERY_IMAGES = [
   { src: "/media/gallery/mechanic-at-work.jpg", alt: { en: "Professional mechanic at work", es: "Mecánico profesional trabajando" } },
   { src: "/media/hero/shop-lift.jpg", alt: { en: "Vehicle maintenance on lift", es: "Mantenimiento de vehículo en elevador" } },
-  { src: "/media/hero/hero.jpg", alt: { en: "IAM Motors service bay", es: "Área de servicio de IAM Motors" } },
+  { src: "/media/gallery/gallery-workshop.png", alt: { en: "IAM Motors workshop at golden hour", es: "Taller de IAM Motors al atardecer" } },
   { src: "/media/posters/general-mechanics.png", alt: { en: "General mechanical service", es: "Servicio mecánico general" } },
-  { src: "/services/brakes.jpg", alt: { en: "Brake service", es: "Servicio de frenos" } },
   { src: "/media/posters/air-conditioning.png", alt: { en: "Technician at work in the shop", es: "Técnico trabajando en el taller" } },
   { src: "/services/new-tires-shop.png", alt: { en: "Tire service at the shop", es: "Servicio de llantas en el taller" } },
+  { src: "/media/posters/suspension.png", alt: { en: "Suspension service detail", es: "Detalle del servicio de suspensión" } },
 ];
 
 // Shop videos for the gallery.

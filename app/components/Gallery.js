@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useT } from "../i18n/LanguageContext";
 import { COPY, REELS, GALLERY_IMAGES, GALLERY_VIDEOS, SITE } from "../site.config";
 import Icon from "./Icons";
@@ -10,6 +10,7 @@ export default function Gallery() {
   const t = useT();
   const trackRef = useRef(null);
   const processed = useRef(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     if (processed.current) return;
@@ -84,7 +85,7 @@ export default function Gallery() {
                   poster="/media/hero/shop-lift.jpg"
                   autoPlay
                   loop
-                  muted
+                  muted={isMuted}
                   playsInline
                   preload="metadata"
                   disablePictureInPicture
@@ -99,6 +100,16 @@ export default function Gallery() {
                   <span className="gallery-film__cue"><span aria-hidden="true" /> Watch the shop</span>
                 </div>
                 <span className="gallery-film__mark" aria-hidden="true">IAM</span>
+                <button
+                  type="button"
+                  className="gallery-film__sound"
+                  onClick={() => setIsMuted((muted) => !muted)}
+                  aria-pressed={!isMuted}
+                  aria-label={isMuted ? "Turn video sound on" : "Turn video sound off"}
+                >
+                  <span aria-hidden="true">{isMuted ? "🔇" : "🔊"}</span>
+                  {isMuted ? "Sound off" : "Sound on"}
+                </button>
               </div>
             </Reveal>
 
