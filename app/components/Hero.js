@@ -7,17 +7,17 @@ import Icon from "./Icons";
 
 const TRUST_ITEMS = [
   {
-    icon: "alignment",
+    icon: "estimate",
     title: { en: "Free estimates", es: "Estimados gratis" },
     detail: { en: "No obligation", es: "Sin obligación" },
   },
   {
-    icon: "wrench",
+    icon: "walkIn",
     title: { en: "Walk-ins welcome", es: "Aceptamos sin cita" },
     detail: { en: "No appointment needed", es: "No necesitas cita" },
   },
   {
-    icon: "battery",
+    icon: "language",
     title: { en: "English & Spanish", es: "Inglés y español" },
     detail: { en: "We're here to help", es: "Estamos para ayudarte" },
   },
@@ -25,31 +25,31 @@ const TRUST_ITEMS = [
 
 const PROOF_ITEMS = [
   {
-    icon: "wrench",
+    icon: "shield",
     value: { en: "Expert", es: "Expertos" },
     label: { en: "Technicians", es: "Técnicos" },
     detail: { en: "Skilled professionals", es: "Profesionales capacitados" },
   },
   {
-    icon: "tire",
+    icon: "wrench",
     value: { en: "Quality", es: "Calidad" },
     label: { en: "Service", es: "Servicio" },
     detail: { en: "Top-quality parts and care", es: "Piezas y atención de calidad" },
   },
   {
-    icon: "alignment",
+    icon: "clipboard",
     value: { en: "Honest", es: "Honestos" },
     label: { en: "Estimates", es: "Estimados" },
     detail: { en: "Clear, upfront communication", es: "Comunicación clara" },
   },
   {
-    icon: "battery",
+    icon: "car",
     value: { en: "All makes", es: "Todas las marcas" },
     label: { en: "& models", es: "y modelos" },
     detail: { en: "Gas, hybrid, and more", es: "Gasolina, híbridos y más" },
   },
   {
-    icon: "brakes",
+    icon: "handshake",
     value: { en: "Customer", es: "Enfoque" },
     label: { en: "focused", es: "en el cliente" },
     detail: { en: "Your vehicle, our priority", es: "Tu vehículo es prioridad" },

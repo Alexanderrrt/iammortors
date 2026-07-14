@@ -4055,6 +4055,73 @@ body {
 .hero--reference .hero__visual-caption {
   z-index: 1;
 }
+
+/* Editorial automotive polish: fewer floating frames, flatter surfaces, and
+   one consistent technical line-icon language. */
+.hero--reference .hero__visual {
+  border-radius: 3px;
+}
+
+.hero--reference .hero__visual::before {
+  border-radius: 3px;
+  border-color: rgba(145, 190, 235, 0.12);
+  background: linear-gradient(135deg, rgba(8, 120, 249, 0.06), transparent 42%);
+  box-shadow: none;
+}
+
+.hero--reference .hero__visual::after {
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  opacity: 0.45;
+  box-shadow: none;
+}
+
+.hero__trust-icon {
+  width: 30px;
+  height: 30px;
+  flex-basis: 30px;
+  border: 0;
+  border-radius: 0;
+}
+
+.hero__trust-icon .icon {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.55;
+}
+
+.hero--reference .hero__finance {
+  border-radius: 3px;
+  background: rgba(2, 11, 24, 0.68);
+  box-shadow: none;
+}
+
+.hero--reference .hero__actions .btn,
+.hero--reference .btn--primary {
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+.hero-proof__card {
+  min-height: 142px;
+  border-radius: 3px;
+  border-color: rgba(145, 190, 235, 0.18);
+  background: #071526;
+  box-shadow: none;
+}
+
+.hero-proof__card:hover {
+  border-color: rgba(8, 120, 249, 0.58);
+  background: #0a1b31;
+  transform: translateY(-2px);
+}
+
+.hero-proof__card .icon {
+  width: 31px;
+  height: 31px;
+  stroke-width: 1.55;
+}
 }
 
 .btn {
