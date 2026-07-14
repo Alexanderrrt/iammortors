@@ -79,8 +79,8 @@ export default function Hero() {
               {t({ en: "Full-service auto repair & body shop", es: "Taller completo de reparación y carrocería" })}
             </p>
             <h1 className="hero__title">
-              <span>{t({ en: "Expert care", es: "Cuidado experto" })}</span>
-              <span>{t({ en: "for", es: "para" })} <em>{t({ en: "every mile", es: "cada kilómetro" })}</em></span>
+              <span>IAM</span>
+              <span><em>MOTORS</em></span>
             </h1>
             <p className="hero__tagline">
               {t({

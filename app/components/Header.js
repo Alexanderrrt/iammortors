@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLanguage, useT } from "../i18n/LanguageContext";
@@ -8,6 +7,7 @@ import { useOpenStatus } from "../hooks/useOpenStatus";
 import { useSecretAdminTap } from "../hooks/useSecretAdminTap";
 import { COPY, SITE } from "../site.config";
 import Icon from "./Icons";
+import BrandLogo from "./BrandLogo";
 
 export default function Header() {
   const { lang, toggleLang } = useLanguage();
@@ -47,7 +47,7 @@ export default function Header() {
       <div className="header__inner">
         <a href="/" className="header__brand">
           <span className="header__logo-hit" role="presentation" onClick={onSecretAdminTap}>
-            <Image className="header__logo" src="/media/brand/logo.png" alt={SITE.name} width={220} height={70} priority draggable={false} />
+            <BrandLogo className="header__logo" alt={SITE.name} width={220} height={70} priority />
           </span>
         </a>
 

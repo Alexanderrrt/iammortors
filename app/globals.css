@@ -4122,6 +4122,31 @@ body {
   height: 31px;
   stroke-width: 1.55;
 }
+
+/* Shared two-tone IAM Motors lockup. The blue lower pass colors MOTORS while
+   leaving the upper IAM mark and chrome untouched. */
+.brand-logo {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.brand-logo__image {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+.brand-logo__image--blue {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  clip-path: inset(52% 0 0 0);
+  filter: brightness(0) saturate(100%) invert(39%) sepia(94%) saturate(1893%) hue-rotate(201deg) brightness(99%) contrast(104%);
+}
 }
 
 .btn {
